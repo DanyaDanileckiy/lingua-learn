@@ -15,16 +15,64 @@
 "avatar": "data/avatars/UCBJeMCIeLQos7wacox4hmLQ.jpg"
 },
 {
-"id": "UCKUzdt2sELyxd6mz-bAx3bA",
-"name": "Rai",
-"handle": "@rai",
-"subs": "6.66M",
-"subsN": 6660000,
-"videos": "111K",
-"videosN": 111000,
+"id": "UCSFC5Cio8zaLQDFPxA7y_HQ",
+"name": "FavijTV",
+"handle": "@FavijTV",
+"subs": "6.74M",
+"subsN": 6740000,
+"videos": "3.5K",
+"videosN": 3500,
+"cat": "games",
+"source": "seed",
+"avatar": "data/avatars/UCSFC5Cio8zaLQDFPxA7y_HQ.jpg"
+},
+{
+"id": "UCgQna2EqpzqzfBjlSmzT72w",
+"name": "Måneskin Official",
+"handle": "@maneskinofficial",
+"subs": "5.77M",
+"subsN": 5770000,
+"videos": "134",
+"videosN": 134,
+"cat": "music",
+"source": "seed",
+"avatar": "data/avatars/UCgQna2EqpzqzfBjlSmzT72w.jpg"
+},
+{
+"id": "UCYZ3uwiIy1LrwrAywLeQSlQ",
+"name": "theShow",
+"handle": "@theshowisyou",
+"subs": "4.29M",
+"subsN": 4290000,
+"videos": "2.9K",
+"videosN": 2900,
+"cat": "entertainment",
+"source": "seed",
+"avatar": "data/avatars/UCYZ3uwiIy1LrwrAywLeQSlQ.jpg"
+},
+{
+"id": "UCIIe8pQHrmWSzs1i5o3r10w",
+"name": "Fatto in Casa da Benedetta",
+"handle": "@FattoincasadaBenedettaOfficial",
+"subs": "3.45M",
+"subsN": 3450000,
+"videos": "1.8K",
+"videosN": 1800,
+"cat": "food",
+"source": "seed",
+"avatar": "data/avatars/UCIIe8pQHrmWSzs1i5o3r10w.jpg"
+},
+{
+"id": "UCWJhBqnyVdHAuxexgjghNFw",
+"name": "Fanpage.it",
+"handle": "@FanpageIt",
+"subs": "3.33M",
+"subsN": 3330000,
+"videos": "43K",
+"videosN": 43000,
 "cat": "news",
-"source": "search:notizia",
-"avatar": "data/avatars/UCKUzdt2sELyxd6mz-bAx3bA.jpg"
+"source": "seed",
+"avatar": "data/avatars/UCWJhBqnyVdHAuxexgjghNFw.jpg"
 },
 {
 "id": "UCx7EWheHmjCW3vX8K2d09vg",
@@ -51,6 +99,18 @@
 "avatar": "data/avatars/UCNo7m7faHS9t3nSDfWXvGww.jpg"
 },
 {
+"id": "UC76vuUkGWnPUDFWcgM2_yMg",
+"name": "Giallozafferano recipes",
+"handle": "@GialloZafferanoTV",
+"subs": "2.87M",
+"subsN": 2870000,
+"videos": "6.6K",
+"videosN": 6600,
+"cat": "food",
+"source": "seed",
+"avatar": "data/avatars/UC76vuUkGWnPUDFWcgM2_yMg.jpg"
+},
+{
 "id": "UCKcx1uK38H4AOkmfv4ywlrg",
 "name": "AC Milan",
 "handle": "@ACMilan",
@@ -61,6 +121,54 @@
 "cat": "sport",
 "source": "seed",
 "avatar": "data/avatars/UCKcx1uK38H4AOkmfv4ywlrg.jpg"
+},
+{
+"id": "UC5yXB_ThsufRJYMRlzIGoeQ",
+"name": "andreagaleazzi",
+"handle": "@AndreaGaleazziVERIFICATO",
+"subs": "1.41M",
+"subsN": 1410000,
+"videos": "4.4K",
+"videosN": 4400,
+"cat": "tech",
+"source": "seed",
+"avatar": "data/avatars/UC5yXB_ThsufRJYMRlzIGoeQ.jpg"
+},
+{
+"id": "UCpB9uxBH-Hjoj_Jd9cnRC_w",
+"name": "The Jackal",
+"handle": "@_the_jackal",
+"subs": "1.22M",
+"subsN": 1220000,
+"videos": "430",
+"videosN": 430,
+"cat": "entertainment",
+"source": "seed",
+"avatar": "data/avatars/UCpB9uxBH-Hjoj_Jd9cnRC_w.jpg"
+},
+{
+"id": "UCg7mcZKjupbLdsuiMBVTuDw",
+"name": "MuschioSelvaggio",
+"handle": "@MuschioSelvaggio1",
+"subs": "1.15M",
+"subsN": 1150000,
+"videos": "615",
+"videosN": 615,
+"cat": "interview",
+"source": "seed",
+"avatar": "data/avatars/UCg7mcZKjupbLdsuiMBVTuDw.jpg"
+},
+{
+"id": "UCS5PaGnSnFUnrjSc80XRnqw",
+"name": "Marcello Ascani",
+"handle": "@marcelloascani",
+"subs": "1.08M",
+"subsN": 1080000,
+"videos": "2.4K",
+"videosN": 2400,
+"cat": "career",
+"source": "seed",
+"avatar": "data/avatars/UCS5PaGnSnFUnrjSc80XRnqw.jpg"
 },
 {
 "id": "UCY5p3x2TsDu3eQdKjl-d_BA",
@@ -75,6 +183,18 @@
 "avatar": "data/avatars/UCY5p3x2TsDu3eQdKjl-d_BA.jpg"
 },
 {
+"id": "UC9ePmjVRHLL8x8vq5fOKflg",
+"name": "La Repubblica",
+"handle": "@repubblica",
+"subs": "945K",
+"subsN": 945000,
+"videos": "47K",
+"videosN": 47000,
+"cat": "news",
+"source": "seed",
+"avatar": "data/avatars/UC9ePmjVRHLL8x8vq5fOKflg.jpg"
+},
+{
 "id": "UCXuc_HVyuWFoWQa1zyyuqJw",
 "name": "PODCAST ONE MORE TIME di Luca Casadei",
 "handle": "@OneMoreTimePodcast",
@@ -85,6 +205,42 @@
 "cat": "interview",
 "source": "search:podcast di interviste",
 "avatar": "data/avatars/UCXuc_HVyuWFoWQa1zyyuqJw.jpg"
+},
+{
+"id": "UCZPLMvQd-yMRMK-Q6AtvKfg",
+"name": "LYON S.P.D",
+"handle": "@LYONSPD",
+"subs": "539K",
+"subsN": 539000,
+"videos": "553",
+"videosN": 553,
+"cat": "minecraft",
+"source": "seed",
+"avatar": "data/avatars/UCZPLMvQd-yMRMK-Q6AtvKfg.jpg"
+},
+{
+"id": "UCwbdE36Ey2CNeANU7Y23kww",
+"name": "Il Milanese Imbruttito",
+"handle": "@IlMilaneseImbruttito",
+"subs": "536K",
+"subsN": 536000,
+"videos": "349",
+"videosN": 349,
+"cat": "vlog",
+"source": "seed",
+"avatar": "data/avatars/UCwbdE36Ey2CNeANU7Y23kww.jpg"
+},
+{
+"id": "UCyyC9-3IqkScHi8dGQzuDEw",
+"name": "Anima Podcast",
+"handle": "@animapodcastoficial",
+"subs": "507K",
+"subsN": 507000,
+"videos": "1.5K",
+"videosN": 1500,
+"cat": "minecraft",
+"source": "seed",
+"avatar": "data/avatars/UCyyC9-3IqkScHi8dGQzuDEw.jpg"
 },
 {
 "id": "UCtgIlU49ppoBvEgDboD34Pg",
@@ -99,28 +255,16 @@
 "avatar": "data/avatars/UCtgIlU49ppoBvEgDboD34Pg.jpg"
 },
 {
-"id": "UCZH1ypQDpzzlHw5rrrvNYBg",
-"name": "Comedy Central Italia",
-"handle": "@ComedyCentralItalia",
-"subs": "478K",
-"subsN": 478000,
+"id": "UCCFD2I_EBPlwpeaZfX3egWw",
+"name": "Storia e Mitologia Illustrate",
+"handle": "@StoriaeMitologia",
+"subs": "402K",
+"subsN": 402000,
 "videos": "2.6K",
 "videosN": 2600,
-"cat": "entertainment",
-"source": "search:comici italiani",
-"avatar": "data/avatars/UCZH1ypQDpzzlHw5rrrvNYBg.jpg"
-},
-{
-"id": "UCR34kAAMqN7wVdJ4hoo2qWg",
-"name": "PoretCast di Giacomo Poretti",
-"handle": "@poretcast",
-"subs": "397K",
-"subsN": 397000,
-"videos": "1K",
-"videosN": 1000,
-"cat": "interview",
-"source": "search:podcast di interviste",
-"avatar": "data/avatars/UCR34kAAMqN7wVdJ4hoo2qWg.jpg"
+"cat": "history",
+"source": "search:storia",
+"avatar": "data/avatars/UCCFD2I_EBPlwpeaZfX3egWw.jpg"
 },
 {
 "id": "UCIfXF2g-jES4VTAPQzgIRUw",
@@ -135,6 +279,18 @@
 "avatar": "data/avatars/UCIfXF2g-jES4VTAPQzgIRUw.jpg"
 },
 {
+"id": "UCqb5wzZNv47POo2KcQ7AZdQ",
+"name": "Urbex Squad",
+"handle": "@UrbexSquad",
+"subs": "285K",
+"subsN": 285000,
+"videos": "763",
+"videosN": 763,
+"cat": "urbex",
+"source": "seed",
+"avatar": "data/avatars/UCqb5wzZNv47POo2KcQ7AZdQ.jpg"
+},
+{
 "id": "UCiXDrt2SYLIdG3adukvL2kw",
 "name": "La cucina di Rita",
 "handle": "@LacucinadiRita",
@@ -147,40 +303,16 @@
 "avatar": "data/avatars/UCiXDrt2SYLIdG3adukvL2kw.jpg"
 },
 {
-"id": "UCPtgZAmfZ5eT_dKB8yu4rrQ",
-"name": "Speziata",
-"handle": "@speziata",
-"subs": "267K",
-"subsN": 267000,
-"videos": "330",
-"videosN": 330,
-"cat": "food",
-"source": "search:ricette di cucina",
-"avatar": "data/avatars/UCPtgZAmfZ5eT_dKB8yu4rrQ.jpg"
-},
-{
-"id": "UC_2OzUw2mnLmlqFEzNzzUjw",
-"name": "scrip",
-"handle": "@scrip79",
-"subs": "214K",
-"subsN": 214000,
-"videos": "2.4K",
-"videosN": 2400,
-"cat": "education",
-"source": "search:lezioni di educazione",
-"avatar": "data/avatars/UC_2OzUw2mnLmlqFEzNzzUjw.jpg"
-},
-{
-"id": "UCrOEtTBw_nUv_r5x7Uvebag",
-"name": "Film&Clips Commedia",
-"handle": "@FilmCommedia",
-"subs": "185K",
-"subsN": 185000,
-"videos": "683",
-"videosN": 683,
-"cat": "entertainment",
-"source": "search:comici italiani",
-"avatar": "data/avatars/UCrOEtTBw_nUv_r5x7Uvebag.jpg"
+"id": "UCzrNebaJySYxAL9HNhw1MMQ",
+"name": "Vassalli di Barbero (ORIGINALS)",
+"handle": "@primovassallo",
+"subs": "166K",
+"subsN": 166000,
+"videos": "170",
+"videosN": 170,
+"cat": "history",
+"source": "seed",
+"avatar": "data/avatars/UCzrNebaJySYxAL9HNhw1MMQ.jpg"
 },
 {
 "id": "UC2SKefe4CI00_x4nTHrYN-A",
@@ -195,30 +327,6 @@
 "avatar": "data/avatars/UC2SKefe4CI00_x4nTHrYN-A.jpg"
 },
 {
-"id": "UCxqR9g_1XlnfrqwHK9viwCw",
-"name": "RaiNews",
-"handle": "@RaiNews",
-"subs": "152K",
-"subsN": 152000,
-"videos": "3.7K",
-"videosN": 3700,
-"cat": "news",
-"source": "search:notizia",
-"avatar": "data/avatars/UCxqR9g_1XlnfrqwHK9viwCw.jpg"
-},
-{
-"id": "UCXuOA7WZmGVEhrOqac8n4fw",
-"name": "Come Disegnare e Colora Per i Bambini",
-"handle": "@comedisegnareecoloraperiba2911",
-"subs": "128K",
-"subsN": 128000,
-"videos": "748",
-"videosN": 748,
-"cat": "art",
-"source": "search:disegnare arte",
-"avatar": "data/avatars/UCXuOA7WZmGVEhrOqac8n4fw.jpg"
-},
-{
 "id": "UCrCtiT9A_kIANYqI7xE06iA",
 "name": "in Viaggio col Tubo",
 "handle": "@inviaggiocoltubo",
@@ -231,16 +339,40 @@
 "avatar": "data/avatars/UCrCtiT9A_kIANYqI7xE06iA.jpg"
 },
 {
-"id": "UCaI0-QEqcqLyQnIuVI1vDPQ",
-"name": "Pepite di Scienza",
-"handle": "@PepitediScienza",
-"subs": "116K",
-"subsN": 116000,
-"videos": "220",
-"videosN": 220,
-"cat": "science",
-"source": "search:scienza",
-"avatar": "data/avatars/UCaI0-QEqcqLyQnIuVI1vDPQ.jpg"
+"id": "UCBWsc0BLYhI4yMZSCp0vjbg",
+"name": "Ruggero de I Timidi",
+"handle": "@ruggerodeitimidi",
+"subs": "101K",
+"subsN": 101000,
+"videos": "187",
+"videosN": 187,
+"cat": "music",
+"source": "seed",
+"avatar": "data/avatars/UCBWsc0BLYhI4yMZSCp0vjbg.jpg"
+},
+{
+"id": "UCHf53b-cQ69qaKOT_jYZ0vA",
+"name": "Loco Nuts Italiano - Cartoni animati per Bambini",
+"handle": "@LocoNutsItaliano",
+"subs": "94.8K",
+"subsN": 94800,
+"videos": "198",
+"videosN": 198,
+"cat": "animation",
+"source": "search:cartone animato di animazione",
+"avatar": "data/avatars/UCHf53b-cQ69qaKOT_jYZ0vA.jpg"
+},
+{
+"id": "UCWiq5MsJ8BBj-kskWAEUjMw",
+"name": "La Famiglia Del Paranormale",
+"handle": "@lafamigliadelparanormale380",
+"subs": "79.6K",
+"subsN": 79600,
+"videos": "809",
+"videosN": 809,
+"cat": "urbex",
+"source": "search:paranormale italia",
+"avatar": "data/avatars/UCWiq5MsJ8BBj-kskWAEUjMw.jpg"
 },
 {
 "id": "UCrCUwt-0JK8TyXgf_PWjarw",
@@ -253,6 +385,18 @@
 "cat": "film",
 "source": "search:recensione del film",
 "avatar": "data/avatars/UCrCUwt-0JK8TyXgf_PWjarw.jpg"
+},
+{
+"id": "UCvGwatHyCegYsG_y09qH1zw",
+"name": "Enkk",
+"handle": "@enkk",
+"subs": "68.4K",
+"subsN": 68400,
+"videos": "256",
+"videosN": 256,
+"cat": "ai",
+"source": "search:intelligenza artificiale",
+"avatar": "data/avatars/UCvGwatHyCegYsG_y09qH1zw.jpg"
 },
 {
 "id": "UC7jetLThIhNkBtoDBoXK7-Q",
