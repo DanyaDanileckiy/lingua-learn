@@ -3,6 +3,18 @@
 "updated": "2026-10-12",
 "channels": [
 {
+"id": "UCbCJmNKAL85O1VFeD6Wj60g",
+"name": "Bayashi TV",
+"handle": "@BayashiTV_",
+"subs": "37.3M",
+"subsN": 37300000,
+"videos": "1.7K",
+"videosN": 1700,
+"cat": "food",
+"source": "seed",
+"avatar": "data/avatars/UCbCJmNKAL85O1VFeD6Wj60g.jpg"
+},
+{
 "id": "UCZf__ehlCEBPop-_sldpBUQ",
 "name": "HikakinTV",
 "handle": "@HikakinTV",
@@ -63,6 +75,30 @@
 "avatar": "data/avatars/UCUCeZaZeJbEYAAzvMgrKOPQ.jpg"
 },
 {
+"id": "UCvpredjG93ifbCP1Y77JyFA",
+"name": "YOASOBI",
+"handle": "@YOASOBI_Official",
+"subs": "7.43M",
+"subsN": 7430000,
+"videos": "351",
+"videosN": 351,
+"cat": "music",
+"source": "seed",
+"avatar": "data/avatars/UCvpredjG93ifbCP1Y77JyFA.jpg"
+},
+{
+"id": "UCutJqz56653xV2wwSvut_hQ",
+"name": "東海オンエア",
+"handle": "@TokaiOnAir",
+"subs": "7.27M",
+"subsN": 7270000,
+"videos": "3.5K",
+"videosN": 3500,
+"cat": "entertainment",
+"source": "seed",
+"avatar": "data/avatars/UCutJqz56653xV2wwSvut_hQ.jpg"
+},
+{
 "id": "UCX1xppLvuj03ubLio8jslyA",
 "name": "HikakinGames",
 "handle": "@HikakinGames",
@@ -83,8 +119,20 @@
 "videos": "3.8K",
 "videosN": 3800,
 "cat": "food",
-"source": "search:料理レシピ",
+"source": "seed",
 "avatar": "data/avatars/UCW01sMEVYQdhcvkrhbxdBpw.jpg"
+},
+{
+"id": "UCFo4kqllbcQ4nV83WCyraiw",
+"name": "NAKATA UNIVERSITY ",
+"handle": "@NKTofficial",
+"subs": "5.48M",
+"subsN": 5480000,
+"videos": "895",
+"videosN": 895,
+"cat": "education",
+"source": "seed",
+"avatar": "data/avatars/UCFo4kqllbcQ4nV83WCyraiw.jpg"
 },
 {
 "id": "UCGCZAYq5Xxojl_tSXcVJhiQ",
@@ -123,18 +171,6 @@
 "avatar": "data/avatars/UC14Yc2Qv92DMuyNRlHvpo2Q.jpg"
 },
 {
-"id": "UC8yHePe_RgUBE-waRWy6olw",
-"name": "PIVOT 公式チャンネル",
-"handle": "@pivot00",
-"subs": "4.09M",
-"subsN": 4090000,
-"videos": "5.5K",
-"videosN": 5500,
-"cat": "career",
-"source": "search:キャリアビジネス",
-"avatar": "data/avatars/UC8yHePe_RgUBE-waRWy6olw.jpg"
-},
-{
 "id": "UCM3yhFc0-fBFuvqx1Vg2YNQ",
 "name": "Maizen Japanese Channel",
 "handle": "@maizen",
@@ -145,6 +181,18 @@
 "cat": "minecraft",
 "source": "seed",
 "avatar": "data/avatars/UCM3yhFc0-fBFuvqx1Vg2YNQ.jpg"
+},
+{
+"id": "UCweCc7bSMX5J4jEH7HFImng",
+"name": "GMHikaru",
+"handle": "@GMHikaru",
+"subs": "3.26M",
+"subsN": 3260000,
+"videos": "5.7K",
+"videosN": 5700,
+"cat": "career",
+"source": "seed",
+"avatar": "data/avatars/UCweCc7bSMX5J4jEH7HFImng.jpg"
 },
 {
 "id": "UCY5fcqgSrQItPAX_Z5Frmwg",
@@ -159,18 +207,6 @@
 "avatar": "data/avatars/UCY5fcqgSrQItPAX_Z5Frmwg.jpg"
 },
 {
-"id": "UC3p5OTQsMEnmZktWUkw_Y0A",
-"name": "Koh Kentetsu Kitchen【料理研究家コウケンテツ公式チャンネル】",
-"handle": "@kohkentetsukitchen",
-"subs": "2.3M",
-"subsN": 2300000,
-"videos": "782",
-"videosN": 782,
-"cat": "food",
-"source": "search:料理レシピ",
-"avatar": "data/avatars/UC3p5OTQsMEnmZktWUkw_Y0A.jpg"
-},
-{
 "id": "UCgCudMsK-kxYxB2RgiS3bzQ",
 "name": "TBS",
 "handle": "@TBS",
@@ -181,18 +217,6 @@
 "cat": "news",
 "source": "seed",
 "avatar": "data/avatars/UCgCudMsK-kxYxB2RgiS3bzQ.jpg"
-},
-{
-"id": "UCzDd3Byvt91oyf3ggRlTb3A",
-"name": "とある男が授業をしてみた",
-"handle": "@toaruotoko",
-"subs": "2.25M",
-"subsN": 2250000,
-"videos": "4.7K",
-"videosN": 4700,
-"cat": "education",
-"source": "search:教育の授業",
-"avatar": "data/avatars/UCzDd3Byvt91oyf3ggRlTb3A.jpg"
 },
 {
 "id": "UCFdBehO71GQaIom4WfVeGSw",
@@ -219,6 +243,18 @@
 "avatar": "data/avatars/UCySNyY7ZlIyIeQ0T_8ah4Vg.jpg"
 },
 {
+"id": "UCoFLB_Gw_AoxUuuzKjXrc_Q",
+"name": "DAZN Japan",
+"handle": "@DAZNJapan",
+"subs": "1.6M",
+"subsN": 1600000,
+"videos": "24K",
+"videosN": 24000,
+"cat": "sport",
+"source": "search:サッカースポーツ",
+"avatar": "data/avatars/UCoFLB_Gw_AoxUuuzKjXrc_Q.jpg"
+},
+{
 "id": "UCqmWJJolqAgjIdLqK3zD1QQ",
 "name": "予備校のノリで学ぶ「大学の数学・物理」",
 "handle": "@yobinori",
@@ -234,13 +270,37 @@
 "id": "UCeCmTmCwLMhp7l6K3i5X5eA",
 "name": "【ダラシメン】やーかず",
 "handle": "@darashimen",
-"subs": "787K",
-"subsN": 787000,
+"subs": "788K",
+"subsN": 788000,
 "videos": "912",
 "videosN": 912,
 "cat": "urbex",
 "source": "search:心霊スポット",
 "avatar": "data/avatars/UCeCmTmCwLMhp7l6K3i5X5eA.jpg"
+},
+{
+"id": "UCv1DvRY5PyHHt3KN9ghunuw",
+"name": "Masahiro Sakurai on Creating Games",
+"handle": "@sora_sakurai_en",
+"subs": "668K",
+"subsN": 668000,
+"videos": "300",
+"videosN": 300,
+"cat": "games",
+"source": "seed",
+"avatar": "data/avatars/UCv1DvRY5PyHHt3KN9ghunuw.jpg"
+},
+{
+"id": "UCmQp6ZaAejJKKkXc_Y_lh1A",
+"name": "J.LEAGUE International",
+"handle": "@JLEAGUEInternational",
+"subs": "545K",
+"subsN": 545000,
+"videos": "11K",
+"videosN": 11000,
+"cat": "sport",
+"source": "seed",
+"avatar": "data/avatars/UCmQp6ZaAejJKKkXc_Y_lh1A.jpg"
 },
 {
 "id": "UC7_mFzmj89tqAqgpl5695QQ",
@@ -267,30 +327,6 @@
 "avatar": "data/avatars/UCU0KURiKTupBYVCK8rgG7Rw.jpg"
 },
 {
-"id": "UCMjvvElkdLRTgcTKklAUkSw",
-"name": "U-NEXT フットボール",
-"handle": "@UNEXT_football",
-"subs": "437K",
-"subsN": 437000,
-"videos": "4.1K",
-"videosN": 4100,
-"cat": "sport",
-"source": "search:サッカースポーツ",
-"avatar": "data/avatars/UCMjvvElkdLRTgcTKklAUkSw.jpg"
-},
-{
-"id": "UCWt0yfrBaUk148rxaOp4b4w",
-"name": "日テレスポーツ【公式】",
-"handle": "@ntvsports",
-"subs": "399K",
-"subsN": 399000,
-"videos": "9.1K",
-"videosN": 9100,
-"cat": "sport",
-"source": "search:サッカースポーツ",
-"avatar": "data/avatars/UCWt0yfrBaUk148rxaOp4b4w.jpg"
-},
-{
 "id": "UCBHGZpDF2fsqPIPi0pNyuTg",
 "name": "Pivot with Kara Swisher and Scott Galloway",
 "handle": "@pivot",
@@ -303,16 +339,16 @@
 "avatar": "data/avatars/UCBHGZpDF2fsqPIPi0pNyuTg.jpg"
 },
 {
-"id": "UCuIuBSxnpI85225O7F6Od3w",
-"name": "歴史再現めし REKISHI MESHI",
-"handle": "@rekishi_meshi",
-"subs": "223K",
-"subsN": 223000,
-"videos": "484",
-"videosN": 484,
+"id": "UCj3w6q3Su0jDCv97bRiaS0g",
+"name": "最強のメラ",
+"handle": "@user-lg3merasikyou",
+"subs": "242K",
+"subsN": 242000,
+"videos": "171",
+"videosN": 171,
 "cat": "history",
 "source": "search:歴史",
-"avatar": "data/avatars/UCuIuBSxnpI85225O7F6Od3w.jpg"
+"avatar": "data/avatars/UCj3w6q3Su0jDCv97bRiaS0g.jpg"
 },
 {
 "id": "UC9FTrf3ryoNxs01o_a2FE6g",
@@ -325,6 +361,18 @@
 "cat": "lectures",
 "source": "search:大学の講義",
 "avatar": "data/avatars/UC9FTrf3ryoNxs01o_a2FE6g.jpg"
+},
+{
+"id": "UC-ltIgkALuC9liu6rC_m7BQ",
+"name": "チキンボールチャンネル",
+"handle": "@ChickenBallCH_Horror",
+"subs": "194K",
+"subsN": 194000,
+"videos": "44",
+"videosN": 44,
+"cat": "urbex",
+"source": "search:心霊スポット",
+"avatar": "data/avatars/UC-ltIgkALuC9liu6rC_m7BQ.jpg"
 },
 {
 "id": "UCmYEOuRIVGSO5PlExUYHqYQ",
@@ -351,16 +399,16 @@
 "avatar": "data/avatars/UCQ6u9aSYlE2Xrsws6Y00q1w.jpg"
 },
 {
-"id": "UCrBRHWSm6OA3wKTnV4XoSUg",
-"name": "クロシロチャンネル",
-"handle": "@kuroshiro_channel",
+"id": "UCq1cKXce5VFXG-nX8DBkTWQ",
+"name": "サイトウさんの毎日心理学チャンネル",
+"handle": "@yusuke_counselor",
 "subs": "147K",
 "subsN": 147000,
-"videos": "264",
-"videosN": 264,
-"cat": "urbex",
-"source": "search:心霊スポット",
-"avatar": "data/avatars/UCrBRHWSm6OA3wKTnV4XoSUg.jpg"
+"videos": "2.8K",
+"videosN": 2800,
+"cat": "psychology",
+"source": "search:心理学",
+"avatar": "data/avatars/UCq1cKXce5VFXG-nX8DBkTWQ.jpg"
 },
 {
 "id": "UC74VHLru6qqrAw4e7hzdDsw",
