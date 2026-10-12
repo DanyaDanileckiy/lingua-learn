@@ -325,7 +325,7 @@ function setLang(l) { S.set('learnLang', l); feedMem = null; catState.cat = 'all
 function renderLangSw() {
   let el = $('#langsw'); if (!el) { el = document.createElement('button'); el.id = 'langsw'; el.onclick = e => { e.stopPropagation(); langMenu(el); }; }
   const l = curLang(); el.title = 'Изучаемый язык: ' + langName(l); el.innerHTML = flag(l, 'flag big') + '<span class="car">▾</span>';
-  const t = $('#app .top, #app .catsearch'); if (t) { t.prepend(el); el.classList.remove('fx'); } else { document.body.appendChild(el); el.classList.add('fx'); }
+  const t = $('#app .top, #app .catsearch'); if (t && t.getBoundingClientRect().left < 200) { t.prepend(el); el.classList.remove('fx'); } else { document.body.appendChild(el); el.classList.add('fx'); }
 }
 function langMenu(anchor, onPick = setLang, cur = curLang()) {
   if ($('.lmenu')) { $$('.lmenu').forEach(x => x.remove()); return; }
@@ -768,7 +768,7 @@ function route() {
   }
 }
 window.addEventListener('hashchange', route);
-new MutationObserver(() => { if (!$('#langsw') || !$('#langsw').isConnected || ($('#langsw').classList.contains('fx') && $('#app .top, #app .catsearch')) || (!$('#langsw').classList.contains('fx') && !$('#app').contains($('#langsw')))) renderLangSw(); }).observe(document.getElementById('app'), { childList: true });
+new MutationObserver(() => { if (!$('#langsw') || !$('#langsw').isConnected || ($('#langsw').classList.contains('fx') && $('#app .top, #app .catsearch') && $('#app .top, #app .catsearch').getBoundingClientRect().left < 200) || (!$('#langsw').classList.contains('fx') && !$('#app').contains($('#langsw')))) renderLangSw(); }).observe(document.getElementById('app'), { childList: true });
 if (document.documentElement.dataset.linguaExt) window.__linguaExt = true;
 window.postMessage({ source: 'lingua-hello' }, location.origin);
 renderLangSw(); migrateLangs().finally(route);
