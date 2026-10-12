@@ -244,9 +244,10 @@ async function loadChannel(c) {
   const el = $('#chv'); if (!c) { el.textContent = 'Канал не найден'; return; }
   el.innerHTML = '<div class="empty"><div class="spin"></div><div>Загрузка видео канала…</div></div>';
   let vs = [];
-  const j = await pipedJSON('/channel/' + c.id);
+  const j = await withTimeout(pipedJSON('/channel/' + c.id), 6000).catch(() => null);
   if (j && j.relatedStreams) vs = j.relatedStreams.filter(x => x.url).map(x => ({ id: (x.url.match(/v=([\w-]{11})/) || [])[1], title: x.title, channel: x.uploaderName || c.title, dur: x.duration > 0 ? x.duration : 0 })).filter(x => x.id);
-  if (!vs.length) vs = await uploadsViaIframe(c);
+  if (!vs.length) vs = await withTimeout(uploadsViaIframe(c), 15000).catch(() => []);
+  if (!vs.length) vs = await channelVideos(c).catch(() => []);
   if (!vs.length) {
     const xml = await extFetch('https://www.youtube.com/feeds/videos.xml?channel_id=' + c.id);
     if (xml) vs = [...new DOMParser().parseFromString(xml, 'text/xml').getElementsByTagName('entry')].map(e => ({ id: (e.getElementsByTagName('yt:videoId')[0] || {}).textContent, title: (e.getElementsByTagName('title')[0] || {}).textContent, channel: c.title })).filter(x => x.id);
