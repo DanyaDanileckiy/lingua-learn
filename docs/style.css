@@ -88,3 +88,4 @@ h2 span{display:flex;gap:10px;align-items:center}
 img.flag{width:20px;height:14px;object-fit:cover;border-radius:2px;vertical-align:-2px;box-shadow:0 0 0 1px rgba(255,255,255,.15)}img.flag.big{width:28px;height:20px;border-radius:3px}#langsw .car{font-size:10px;color:var(--m)}
 .lmenu button{display:flex;align-items:center;gap:10px}.chl img.flag{width:18px;height:13px}
 @media(max-width:700px){#langsw{width:auto}}
+#langsw.inh{display:inline-flex;vertical-align:middle;margin-right:8px;font-size:14px}

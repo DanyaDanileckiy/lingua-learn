@@ -325,7 +325,8 @@ function setLang(l) { S.set('learnLang', l); feedMem = null; catState.cat = 'all
 function renderLangSw() {
   let el = $('#langsw'); if (!el) { el = document.createElement('button'); el.id = 'langsw'; el.onclick = e => { e.stopPropagation(); langMenu(el); }; }
   const l = curLang(); el.title = 'Изучаемый язык: ' + langName(l); el.innerHTML = flag(l, 'flag big') + '<span class="car">▾</span>';
-  const t = $('#app .top, #app .catsearch'); if (t && t.getBoundingClientRect().left < 200) { t.prepend(el); el.classList.remove('fx'); } else { document.body.appendChild(el); el.classList.add('fx'); }
+  const t = $('#app .top, #app .catsearch'); const hd = [...$$('#app h1, #app h2')].find(h => h.getBoundingClientRect().left < 200 && h.getBoundingClientRect().top < 80);
+  if (t && t.getBoundingClientRect().left < 200) { t.prepend(el); el.classList.remove('fx', 'inh'); } else if (hd) { hd.prepend(el); el.classList.remove('fx'); el.classList.add('inh'); } else { document.body.appendChild(el); el.classList.add('fx'); }
 }
 function langMenu(anchor, onPick = setLang, cur = curLang()) {
   if ($('.lmenu')) { $$('.lmenu').forEach(x => x.remove()); return; }
