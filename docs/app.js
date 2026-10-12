@@ -116,7 +116,7 @@ function home() {
   const st = srsStats(), reviewed = S.get('reviews', {})[today()] || 0, ws = words(), ss = S.get('sentences', []), books = S.get('books', []);
   const [pv, pl] = last7(k => ws.filter(w => (w.createdAt || '').slice(0, 10) === k).length);
   app().innerHTML = `<div class="main"><div class="top"><input id="hs" placeholder="Поиск / вставьте ссылку YouTube" style="width:340px"><button class="btn s" id="hgo">Открыть</button></div>
-  <h2>${S.get('channels', []).length ? 'Новое на ваших каналах' : 'YouTube'} <span><button class="btn s" id="haddch">+ Добавить канал</button> <a id="hmore">Показать больше ›</a></span></h2><div class="vgrid" id="hv">${S.get('channels', []).length ? skel(homeN) : allVideos().slice(0, homeN).map(vcard).join('')}</div>
+  <h2>${myChs().length ? 'Новое на ваших каналах' : 'YouTube'} <small class="muted">${FLAGS[curLang()]} ${esc(langName(curLang()))}</small> <span><button class="btn s" id="haddch">+ Добавить канал</button> <a id="hmore">Показать больше ›</a></span></h2><div class="vgrid" id="hv">${myChs().length ? skel(homeN) : (curated().slice(0, homeN).map(vcard).join('') || noVids())}</div>${hiddenNote('channels')}
   ${homeN < Math.max(VIDEOS.length, (feedMem && feedMem.v.length) || 0) ? '<p style="text-align:center"><button class="btn g" id="hmore2">Показать больше</button></p>' : ''}
   <h2>Podcast <a href="#/library/podcasts">Показать больше ›</a></h2><div class="box" id="hpod">${podcastsBlock()}</div></div>
   <div class="rp"><div class="box"><h3>Календарь <span class="muted small">Серия ${streak()} д.</span></h3>${weekHTML()}</div>
@@ -125,7 +125,7 @@ function home() {
   <div class="tiles"><a class="tile" href="#/vocab/saved/learn"><div><b>${st.fresh}</b><span class="muted small">Обучение</span></div>🎓</a><a class="tile" href="#/vocab"><div><b>${ws.length}</b><span class="muted small">Словарь</span></div>📕</a><a class="tile" href="#/sentences"><div><b>${ss.length}</b><span class="muted small">Предложения</span></div>💬</a><a class="tile" href="#/books"><div><b>${books.length}</b><span class="muted small">PDF / книги</span></div>📄</a></div>
   <div class="box"><h3>Активность</h3>${heatHTML()}</div><div class="box"><h3>Прогресс <span class="muted small">новые слова</span></h3>${barChart(pv, pl)}</div></div>`;
   bindV(app()); bindPodcasts($('#hpod')); $('#haddch').onclick = addChannelDialog;
-  if (S.get('channels', []).length) fillFeed($('#hv'), homeN, false);
+  if (myChs().length) fillFeed($('#hv'), homeN, false);
   $('#hmore').onclick = () => location.hash = '#/library';
   if ($('#hmore2')) $('#hmore2').onclick = () => { homeN += 10; home(); };
   const go = () => { const v = $('#hs').value.trim(), id = parseId(v); if (id) location.hash = '#/watch/' + id + (parseT(v) ? '/' + parseT(v) : ''); else { location.hash = '#/library'; setTimeout(() => { const q = $('#lq'); if (q) { q.value = v; q.oninput(); } }, 0); } };
@@ -139,10 +139,10 @@ async function fetchText(url) {
 }
 const POD_PRESETS = [['BBC 6 Minute English', 'https://podcasts.files.bbci.co.uk/p02pc9tn.rss'], ['The Daily (NYT)', 'https://rss.art19.com/the-daily'], ['Stuff You Should Know', 'https://www.omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/A91018A4-EA4F-4130-BF55-AE270180C327/44710ECC-10BB-48D1-93C7-AE270180C33E/podcast.rss']];
 function podcastsBlock() {
-  const ps = S.get('podcasts', []);
+  const ps = myPods();
   const form = `<div style="display:flex;gap:8px;justify-content:center;margin-top:8px"><input class="purl" placeholder="URL RSS-ленты подкаста" style="width:320px"><button class="btn s padd">Добавить подкаст</button></div><div class="chips" style="justify-content:center;margin-top:8px">${POD_PRESETS.map(([n, u]) => `<button class="chip ppre" data-u="${esc(u)}">+ ${esc(n)}</button>`).join('')}</div>`;
-  if (!ps.length) return `<div class="empty">${CAT()}<div>Подкастов пока нет</div>${form}</div>`;
-  return `<div class="vgrid">${ps.map((p, i) => `<div class="v pod" data-i="${i}"><div class="th">${p.image ? `<img src="${esc(p.image)}" alt="">` : '<div class="empty">🎧</div>'}</div><div class="ti">${esc(p.title)}</div><div class="ch">${p.episodes.length} эпизодов <button class="x pdel" data-i="${i}">✕</button></div></div>`).join('')}</div>${form}`;
+  if (!ps.length) return `<div class="empty">${CAT()}<div>Подкастов на этом языке пока нет — <a href="#/catalog">каталог</a></div>${form}</div>${hiddenNote('podcasts')}`;
+  return `<div class="vgrid">${ps.map(p => { const i = p._i; return `<div class="v pod" data-i="${i}"><div class="th">${p.image ? `<img src="${esc(p.image)}" alt="">` : '<div class="empty">🎧</div>'}</div><div class="ti">${esc(p.title)}</div><div class="ch">${p.episodes.length} эпизодов <button class="x pdel" data-i="${i}">✕</button></div></div>`; }).join('')}</div>${form}${hiddenNote('podcasts')}`;
 }
 function bindPodcasts(root) {
   $$('.ppre', root).forEach(b => b.onclick = () => { $('.purl', root).value = b.dataset.u; $('.padd', root).click(); });
@@ -158,7 +158,7 @@ async function addPodcastFeed(url, fallback = {}) {
   try {
     const xml = new DOMParser().parseFromString(await extFetch(url) || await fetchText(url), 'text/xml'); const ch = xml.querySelector('channel'); if (!ch) throw 0;
     const img = ch.querySelector('image url') || [...ch.children].find(n => n.localName === 'image' && n.getAttribute('href'));
-    const p = { url, title: ch.querySelector('title')?.textContent || fallback.title || url, image: fallback.image || (img ? (img.textContent || img.getAttribute('href')) : ''), episodes: [...xml.querySelectorAll('item')].slice(0, 50).map(it => ({ title: it.querySelector('title')?.textContent || '', audio: it.querySelector('enclosure')?.getAttribute('url') || '', date: it.querySelector('pubDate')?.textContent || '' })) };
+    const p = { url, title: ch.querySelector('title')?.textContent || fallback.title || url, image: fallback.image || (img ? (img.textContent || img.getAttribute('href')) : ''), lang: fallback.lang || curLang(), episodes: [...xml.querySelectorAll('item')].slice(0, 50).map(it => ({ title: it.querySelector('title')?.textContent || '', audio: it.querySelector('enclosure')?.getAttribute('url') || '', date: it.querySelector('pubDate')?.textContent || '' })) };
     const ps = S.get('podcasts', []); ps.push(p); S.set('podcasts', ps); toast('Подкаст добавлен'); return true;
   } catch (e) { toast('Не удалось загрузить RSS'); return false; }
 }
@@ -170,9 +170,9 @@ function podcastPage(i) {
 
 /* ---------- LIBRARY ---------- */
 function library(tab = 'youtube') {
-  const fav = S.get('fav', []), hist = S.get('history', []), chs = S.get('channels', []);
+  const fav = S.get('fav', []), hist = S.get('history', []), chs = myChs();
   let body = '';
-  if (tab === 'youtube') body = chs.length ? `<h2>Новое на ваших каналах</h2><div class="vgrid" id="lg">${skel(12)}</div>` : `<div class="vgrid" id="lg">${allVideos().map(vcard).join('')}</div>`;
+  if (tab === 'youtube') body = chs.length ? `<h2>Новое на ваших каналах</h2><div class="vgrid" id="lg">${skel(12)}</div>` : `<div class="vgrid" id="lg">${curated().map(vcard).join('') || noVids()}</div>`;
   else if (tab === 'podcasts') body = `<div class="box" id="lp">${podcastsBlock()}</div>`;
   else if (tab === 'sets') { const ss = S.get('sentences', []); body = ss.length ? `<div class="wl">${ss.map(s => `<div class="wc">${esc(s.text)}<div class="ctx">${esc(s.translation)}</div></div>`).join('')}</div>` : empty('Наборов предложений пока нет. Сохраняйте фразы при просмотре видео.', '<a class="btn" href="#/home">К видео</a>'); }
   else if (tab === 'movies') body = empty('Фильмы появятся позже. Пока можно открыть любое видео по ссылке YouTube.', '<a class="btn" href="#/home">Открыть видео</a>');
@@ -181,10 +181,11 @@ function library(tab = 'youtube') {
   else if (tab.startsWith('ch:')) body = `<div id="chv" class="muted">Загрузка видео канала…</div>`;
   app().innerHTML = `<div class="main"><div class="top"><h1>Библиотека</h1><div class="tabs">${[['youtube', '▶ YouTube'], ['podcasts', '🎧 Подкасты'], ['sets', '📑 Наборы предложений'], ['movies', '🎬 Фильмы']].map(([k, l]) => `<a class="tab ${tab === k ? 'on' : ''}" href="#/library/${k}">${l}</a>`).join('')}</div><div class="sp"></div><button class="btn s" id="addch">+ Добавить канал</button><a class="btn g s" href="#/catalog">Каталог каналов</a><input id="lq" placeholder="Поиск / Обзор" style="width:200px"></div>${body}</div>
   <div class="rp"><div class="box"><a class="rl" href="#/library/fav">⭐ Избранное <span class="muted" style="margin-left:auto">${fav.length}</span></a><a class="rl" href="#/library/history">🕘 История <span class="muted" style="margin-left:auto">${hist.length}</span></a></div>
-  <div class="box"><h3>Подписанные каналы <a class="more" href="#/catalog">Каталог ›</a></h3>${chs.map((c, i) => `<a class="rl" href="#/library/ch:${i}">${c.avatar ? `<img class="av" src="${esc(c.avatar)}" alt="">` : `<div class="av" style="background:hsl(${(c.title.charCodeAt(0) * 37) % 360},45%,40%)">${esc(c.title[0] || '?')}</div>`}<span>${esc(c.title)}</span><button class="x chdel" data-i="${i}">✕</button></a>`).join('') || '<div class="muted small">Нет каналов</div>'}
+  <div class="box"><h3>Подписанные каналы <a class="more" href="#/catalog">Каталог ›</a></h3>${chs.map(c => { const i = c._i; return `<a class="rl" href="#/library/ch:${i}">${c.avatar ? `<img class="av" src="${esc(c.avatar)}" alt="">` : `<div class="av" style="background:hsl(${(c.title.charCodeAt(0) * 37) % 360},45%,40%)">${esc(c.title[0] || '?')}</div>`}<span>${esc(c.title)}</span><button class="chl" data-i="${i}" title="Язык канала">${FLAGS[c.lang || 'en']}</button><button class="x chdel" data-i="${i}">✕</button></a>`; }).join('') || '<div class="muted small">Нет каналов на этом языке</div>'}${hiddenNote('channels')}
   <div style="display:flex;gap:6px;margin-top:10px"><input id="chin" placeholder="URL канала или ID (UC…)" style="flex:1;min-width:0"><button class="btn s" id="chadd">+</button></div></div></div>`;
   bindV(app()); if ($('#lp')) bindPodcasts($('#lp'));
   $('#addch').onclick = addChannelDialog;
+  $$('.chl').forEach(b => b.onclick = e => { e.preventDefault(); e.stopPropagation(); const i = +b.dataset.i, all = S.get('channels', []); langMenu(b, l => { all[i].lang = l; S.set('channels', all); feedMem = null; toast(all[i].title + ' → ' + langName(l)); library(tab); }, all[i].lang); });
   if (tab === 'youtube' && chs.length) fillFeed($('#lg'), 0, true);
   $('#lq').oninput = () => { const q = $('#lq').value.toLowerCase(); $$('.v').forEach(v => v.style.display = v.textContent.toLowerCase().includes(q) ? '' : 'none'); };
   $$('.chdel').forEach(b => b.onclick = e => { e.preventDefault(); e.stopPropagation(); const c = S.get('channels', []); c.splice(+b.dataset.i, 1); S.set('channels', c); library(); });
@@ -192,7 +193,7 @@ function library(tab = 'youtube') {
     const v = $('#chin').value.trim(); if (!v) return; $('#chadd').textContent = '…';
     const ch = await resolveChannel(v); $('#chadd').textContent = '+';
     if (!ch) return toast('Канал не найден. Укажите ссылку, @handle или ID вида UC…');
-    const c = S.get('channels', []); let i = c.findIndex(x => x.id === ch.id); if (i < 0) { c.push({ id: ch.id, title: ch.title }); i = c.length - 1; } S.set('channels', c); toast('Канал добавлен'); location.hash = '#/library/ch:' + i;
+    const c = S.get('channels', []); let i = c.findIndex(x => x.id === ch.id); if (i < 0) { c.push({ id: ch.id, title: ch.title, lang: curLang() }); i = c.length - 1; } S.set('channels', c); toast('Канал добавлен'); location.hash = '#/library/ch:' + i;
   };
   if (tab.startsWith('ch:')) loadChannel(S.get('channels', [])[+tab.slice(3)]);
 }
@@ -270,18 +271,20 @@ async function channelVideos(c) {
   return vs;
 }
 async function subsFeed() {
-  const chs = S.get('channels', []); if (!chs.length) return [];
-  const key = chs.map(c => c.id).join(','); if (feedMem && feedMem.key === key && Date.now() - feedMem.t < 5 * 60e3) return feedMem.v;
+  const chs = myChs(); if (!chs.length) return [];
+  const key = curLang() + ':' + chs.map(c => c.id).join(','); if (feedMem && feedMem.key === key && Date.now() - feedMem.t < 5 * 60e3) return feedMem.v;
   const out = []; let i = 0;
   await Promise.all(Array.from({ length: Math.min(6, chs.length) }, async () => { while (i < chs.length) { const c = chs[i++]; out.push(...await channelVideos(c)); } }));
   const seen = new Set(), v = out.filter(x => !seen.has(x.id) && seen.add(x.id)).sort((a, b) => (Date.parse(b.published) || 0) - (Date.parse(a.published) || 0));
   const known = S.get('vmeta', {}); v.forEach(x => known[x.id] = { id: x.id, title: x.title, channel: x.channel }); S.set('vmeta', known);
   feedMem = { key, t: Date.now(), v }; return v;
 }
+const noVids = () => `<div class="empty" style="grid-column:1/-1">${CAT()}<div>Нет каналов на языке «${esc(langName(curLang()))}». Добавьте их из каталога.</div><a class="btn" href="#/catalog">Каталог каналов</a></div>`;
+function curated() { return curLang() === 'en' ? allVideos() : []; }
 async function fillFeed(el, limit, withCurated) {
   const vs = await subsFeed(); if (!el.isConnected) return;
-  if (!vs.length) { el.innerHTML = allVideos().slice(0, limit || 999).map(vcard).join(''); bindV(el); return; }
-  el.innerHTML = vs.slice(0, limit || 999).map(vcard).join('') + (withCurated ? `<h2 style="grid-column:1/-1">Рекомендованное</h2>` + allVideos().map(vcard).join('') : '');
+  if (!vs.length) { el.innerHTML = curated().slice(0, limit || 999).map(vcard).join('') || noVids(); bindV(el); return; }
+  el.innerHTML = vs.slice(0, limit || 999).map(vcard).join('') + (withCurated && curated().length ? `<h2 style="grid-column:1/-1">Рекомендованное</h2>` + curated().map(vcard).join('') : '');
   bindV(el); const q = $('#lq'); if (q && q.value) q.oninput();
 }
 
@@ -300,13 +303,44 @@ function addChannelDialog() {
     if (!c || !c.id) { $('#mprev').innerHTML = '<p class="muted">Канал не найден. Проверьте ссылку.</p>'; return; }
     const on = isSub(c.id);
     $('#mprev').innerHTML = `<div class="crow sel" style="margin-top:14px">${c.avatar ? `<img class="cav" src="${esc(c.avatar)}" alt="">` : '<div class="cav"></div>'}<div class="cinfo"><b>${esc(c.name)}</b><span>${c.subsN ? ruNum(c.subsN) + ' подписчиков' : ''}&nbsp;&nbsp;${c.videosN ? ruNum(c.videosN) + ' видео' : ''}${c.handle ? ' · ' + esc(c.handle) : ''}</span></div><button class="btn" id="mok" ${on ? 'disabled' : ''}>${on ? '✓ Уже подписаны' : 'Подписаться'}</button></div>`;
-    if (!on) $('#mok').onclick = () => { toggleSub(c, true); feedMem = null; close(); route(); };
+    if (!on) $('#mok').onclick = () => { toggleSub({ ...c, lang: curLang() }, true); feedMem = null; close(); route(); };
   };
   $('#mfind').onclick = find; inp.onkeydown = e => { if (e.key === 'Enter') find(); if (e.key === 'Escape') close(); };
 }
 
 /* ---------- CATALOG ---------- */
 const LEARN_LANGS = [['en', 'English'], ['es', 'Español'], ['de', 'Deutsch'], ['fr', 'Français'], ['it', 'Italiano'], ['pt', 'Português'], ['ja', '日本語'], ['ko', '한국어'], ['zh', '中文'], ['tr', 'Türkçe'], ['ru', 'Русский'], ['he', 'עברית']];
+const FLAGS = { en: '🇬🇧', es: '🇪🇸', de: '🇩🇪', fr: '🇫🇷', it: '🇮🇹', pt: '🇵🇹', ja: '🇯🇵', ko: '🇰🇷', zh: '🇨🇳', tr: '🇹🇷', ru: '🇷🇺', he: '🇮🇱' };
+const curLang = () => S.get('learnLang', 'en');
+const langName = l => (LEARN_LANGS.find(x => x[0] === l) || [l, l])[1];
+const myChs = () => S.get('channels', []).map((c, i) => ({ ...c, _i: i })).filter(c => (c.lang || 'en') === curLang());
+const myPods = () => S.get('podcasts', []).map((p, i) => ({ ...p, _i: i })).filter(p => (p.lang || 'en') === curLang());
+function hiddenNote(kind) {
+  const n = S.get(kind, []).filter(c => (c.lang || 'en') !== curLang()).length;
+  return n ? `<div class="muted small hidn">Скрыто ${n} ${kind === 'channels' ? 'подписок' : 'подкастов'} на других языках</div>` : '';
+}
+function setLang(l) { S.set('learnLang', l); feedMem = null; catState.cat = 'all'; renderLangSw(); route(); }
+function renderLangSw() {
+  let el = $('#langsw'); if (!el) { el = document.createElement('button'); el.id = 'langsw'; el.title = 'Изучаемый язык'; $('#side .logo').after(el); el.onclick = e => { e.stopPropagation(); langMenu(el); }; }
+  const l = curLang(); el.innerHTML = `<span class="fl">${FLAGS[l] || '🌐'}</span><span class="ln2">${esc(langName(l))}</span>`;
+}
+function langMenu(anchor, onPick = setLang, cur = curLang()) {
+  $$('.lmenu').forEach(x => x.remove());
+  const m = document.createElement('div'); m.className = 'lmenu'; const r = anchor.getBoundingClientRect();
+  m.style.left = Math.min(r.right + 6, innerWidth - 200) + 'px'; m.style.top = Math.min(r.top, innerHeight - 440) + 'px';
+  m.innerHTML = LEARN_LANGS.map(([v, n]) => `<button data-l="${v}" class="${v === cur ? 'on' : ''}">${FLAGS[v]} ${esc(n)}</button>`).join('');
+  document.body.appendChild(m); $$('button', m).forEach(b => b.onclick = e => { e.stopPropagation(); m.remove(); onPick(b.dataset.l); });
+  setTimeout(() => document.addEventListener('click', () => m.remove(), { once: true }));
+}
+async function migrateLangs() {
+  const chs = S.get('channels', []), ps = S.get('podcasts', []);
+  if (chs.every(c => c.lang) && ps.every(p => p.lang)) return;
+  const map = {}, pmap = {};
+  await Promise.all(LEARN_LANGS.map(async ([l]) => { try { (await loadCatalog(l)).forEach(c => { map[c.id] ||= l; }); } catch (e) { } }));
+  try { Object.entries(catData.pods || {}).forEach(([l, a]) => a.forEach(p => pmap[p.feed] ||= l)); } catch (e) { }
+  S.set('channels', chs.map(c => c.lang ? c : { ...c, lang: map[c.id] || curLang() }));
+  S.set('podcasts', ps.map(p => p.lang ? p : { ...p, lang: pmap[p.url] || curLang() }));
+}
 const CAT_LABELS = [['all', 'Все'], ['vlog', 'Влог'], ['animation', 'Анимация'], ['music', 'Музыка'], ['film', 'Кино и сериалы'], ['food', 'Еда'], ['travel', 'Путешествия'], ['tech', 'Технологии'], ['ai', 'ИИ'], ['science', 'Наука'], ['education', 'Образование'], ['psychology', 'Психология'], ['career', 'Карьера'], ['art', 'Искусство'], ['history', 'История'], ['sport', 'Спорт'], ['health', 'Здоровье'], ['news', 'Новости'], ['interview', 'Интервью'], ['lectures', 'Лекции'], ['entertainment', 'Развлечения'], ['games', 'Игры'], ['minecraft', 'Майнкрафт'], ['urbex', 'Заброшки / Паранормальное']];
 const catData = {}; let catState = { tab: 'yt', cat: 'all', q: '' };
 async function loadCatalog(lang) {
@@ -320,7 +354,7 @@ async function catalog() {
   app().innerHTML = `<div class="main cat"><div class="catsearch"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="7" stroke="#888" stroke-width="2" fill="none"/><path d="M16 16l5 5" stroke="#888" stroke-width="2"/></svg><input id="cq" placeholder="Поиск YouTube или подкастов" value="${esc(catState.q)}"><select id="clang" title="Изучаемый язык">${LEARN_LANGS.map(([v, l]) => `<option value="${v}" ${v === lang ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
   <div class="cattabs"><button class="ctab ${catState.tab === 'yt' ? 'on' : ''}" data-t="yt">▶ YouTube</button><button class="ctab ${catState.tab === 'pod' ? 'on' : ''}" data-t="pod">🎧 Podcast</button></div>
   <div class="catbody"><div class="catlist" id="cl"><div class="empty"><div class="spin"></div></div></div>${catState.tab === 'yt' ? `<div class="catcats" id="cc"></div>` : ''}</div></div>`;
-  $('#clang').onchange = () => { S.set('learnLang', $('#clang').value); catState.cat = 'all'; catalog(); };
+  $('#clang').onchange = () => setLang($('#clang').value);
   $$('.ctab').forEach(b => b.onclick = () => { catState.tab = b.dataset.t; catalog(); });
   $('#cq').oninput = () => { catState.q = $('#cq').value; renderCatList(); };
   $('#cq').onkeydown = async e => {
@@ -339,7 +373,7 @@ function isSub(id) { return S.get('channels', []).some(c => c.id === id); }
 function toggleSub(c, forceOn) {
   let list = S.get('channels', []); const on = list.some(x => x.id === c.id);
   if (on && !forceOn) { list = list.filter(x => x.id !== c.id); toast('Отписка: ' + c.name); }
-  else if (!on) { list.push({ id: c.id, title: c.name, avatar: c.avatar || '', subs: c.subsN || 0 }); toast('Подписка: ' + c.name); }
+  else if (!on) { list.push({ id: c.id, title: c.name, avatar: c.avatar || '', subs: c.subsN || 0, lang: c.lang || curLang() }); toast('Подписка: ' + c.name); }
   S.set('channels', list); feedMem = null;
 }
 function renderCatList() {
@@ -351,7 +385,7 @@ function renderCatList() {
     $$('.csub', el).forEach(b => b.onclick = async () => {
       const p = pods.find(x => x.feed === b.dataset.f);
       if (b.classList.contains('on')) { S.set('podcasts', S.get('podcasts', []).filter(x => x.url !== p.feed)); toast('Отписка'); renderCatList(); return; }
-      b.textContent = '…'; await addPodcastFeed(p.feed, { title: p.title, image: p.image }); renderCatList();
+      b.textContent = '…'; await addPodcastFeed(p.feed, { title: p.title, image: p.image, lang }); renderCatList();
     });
     return;
   }
@@ -733,4 +767,4 @@ function route() {
 window.addEventListener('hashchange', route);
 if (document.documentElement.dataset.linguaExt) window.__linguaExt = true;
 window.postMessage({ source: 'lingua-hello' }, location.origin);
-route();
+renderLangSw(); migrateLangs().finally(route);

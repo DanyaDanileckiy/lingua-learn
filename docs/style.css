@@ -77,3 +77,10 @@ h2 span{display:flex;gap:10px;align-items:center}
 .watch .pwrap iframe,.watch #player{display:block;width:100%!important;height:auto!important;aspect-ratio:16/9}
 @media(max-width:900px){.watch .pcol{max-width:100%;width:100%}.main.watch{min-width:0;overflow-x:hidden}}
 @media(max-width:900px){.main.watch{width:calc(100vw - 44px);max-width:calc(100vw - 44px);box-sizing:border-box}.watch .top{flex-wrap:wrap!important}.watch .top .btn{white-space:nowrap}.watch .pl,.watch #tr{max-width:100%;box-sizing:border-box}}
+#langsw{width:50px;margin:-4px 0 8px;padding:5px 0;border-radius:10px;background:#2a2a2a;border:1px solid #3a3a3a;color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px}#langsw:hover{border-color:var(--y)}
+#langsw .fl{font-size:20px;line-height:1}#langsw .ln2{font-size:9px;max-width:48px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lmenu{position:fixed;z-index:90;background:#222;border:1px solid #3a3a3a;border-radius:12px;padding:6px;display:flex;flex-direction:column;min-width:170px;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.lmenu button{background:none;border:0;color:#ddd;text-align:left;padding:7px 10px;border-radius:8px;cursor:pointer;font-size:14px}.lmenu button:hover{background:#2e2e2e}.lmenu button.on{background:#2e2e2e;color:var(--y)}
+.chl{background:none;border:0;cursor:pointer;font-size:14px;padding:0 4px;margin-left:auto;opacity:.8}.chl:hover{opacity:1}.rl .chl+.x{margin-left:0}
+.hidn{margin:8px 0;padding:6px 10px;background:#232323;border-radius:8px;display:inline-block}
+@media(max-width:700px){#langsw{width:40px}#langsw .ln2{display:none}}
