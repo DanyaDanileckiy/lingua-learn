@@ -33,3 +33,6 @@
 
 ## Произвольные видео
 Надёжный путь — расширение Lingua (v0.6+): сайт запрашивает транскрипт у расширения, оно получает субтитры через innertube без CORS. Без расширения сайт пробует Piped (работает только для видео, которые есть в кэше инстанса) и CORS-прокси (сейчас бесплатные прокси не работают).
+
+## Cloudflare Worker
+`worker/worker.js` развёрнут как https://lingua.lingua-learn.workers.dev (`/transcript?id=`, `/translate`, `/fetch`). CORS разрешён только для danyadanileckiy.github.io и localhost. Деплой: `CLOUDFLARE_API_TOKEN=... npx wrangler deploy` в папке `worker/` (токен в репозиторий не коммитится).
