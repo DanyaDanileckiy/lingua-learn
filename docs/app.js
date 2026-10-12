@@ -19,6 +19,7 @@ const TR_PROVIDERS = [
   async (t, tl) => { const j = await (await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&dt=t&tl=' + tl + '&q=' + encodeURIComponent(t))).json(); return (j[0] || []).map(x => x[0]).join(''); },
   async (t, tl) => { const j = await (await fetch('https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl=' + tl + '&q=' + encodeURIComponent(t))).json(); const x = j[0]; return Array.isArray(x) ? x[0] : x; },
   async (t, tl) => { const parts = []; for (const line of t.split('\n')) { const j = await (await fetch('https://api.mymemory.translated.net/get?langpair=en|' + tl + '&q=' + encodeURIComponent(line.slice(0, 480)))).json(); parts.push(j.responseStatus == 200 ? j.responseData.translatedText : ''); } return parts.join('\n'); },
+  async (t, tl) => { const j = await (await fetch(WORKER + '/translate?tl=' + tl + '&q=' + encodeURIComponent(t))).json(); return j.text; },
   async (t, tl) => { const j = await (await fetch('https://lingva.ml/api/v1/auto/' + tl + '/' + encodeURIComponent(t))).json(); return j.translation !== t ? j.translation : ''; }
 ];
 const trBad = {};
@@ -268,7 +269,19 @@ function watch(id, start = 0) {
    3) innertube /player (ANDROID, IOS) directly, then via CORS proxies -> timedtext
    4) innertube get_transcript via proxies
    5) legacy timedtext endpoint */
+const WORKER = 'https://lingua.lingua-learn.workers.dev';
+async function viaWorker(id) {
+  for (let i = 0; i < 3; i++) {
+    try {
+      const r = await withTimeout(fetch(WORKER + '/transcript?id=' + id), 30000); const d = await r.json();
+      if (d.cues && d.cues.length) { if (d.title && curVid === id) { const h1 = $('.main .top h1'); if (h1 && /^Видео /.test(h1.textContent)) h1.textContent = d.title; } return d.cues; }
+      if (d.error && d.error !== 'blocked') return null; // no captions / unavailable: don't retry
+    } catch (e) { }
+  }
+  return null;
+}
 const PROXIES = [
+  u => WORKER + '/fetch?url=' + encodeURIComponent(u),
   u => 'https://corsproxy.io/?url=' + encodeURIComponent(u),
   u => 'https://api.codetabs.com/v1/proxy?quest=' + u,
   u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
@@ -349,6 +362,7 @@ async function viaTimedtext(id) {
 async function fetchTranscript(id) {
   const steps = [
     ['Загрузка готового транскрипта…', async () => { const r = await fetch('transcripts/' + id + '.json'); return r.ok ? (await r.json()).cues : null; }],
+    ['Получение субтитров через сервер Lingua…', () => viaWorker(id)],
     ['Запрос через расширение Lingua…', () => extTranscript(id)],
     ['Получение субтитров YouTube (innertube)…', () => viaInnertube(id)],
     ['Пробуем Piped…', () => viaPiped(id)],
