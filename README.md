@@ -24,3 +24,6 @@
 - AI Talk — сценарные диалоги (без нейросети); распознавание речи работает только в Chrome/Edge.
 - Подкасты и каналы загружаются через публичные CORS-прокси (allorigins/corsproxy) — могут быть недоступны.
 - PDF не поддерживается в «Мои книги»; большие книги могут не поместиться в localStorage (~5 МБ).
+
+## Транскрипты
+Сайт ищет субтитры по цепочке: готовый файл `docs/transcripts/<id>.json` → расширение Lingua → innertube `/player` (ANDROID/IOS) напрямую и через CORS-прокси → `get_transcript` → `timedtext`. Для курируемых видео транскрипты генерируются `scripts/fetch_transcripts.py` (yt-dlp) и workflow `ci/transcripts.yml` (скопируйте в `.github/workflows/` для активации — для push нужен токен со scope `workflow`) (можно запустить вручную с дополнительными ID).

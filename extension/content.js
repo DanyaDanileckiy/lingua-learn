@@ -15,13 +15,16 @@
     if (!d || d.source !== 'lingua-inject' || !d.videoId || d.videoId === curVideo) return;
     if (new URL(location.href).searchParams.get('v') !== d.videoId) return;
     curVideo = d.videoId; cues = []; trans = {}; lastIdx = -1;
-    if (!d.tracks.length) return;
-    const t = d.tracks.find(t => t.kind !== 'asr') || d.tracks[0];
+    const fallback = () => chrome.runtime.sendMessage({ type: 'transcript', id: d.videoId }, r => { if (r && r.cues && curVideo === d.videoId) cues = r.cues.map((c, i, a) => ({ start: c.s, end: a[i + 1] ? a[i + 1].s : c.s + 4, text: c.text })); });
+    if (!d.tracks.length) return fallback();
+    const en = d.tracks.filter(t => /^en/.test(t.lang));
+    const t = en.find(t => t.kind !== 'asr') || en[0] || d.tracks.find(t => t.kind !== 'asr') || d.tracks[0];
     try {
       const r = await fetch(t.baseUrl + '&fmt=json3');
       const j = await r.json();
       cues = (j.events || []).filter(ev => ev.segs).map(ev => ({ start: ev.tStartMs / 1000, end: (ev.tStartMs + (ev.dDurationMs || 2000)) / 1000, text: ev.segs.map(x => x.utf8).join('').replace(/\n/g, ' ').trim() })).filter(c => c.text);
-    } catch (err) { console.warn('Lingua: captions failed', err); }
+      if (!cues.length) fallback();
+    } catch (err) { console.warn('Lingua: captions failed', err); fallback(); }
   });
   function poll() {
     if (location.pathname === '/watch') window.postMessage({ source: 'lingua-req' }, '*');

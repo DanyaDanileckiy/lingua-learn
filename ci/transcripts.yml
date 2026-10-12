@@ -1,0 +1,28 @@
+name: Transcripts
+on:
+  push:
+    paths: ['docs/data.js', 'scripts/fetch_transcripts.py']
+  schedule:
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: 'Extra YouTube video IDs (space-separated)'
+        required: false
+        default: ''
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install -U yt-dlp
+      - run: python3 scripts/fetch_transcripts.py ${{ github.event.inputs.ids }}
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git add docs/transcripts
+          git diff --cached --quiet || (git commit -m "Update transcripts" && git push)

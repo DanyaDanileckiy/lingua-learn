@@ -205,14 +205,93 @@ function watch(id, start = 0) {
     const l = $(`.ln[data-i="${idx}"]`); if (l) { l.classList.add('on'); l.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
   }, 400);
 }
+/* Transcript fallback chain:
+   1) pre-generated docs/transcripts/<id>.json (yt-dlp, GitHub Actions)
+   2) Lingua extension bridge (background fetch, no CORS)
+   3) innertube /player (ANDROID, IOS) directly, then via CORS proxies -> timedtext
+   4) innertube get_transcript via proxies
+   5) legacy timedtext endpoint */
+const PROXIES = [
+  u => 'https://corsproxy.io/?url=' + encodeURIComponent(u),
+  u => 'https://api.codetabs.com/v1/proxy?quest=' + u,
+  u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
+  u => 'https://thingproxy.freeboard.io/fetch/' + u,
+  u => 'https://cors.eu.org/' + u
+];
+const IT_CLIENTS = [
+  { clientName: 'ANDROID', clientVersion: '20.10.38', androidSdkVersion: 30, hl: 'en' },
+  { clientName: 'IOS', clientVersion: '20.10.4', deviceModel: 'iPhone16,2', hl: 'en' },
+  { clientName: 'TVHTML5_SIMPLY_EMBEDDED_PLAYER', clientVersion: '2.0', hl: 'en' }
+];
+const withTimeout = (p, ms = 9000) => Promise.race([p, new Promise((_, no) => setTimeout(() => no(new Error('timeout')), ms))]);
+async function tryFetch(url, opts, direct = true) {
+  const urls = (direct ? [url] : []).concat(PROXIES.map(f => f(url)));
+  for (const u of urls) { try { const r = await withTimeout(fetch(u, opts)); if (r.ok) { const t = await r.text(); if (t && t.length > 20) return t; } } catch (e) { } }
+  return null;
+}
+function parseTimed(t) {
+  t = (t || '').trim(); if (!t) return [];
+  if (t[0] === '{') return (JSON.parse(t).events || []).filter(e => e.segs).map(e => ({ s: e.tStartMs / 1000, text: e.segs.map(x => x.utf8).join('').replace(/\n/g, ' ').trim() })).filter(c => c.text);
+  const doc = new DOMParser().parseFromString(t, 'text/xml'), out = [];
+  doc.querySelectorAll('p').forEach(p => out.push({ s: +p.getAttribute('t') / 1000, text: p.textContent.replace(/\s+/g, ' ').trim() }));
+  doc.querySelectorAll('text').forEach(p => out.push({ s: +p.getAttribute('start'), text: p.textContent.replace(/\s+/g, ' ').trim() }));
+  return out.filter(c => c.text);
+}
+function pickTrack(tracks) {
+  const en = tracks.filter(t => /^en/.test(t.languageCode));
+  return en.find(t => t.kind !== 'asr') || en.find(t => t.kind === 'asr') || tracks.find(t => t.kind === 'asr') || tracks[0];
+}
+const dedupe = cs => cs.filter((c, i) => !i || c.text !== cs[i - 1].text);
+const trStatus = m => { const el = $('#tr'); if (el && !cues.length) el.innerHTML = `<div class="empty"><div class="spin"></div><div>${m}</div></div>`; };
+function extTranscript(id) {
+  return new Promise(res => {
+    const rid = Math.random().toString(36).slice(2), h = e => { if (e.source === window && e.data && e.data.source === 'lingua-ext-transcript' && e.data.rid === rid) { window.removeEventListener('message', h); res(e.data.cues || null); } };
+    window.addEventListener('message', h); window.postMessage({ source: 'lingua-req-transcript', id, rid }, location.origin);
+    setTimeout(() => { window.removeEventListener('message', h); res(null); }, window.__linguaExt ? 15000 : 1500);
+  });
+}
+async function viaInnertube(id) {
+  for (const client of IT_CLIENTS) {
+    for (const direct of [true, false]) {
+      const t = await tryFetch('https://www.youtube.com/youtubei/v1/player?prettyPrint=false', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ context: { client }, videoId: id }) }, direct);
+      if (!t) continue;
+      let tracks; try { tracks = JSON.parse(t).captions.playerCaptionsTracklistRenderer.captionTracks; } catch (e) { continue; }
+      if (!tracks || !tracks.length) continue;
+      const tr = pickTrack(tracks), url = tr.baseUrl.replace(/&fmt=[^&]*/, '') + '&fmt=json3';
+      const body = await tryFetch(url, {}, true);
+      const cs = body ? parseTimed(body) : []; if (cs.length) return cs;
+    }
+  }
+  return null;
+}
+async function viaGetTranscript(id) {
+  const params = btoa('\n\x0b' + id);
+  const t = await tryFetch('https://www.youtube.com/youtubei/v1/get_transcript?prettyPrint=false', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ context: { client: { clientName: 'WEB', clientVersion: '2.20250101.00.00', hl: 'en' } }, params }) }, false);
+  if (!t) return null;
+  const out = []; (function walk(o) { if (!o || typeof o !== 'object') return; if (o.transcriptSegmentRenderer) { const r = o.transcriptSegmentRenderer; out.push({ s: +r.startMs / 1000, text: (r.snippet.runs || []).map(x => x.text).join('').trim() }); return; } Object.values(o).forEach(walk); })(JSON.parse(t));
+  return out.filter(c => c.text).length ? out.filter(c => c.text) : null;
+}
+async function viaTimedtext(id) {
+  for (const q of ['lang=en', 'lang=en&kind=asr']) { const t = await tryFetch(`https://www.youtube.com/api/timedtext?v=${id}&${q}&fmt=json3`, {}, true); const cs = t ? parseTimed(t) : []; if (cs.length) return cs; }
+  return null;
+}
 async function fetchTranscript(id) {
-  for (const lang of ['en', 'en-US', 'en-GB']) {
-    for (const kind of ['', '&kind=asr']) {
-      try {
-        const t = await (await fetch(`https://www.youtube.com/api/timedtext?v=${id}&lang=${lang}${kind}&fmt=json3`)).text(); if (!t) continue;
-        cues = (JSON.parse(t).events || []).filter(e => e.segs).map(e => ({ s: e.tStartMs / 1000, text: e.segs.map(x => x.utf8).join('').replace(/\n/g, ' ').trim() })).filter(c => c.text);
-        if (cues.length) return renderTr();
-      } catch (e) { }
+  const steps = [
+    ['Загрузка готового транскрипта…', async () => { const r = await fetch('transcripts/' + id + '.json'); return r.ok ? (await r.json()).cues : null; }],
+    ['Запрос через расширение Lingua…', () => extTranscript(id)],
+    ['Получение субтитров YouTube (innertube)…', () => viaInnertube(id)],
+    ['Пробуем get_transcript…', () => viaGetTranscript(id)],
+    ['Пробуем timedtext…', () => viaTimedtext(id)]
+  ];
+  const cached = S.get('tcache', {})[id]; if (cached) { cues = cached; return renderTr(); }
+  for (const [msg, fn] of steps) {
+    if (id !== curVid) return; trStatus(msg);
+    let cs = null; try { cs = await fn(); } catch (e) { }
+    if (id !== curVid) return;
+    if (cs && cs.length) {
+      cues = dedupe(cs.map(c => ({ s: c.s, text: c.text })));
+      if (msg.indexOf('готового') < 0) { const tc = S.get('tcache', {}); const keys = Object.keys(tc); if (keys.length > 15) delete tc[keys[0]]; tc[id] = cues; S.set('tcache', tc); }
+      return renderTr();
     }
   }
   renderTr();
@@ -224,7 +303,7 @@ function parseSubs(txt) {
 }
 function renderTr() {
   const el = $('#tr'); if (!el) return;
-  if (!cues.length) { el.innerHTML = `<div class="empty">${CAT()}<div>Транскрипт недоступен: YouTube ограничивает доступ к субтитрам из браузера.<br>Вставьте субтитры (SRT/VTT) вручную или используйте расширение Lingua.</div></div>`; return; }
+  if (!cues.length) { el.innerHTML = `<div class="empty">${CAT()}<div>Не удалось автоматически получить субтитры для этого видео (YouTube блокирует запросы из браузера, а у видео может не быть субтитров).<br>Установите расширение Lingua — оно загружает субтитры любого видео — или вставьте SRT/VTT вручную ниже.</div></div>`; return; }
   el.innerHTML = cues.map((c, i) => `<div class="ln" data-i="${i}"><span class="ts">${fmt(c.s)}</span>${wordsHTML(c.text)}<div class="t2"></div></div>`).join('');
   $$('.ln', el).forEach(l => l.onclick = e => {
     const c = cues[+l.dataset.i];
@@ -410,7 +489,7 @@ function mergeWords(list) {
   S.set('words', ws); if (n) bump(n); return n;
 }
 // Extension direct sync: content script posts {source:'lingua-ext', words:[...]}
-window.addEventListener('message', e => { if (e.source === window && e.data && e.data.source === 'lingua-ext' && Array.isArray(e.data.words)) { const n = mergeWords(e.data.words); if (n) { toast('Синхронизировано из расширения: ' + n); route(); } } });
+window.addEventListener('message', e => { if (e.source === window && e.data && e.data.source === 'lingua-ext') window.__linguaExt = true; if (e.source === window && e.data && e.data.source === 'lingua-ext' && Array.isArray(e.data.words)) { const n = mergeWords(e.data.words); if (n) { toast('Синхронизировано из расширения: ' + n); route(); } } });
 
 /* ---------- ROUTER ---------- */
 function route() {
