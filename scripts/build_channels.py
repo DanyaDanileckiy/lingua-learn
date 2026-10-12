@@ -39,7 +39,7 @@ def detect(text):
     try: j = json.loads(get('https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl=en&q=' + urllib.parse.quote(text[:300]))); return j[0][1] if isinstance(j[0], list) else ''
     except Exception: return ''
 EXTRA_Q = {'ru': {'urbex': ['заброшки', 'паранормальное'], 'minecraft': ['майнкрафт летсплей'], 'music': ['русская музыка клипы']}, 'de': {'urbex': ['lost places deutschland', 'paranormal deutsch'], 'entertainment': ['comedy deutsch']},
-  'ko': {'urbex': ['폐가 체험', '흉가 미스터리'], 'minecraft': ['마인크래프트']}, 'it': {'urbex': ['luoghi abbandonati', 'paranormale italia'], 'entertainment': ['comici italiani']}, 'zh': {'urbex': ['廢墟探險', '靈異'], 'tech': ['科技 開箱']},
+  'ko': {'urbex': ['폐가 체험', '흉가 미스터리'], 'minecraft': ['마인크래프트']}, 'it': {'urbex': ['luoghi abbandonati', 'paranormale italia'], 'entertainment': ['comici italiani']}, 'zh': {'urbex': ['廢墟探險', '靈異', '鬼故事'], 'tech': ['科技 開箱', '3C 評測'], 'vlog': ['台灣 vlog', '日常 vlog'], 'entertainment': ['搞笑 台灣', '綜藝'], 'games': ['遊戲實況'], 'minecraft': ['麥塊', '我的世界'], 'ai': ['人工智慧 AI 教學'], 'music': ['華語 MV'], 'food': ['美食 台灣'], 'travel': ['旅遊 台灣'], 'education': ['教學 知識'], 'history': ['歷史 故事'], 'science': ['科普']},
   'tr': {'urbex': ['terk edilmiş yerler', 'paranormal türkçe'], 'games': ['oyun türkçe']}, 'fr': {'urbex': ['urbex france', 'paranormal français'], 'minecraft': ['minecraft français']}, 'es': {'urbex': ['lugares abandonados', 'paranormal español'], 'tech': ['tecnología reseñas español']},
   'pt': {'urbex': ['lugares abandonados brasil']}, 'ja': {'urbex': ['廃墟 探索', '心霊スポット']}, 'en': {}}
 def search(q, lang):

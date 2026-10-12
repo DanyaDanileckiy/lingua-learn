@@ -123,6 +123,18 @@
 "avatar": "data/avatars/UCd91HSXKhsIv8PIjNrDByHQ.jpg"
 },
 {
+"id": "UCn2KKqL6HxgN19J2QM55eHQ",
+"name": "我的世界小救星",
+"handle": "@mc_jiuxing",
+"subs": "1.46M",
+"subsN": 1460000,
+"videos": "826",
+"videosN": 826,
+"cat": "minecraft",
+"source": "search:我的世界",
+"avatar": "data/avatars/UCn2KKqL6HxgN19J2QM55eHQ.jpg"
+},
+{
 "id": "UCmv5DbNpxH8X2eQxJBqEjKQ",
 "name": "CCTV Video News Agency",
 "handle": "@CCTVVideoNewsAgency",
@@ -133,18 +145,6 @@
 "cat": "news",
 "source": "seed",
 "avatar": "data/avatars/UCmv5DbNpxH8X2eQxJBqEjKQ.jpg"
-},
-{
-"id": "UC3w1_57LtKg5mI1PHmPc7Eg",
-"name": "这不科学啊",
-"handle": "@MIWUscience",
-"subs": "713K",
-"subsN": 713000,
-"videos": "364",
-"videosN": 364,
-"cat": "science",
-"source": "search:科學",
-"avatar": "data/avatars/UC3w1_57LtKg5mI1PHmPc7Eg.jpg"
 },
 {
 "id": "UCgHXsynhD8GxbFcNlPEn-_w",
@@ -193,18 +193,6 @@
 "cat": "film",
 "source": "search:電影評論",
 "avatar": "data/avatars/UCKapoW6em0nllaXxNC49XHA.jpg"
-},
-{
-"id": "UC-7jKPgRmLBiB1ltbABubNA",
-"name": "小白的奇幻旅行",
-"handle": "@jianxiaobai",
-"subs": "306K",
-"subsN": 306000,
-"videos": "810",
-"videosN": 810,
-"cat": "travel",
-"source": "search:旅行",
-"avatar": "data/avatars/UC-7jKPgRmLBiB1ltbABubNA.jpg"
 },
 {
 "id": "UCZtwTUonXxD0IrIySpt7ong",
@@ -267,6 +255,30 @@
 "avatar": "data/avatars/UCutKH473vNcid5CIKCqAk3g.jpg"
 },
 {
+"id": "UCPG0y4RcPuqWZ5WKQMeNmzw",
+"name": "大刘科普",
+"handle": "@getstevenliu",
+"subs": "150K",
+"subsN": 150000,
+"videos": "628",
+"videosN": 628,
+"cat": "science",
+"source": "search:科普",
+"avatar": "data/avatars/UCPG0y4RcPuqWZ5WKQMeNmzw.jpg"
+},
+{
+"id": "UCA-4NPra5Cj6WQ7tCS8odoQ",
+"name": "综艺荟萃Variety show",
+"handle": "@varietyshow2670",
+"subs": "139K",
+"subsN": 139000,
+"videos": "88K",
+"videosN": 88000,
+"cat": "entertainment",
+"source": "search:綜藝",
+"avatar": "data/avatars/UCA-4NPra5Cj6WQ7tCS8odoQ.jpg"
+},
+{
 "id": "UCp17m8Dp7yxGaIZkR8GpG_Q",
 "name": "我的世界小茗",
 "handle": "@xiao-ming",
@@ -291,6 +303,54 @@
 "avatar": "data/avatars/UC1S6MSKVN7NQi0f8INP3ddA.jpg"
 },
 {
+"id": "UC4n9o9_Q2rOP2thhmXC3dWA",
+"name": "鹰眼科普",
+"handle": "@yykp",
+"subs": "104K",
+"subsN": 104000,
+"videos": "2.4K",
+"videosN": 2400,
+"cat": "science",
+"source": "search:科普",
+"avatar": "data/avatars/UC4n9o9_Q2rOP2thhmXC3dWA.jpg"
+},
+{
+"id": "UCDRf01HiDrT574r7d7kl3jQ",
+"name": "阿苗的日常生活vlog",
+"handle": "@amiaodeyijia",
+"subs": "86.4K",
+"subsN": 86400,
+"videos": "1.3K",
+"videosN": 1300,
+"cat": "vlog",
+"source": "search:日常 vlog",
+"avatar": "data/avatars/UCDRf01HiDrT574r7d7kl3jQ.jpg"
+},
+{
+"id": "UCXYvWkR9LAOsOZjYhghDiXw",
+"name": "AI学长小林",
+"handle": "@linbintalk",
+"subs": "84.9K",
+"subsN": 84900,
+"videos": "222",
+"videosN": 222,
+"cat": "ai",
+"source": "search:人工智慧 AI 教學",
+"avatar": "data/avatars/UCXYvWkR9LAOsOZjYhghDiXw.jpg"
+},
+{
+"id": "UCBaWuo_3VzPsb0cV8acczZQ",
+"name": "科普库",
+"handle": "@科普库",
+"subs": "61.8K",
+"subsN": 61800,
+"videos": "1.8K",
+"videosN": 1800,
+"cat": "science",
+"source": "search:科普",
+"avatar": "data/avatars/UCBaWuo_3VzPsb0cV8acczZQ.jpg"
+},
+{
 "id": "UCU4cKEdjmchL_eN-X7VQ_mA",
 "name": "历史故事郎",
 "handle": "@历史故事郎",
@@ -299,20 +359,8 @@
 "videos": "56",
 "videosN": 56,
 "cat": "history",
-"source": "search:歷史",
+"source": "search:歷史 故事",
 "avatar": "data/avatars/UCU4cKEdjmchL_eN-X7VQ_mA.jpg"
-},
-{
-"id": "UCWdigI7S6VaNPs6ooIBbiwg",
-"name": "睡前科学故事",
-"handle": "@睡前科学故事",
-"subs": "53.4K",
-"subsN": 53400,
-"videos": "106",
-"videosN": 106,
-"cat": "science",
-"source": "search:科學",
-"avatar": "data/avatars/UCWdigI7S6VaNPs6ooIBbiwg.jpg"
 }
 ]
 }
