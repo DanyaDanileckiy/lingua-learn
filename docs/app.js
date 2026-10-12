@@ -116,7 +116,7 @@ function home() {
   const st = srsStats(), reviewed = S.get('reviews', {})[today()] || 0, ws = words(), ss = S.get('sentences', []), books = S.get('books', []);
   const [pv, pl] = last7(k => ws.filter(w => (w.createdAt || '').slice(0, 10) === k).length);
   app().innerHTML = `<div class="main"><div class="top"><input id="hs" placeholder="Поиск / вставьте ссылку YouTube" style="width:340px"><button class="btn s" id="hgo">Открыть</button></div>
-  <h2>${myChs().length ? 'Новое на ваших каналах' : 'YouTube'} <small class="muted">${FLAGS[curLang()]} ${esc(langName(curLang()))}</small> <span><button class="btn s" id="haddch">+ Добавить канал</button> <a id="hmore">Показать больше ›</a></span></h2><div class="vgrid" id="hv">${myChs().length ? skel(homeN) : (curated().slice(0, homeN).map(vcard).join('') || noVids())}</div>${hiddenNote('channels')}
+  <h2>${myChs().length ? 'Новое на ваших каналах' : 'YouTube'} <small class="muted">${flag(curLang())} ${esc(langName(curLang()))}</small> <span><button class="btn s" id="haddch">+ Добавить канал</button> <a id="hmore">Показать больше ›</a></span></h2><div class="vgrid" id="hv">${myChs().length ? skel(homeN) : (curated().slice(0, homeN).map(vcard).join('') || noVids())}</div>${hiddenNote('channels')}
   ${homeN < Math.max(VIDEOS.length, (feedMem && feedMem.v.length) || 0) ? '<p style="text-align:center"><button class="btn g" id="hmore2">Показать больше</button></p>' : ''}
   <h2>Podcast <a href="#/library/podcasts">Показать больше ›</a></h2><div class="box" id="hpod">${podcastsBlock()}</div></div>
   <div class="rp"><div class="box"><h3>Календарь <span class="muted small">Серия ${streak()} д.</span></h3>${weekHTML()}</div>
@@ -181,7 +181,7 @@ function library(tab = 'youtube') {
   else if (tab.startsWith('ch:')) body = `<div id="chv" class="muted">Загрузка видео канала…</div>`;
   app().innerHTML = `<div class="main"><div class="top"><h1>Библиотека</h1><div class="tabs">${[['youtube', '▶ YouTube'], ['podcasts', '🎧 Подкасты'], ['sets', '📑 Наборы предложений'], ['movies', '🎬 Фильмы']].map(([k, l]) => `<a class="tab ${tab === k ? 'on' : ''}" href="#/library/${k}">${l}</a>`).join('')}</div><div class="sp"></div><button class="btn s" id="addch">+ Добавить канал</button><a class="btn g s" href="#/catalog">Каталог каналов</a><input id="lq" placeholder="Поиск / Обзор" style="width:200px"></div>${body}</div>
   <div class="rp"><div class="box"><a class="rl" href="#/library/fav">⭐ Избранное <span class="muted" style="margin-left:auto">${fav.length}</span></a><a class="rl" href="#/library/history">🕘 История <span class="muted" style="margin-left:auto">${hist.length}</span></a></div>
-  <div class="box"><h3>Подписанные каналы <a class="more" href="#/catalog">Каталог ›</a></h3>${chs.map(c => { const i = c._i; return `<a class="rl" href="#/library/ch:${i}">${c.avatar ? `<img class="av" src="${esc(c.avatar)}" alt="">` : `<div class="av" style="background:hsl(${(c.title.charCodeAt(0) * 37) % 360},45%,40%)">${esc(c.title[0] || '?')}</div>`}<span>${esc(c.title)}</span><button class="chl" data-i="${i}" title="Язык канала">${FLAGS[c.lang || 'en']}</button><button class="x chdel" data-i="${i}">✕</button></a>`; }).join('') || '<div class="muted small">Нет каналов на этом языке</div>'}${hiddenNote('channels')}
+  <div class="box"><h3>Подписанные каналы <a class="more" href="#/catalog">Каталог ›</a></h3>${chs.map(c => { const i = c._i; return `<a class="rl" href="#/library/ch:${i}">${c.avatar ? `<img class="av" src="${esc(c.avatar)}" alt="">` : `<div class="av" style="background:hsl(${(c.title.charCodeAt(0) * 37) % 360},45%,40%)">${esc(c.title[0] || '?')}</div>`}<span>${esc(c.title)}</span><button class="chl" data-i="${i}" title="Язык канала">${flag(c.lang || 'en')}</button><button class="x chdel" data-i="${i}">✕</button></a>`; }).join('') || '<div class="muted small">Нет каналов на этом языке</div>'}${hiddenNote('channels')}
   <div style="display:flex;gap:6px;margin-top:10px"><input id="chin" placeholder="URL канала или ID (UC…)" style="flex:1;min-width:0"><button class="btn s" id="chadd">+</button></div></div></div>`;
   bindV(app()); if ($('#lp')) bindPodcasts($('#lp'));
   $('#addch').onclick = addChannelDialog;
@@ -310,25 +310,28 @@ function addChannelDialog() {
 
 /* ---------- CATALOG ---------- */
 const LEARN_LANGS = [['en', 'English'], ['es', 'Español'], ['de', 'Deutsch'], ['fr', 'Français'], ['it', 'Italiano'], ['pt', 'Português'], ['ja', '日本語'], ['ko', '한국어'], ['zh', '中文'], ['tr', 'Türkçe'], ['ru', 'Русский'], ['he', 'עברית']];
-const FLAGS = { en: '🇬🇧', es: '🇪🇸', de: '🇩🇪', fr: '🇫🇷', it: '🇮🇹', pt: '🇵🇹', ja: '🇯🇵', ko: '🇰🇷', zh: '🇨🇳', tr: '🇹🇷', ru: '🇷🇺', he: '🇮🇱' };
+const FLAG_CC = { en: 'us', es: 'es', de: 'de', fr: 'fr', it: 'it', pt: 'pt', ja: 'jp', ko: 'kr', zh: 'cn', tr: 'tr', ru: 'ru', he: 'il' };
+const flag = (l, cls = 'flag') => FLAG_CC[l] ? `<img class="${cls}" src="flags/${FLAG_CC[l]}.svg" alt="${l}" width="22" height="16">` : '🌐';
+const ruPl = (n, a, b, c) => { const m = n % 10, h = n % 100; return m === 1 && h !== 11 ? a : m >= 2 && m <= 4 && (h < 12 || h > 14) ? b : c; };
 const curLang = () => S.get('learnLang', 'en');
 const langName = l => (LEARN_LANGS.find(x => x[0] === l) || [l, l])[1];
 const myChs = () => S.get('channels', []).map((c, i) => ({ ...c, _i: i })).filter(c => (c.lang || 'en') === curLang());
 const myPods = () => S.get('podcasts', []).map((p, i) => ({ ...p, _i: i })).filter(p => (p.lang || 'en') === curLang());
 function hiddenNote(kind) {
   const n = S.get(kind, []).filter(c => (c.lang || 'en') !== curLang()).length;
-  return n ? `<div class="muted small hidn">Скрыто ${n} ${kind === 'channels' ? 'подписок' : 'подкастов'} на других языках</div>` : '';
+  return n ? `<div class="muted small hidn">Скрыто ${n} ${kind === 'channels' ? ruPl(n, 'подписка', 'подписки', 'подписок') : ruPl(n, 'подкаст', 'подкаста', 'подкастов')} на других языках</div>` : '';
 }
-function setLang(l) { S.set('learnLang', l); feedMem = null; catState.cat = 'all'; renderLangSw(); route(); }
+function setLang(l) { S.set('learnLang', l); feedMem = null; catState.cat = 'all'; route(); renderLangSw(); }
 function renderLangSw() {
-  let el = $('#langsw'); if (!el) { el = document.createElement('button'); el.id = 'langsw'; el.title = 'Изучаемый язык'; $('#side .logo').after(el); el.onclick = e => { e.stopPropagation(); langMenu(el); }; }
-  const l = curLang(); el.innerHTML = `<span class="fl">${FLAGS[l] || '🌐'}</span><span class="ln2">${esc(langName(l))}</span>`;
+  let el = $('#langsw'); if (!el) { el = document.createElement('button'); el.id = 'langsw'; el.onclick = e => { e.stopPropagation(); langMenu(el); }; }
+  const l = curLang(); el.title = 'Изучаемый язык: ' + langName(l); el.innerHTML = flag(l, 'flag big') + '<span class="car">▾</span>';
+  const t = $('#app .top, #app .catsearch'); if (t) { t.prepend(el); el.classList.remove('fx'); } else { document.body.appendChild(el); el.classList.add('fx'); }
 }
 function langMenu(anchor, onPick = setLang, cur = curLang()) {
-  $$('.lmenu').forEach(x => x.remove());
+  if ($('.lmenu')) { $$('.lmenu').forEach(x => x.remove()); return; }
   const m = document.createElement('div'); m.className = 'lmenu'; const r = anchor.getBoundingClientRect();
-  m.style.left = Math.min(r.right + 6, innerWidth - 200) + 'px'; m.style.top = Math.min(r.top, innerHeight - 440) + 'px';
-  m.innerHTML = LEARN_LANGS.map(([v, n]) => `<button data-l="${v}" class="${v === cur ? 'on' : ''}">${FLAGS[v]} ${esc(n)}</button>`).join('');
+  m.style.left = Math.min(r.left, innerWidth - 200) + 'px'; m.style.top = Math.min(r.bottom + 6, innerHeight - 440) + 'px';
+  m.innerHTML = LEARN_LANGS.map(([v, n]) => `<button data-l="${v}" class="${v === cur ? 'on' : ''}">${flag(v)} ${esc(n)}</button>`).join('');
   document.body.appendChild(m); $$('button', m).forEach(b => b.onclick = e => { e.stopPropagation(); m.remove(); onPick(b.dataset.l); });
   setTimeout(() => document.addEventListener('click', () => m.remove(), { once: true }));
 }
@@ -765,6 +768,7 @@ function route() {
   }
 }
 window.addEventListener('hashchange', route);
+new MutationObserver(() => { if (!$('#langsw') || !$('#langsw').isConnected || ($('#langsw').classList.contains('fx') && $('#app .top, #app .catsearch')) || (!$('#langsw').classList.contains('fx') && !$('#app').contains($('#langsw')))) renderLangSw(); }).observe(document.getElementById('app'), { childList: true });
 if (document.documentElement.dataset.linguaExt) window.__linguaExt = true;
 window.postMessage({ source: 'lingua-hello' }, location.origin);
 renderLangSw(); migrateLangs().finally(route);
