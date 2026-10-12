@@ -3,6 +3,18 @@
 "updated": "2026-10-12",
 "channels": [
 {
+"id": "UCpWaR3gNAQGsX48cIlQC0qw",
+"name": "Tibo InShape",
+"handle": "@TiboInShape",
+"subs": "26.9M",
+"subsN": 26900000,
+"videos": "7K",
+"videosN": 7000,
+"cat": "sport",
+"source": "seed",
+"avatar": "data/avatars/UCpWaR3gNAQGsX48cIlQC0qw.jpg"
+},
+{
 "id": "UCWeg2Pkate69NFdBeuRFTAw",
 "name": "SQUEEZIE",
 "handle": "@Squeezie",
@@ -51,6 +63,18 @@
 "avatar": "data/avatars/UCww2zZWg4Cf5xcRKG-ThmXQ.jpg"
 },
 {
+"id": "UCLMKLU-ZuDQIsbjMvR3bbog",
+"name": "Furious Jumper",
+"handle": "@FuriousJumper",
+"subs": "11M",
+"subsN": 11000000,
+"videos": "7.8K",
+"videosN": 7800,
+"cat": "minecraft",
+"source": "seed",
+"avatar": "data/avatars/UCLMKLU-ZuDQIsbjMvR3bbog.jpg"
+},
+{
 "id": "UCgvqvBoSHB1ctlyyhoHrGwQ",
 "name": "Amixem",
 "handle": "@Amixem",
@@ -87,6 +111,66 @@
 "avatar": "data/avatars/UCXF0YCBWewAj3RytJUAivGA.jpg"
 },
 {
+"id": "UCDPK_MTu3uTUFJXRVcTJcEw",
+"name": "Mcfly et Carlito",
+"handle": "@LeFatShow",
+"subs": "7.66M",
+"subsN": 7660000,
+"videos": "1.1K",
+"videosN": 1100,
+"cat": "entertainment",
+"source": "seed",
+"avatar": "data/avatars/UCDPK_MTu3uTUFJXRVcTJcEw.jpg"
+},
+{
+"id": "UC8Q0SLrZLiTj5s4qc9aad-w",
+"name": "Mister V",
+"handle": "@mistervofficial",
+"subs": "6.53M",
+"subsN": 6530000,
+"videos": "48",
+"videosN": 48,
+"cat": "music",
+"source": "seed",
+"avatar": "data/avatars/UC8Q0SLrZLiTj5s4qc9aad-w.jpg"
+},
+{
+"id": "UCWnfDPdZw6A23UtuBpYBbAg",
+"name": "Dr Nozman",
+"handle": "@DrNozman",
+"subs": "4.93M",
+"subsN": 4930000,
+"videos": "961",
+"videosN": 961,
+"cat": "science",
+"source": "seed",
+"avatar": "data/avatars/UCWnfDPdZw6A23UtuBpYBbAg.jpg"
+},
+{
+"id": "UC_yP2DpIgs5Y1uWC0T03Chw",
+"name": "Joueur Du Grenier",
+"handle": "@joueurdugrenier",
+"subs": "3.87M",
+"subsN": 3870000,
+"videos": "173",
+"videosN": 173,
+"cat": "games",
+"source": "seed",
+"avatar": "data/avatars/UC_yP2DpIgs5Y1uWC0T03Chw.jpg"
+},
+{
+"id": "UCp6bpinXPzdx7d7-gekWzZQ",
+"name": "Bigflo et Oli",
+"handle": "@BigfloetOli",
+"subs": "3.25M",
+"subsN": 3250000,
+"videos": "214",
+"videosN": 214,
+"cat": "music",
+"source": "seed",
+"avatar": "data/avatars/UCp6bpinXPzdx7d7-gekWzZQ.jpg"
+},
+{
 "id": "UCDkl5M0WVaddTWE4rr2cSeA",
 "name": "Lena Situations",
 "handle": "@LenaSituations",
@@ -97,6 +181,18 @@
 "cat": "vlog",
 "source": "search:blog vidéo",
 "avatar": "data/avatars/UCDkl5M0WVaddTWE4rr2cSeA.jpg"
+},
+{
+"id": "UCQ_FrN6FNViZVjxHUvf6_xA",
+"name": "Chefclub",
+"handle": "@Chefclubtv",
+"subs": "2.93M",
+"subsN": 2930000,
+"videos": "2.1K",
+"videosN": 2100,
+"cat": "food",
+"source": "seed",
+"avatar": "data/avatars/UCQ_FrN6FNViZVjxHUvf6_xA.jpg"
 },
 {
 "id": "UCSKdvgqdnj72_SLggp7BDTg",
@@ -111,6 +207,18 @@
 "avatar": "data/avatars/UCSKdvgqdnj72_SLggp7BDTg.jpg"
 },
 {
+"id": "UCP46_MXP_WG_auH88FnfS1A",
+"name": "Nota Bene",
+"handle": "@notabenemovies",
+"subs": "2.78M",
+"subsN": 2780000,
+"videos": "1.1K",
+"videosN": 1100,
+"cat": "history",
+"source": "seed",
+"avatar": "data/avatars/UCP46_MXP_WG_auH88FnfS1A.jpg"
+},
+{
 "id": "UCXwDLMDV86ldKoFVc_g8P0g",
 "name": "BFMTV",
 "handle": "@BFMTV",
@@ -123,6 +231,18 @@
 "avatar": "data/avatars/UCXwDLMDV86ldKoFVc_g8P0g.jpg"
 },
 {
+"id": "UCwa-qCAFghXwkcQvLadzRxQ",
+"name": "Siphano",
+"handle": "@Siphano13",
+"subs": "2.31M",
+"subsN": 2310000,
+"videos": "7.1K",
+"videosN": 7100,
+"cat": "minecraft",
+"source": "seed",
+"avatar": "data/avatars/UCwa-qCAFghXwkcQvLadzRxQ.jpg"
+},
+{
 "id": "UCYpRDnhk5H8h16jpS84uqsA",
 "name": "Le Monde",
 "handle": "@lemondefr",
@@ -133,18 +253,6 @@
 "cat": "news",
 "source": "seed",
 "avatar": "data/avatars/UCYpRDnhk5H8h16jpS84uqsA.jpg"
-},
-{
-"id": "UCLkodChK3C0vxWPiphSzyhA",
-"name": "ToMiiX",
-"handle": "@ToMiiX",
-"subs": "2.01M",
-"subsN": 2009999,
-"videos": "443",
-"videosN": 443,
-"cat": "minecraft",
-"source": "search:minecraft français",
-"avatar": "data/avatars/UCLkodChK3C0vxWPiphSzyhA.jpg"
 },
 {
 "id": "UCYnvxJ-PKiGXo_tYXpWAC-w",
@@ -169,6 +277,18 @@
 "cat": "urbex",
 "source": "seed",
 "avatar": "data/avatars/UCQVaKQcp4OxSg1eC6SF3NTw.jpg"
+},
+{
+"id": "UCpEfF_Jfp0SozH6uZ0PNw5Q",
+"name": "Charles.co",
+"handle": "@Charlesco",
+"subs": "1.88M",
+"subsN": 1880000,
+"videos": "1.9K",
+"videosN": 1900,
+"cat": "health",
+"source": "search:médecin de santé",
+"avatar": "data/avatars/UCpEfF_Jfp0SozH6uZ0PNw5Q.jpg"
 },
 {
 "id": "UCaNlbnghtwlsGF-KzAFThqA",
@@ -231,16 +351,16 @@
 "avatar": "data/avatars/UCL7FXdd8TW0hxNHmzlPlAQQ.jpg"
 },
 {
-"id": "UCnf0fDz1vTYW-sl36wbVMbg",
-"name": "Les Revues du Monde",
-"handle": "@LesRevuesduMonde",
-"subs": "1.17M",
-"subsN": 1170000,
-"videos": "103",
-"videosN": 103,
-"cat": "tech",
-"source": "search:revues de technologie",
-"avatar": "data/avatars/UCnf0fDz1vTYW-sl36wbVMbg.jpg"
+"id": "UCcziTK2NKeWtWQ6kB5tmQ8Q",
+"name": "e-penser 2.0",
+"handle": "@Epenser1",
+"subs": "1.14M",
+"subsN": 1140000,
+"videos": "229",
+"videosN": 229,
+"cat": "science",
+"source": "seed",
+"avatar": "data/avatars/UCcziTK2NKeWtWQ6kB5tmQ8Q.jpg"
 },
 {
 "id": "UCBmGPY1gJ4XnXfek849BjTA",
@@ -291,28 +411,16 @@
 "avatar": "data/avatars/UCWedHS9qKebauVIK2J7383g.jpg"
 },
 {
-"id": "UCwbV8cTR4yBgFdfa_BXV2OA",
-"name": "Le Fossoyeur de Films",
-"handle": "@deadwattsofficiel",
-"subs": "800K",
-"subsN": 800000,
-"videos": "326",
-"videosN": 326,
-"cat": "film",
-"source": "search:critique de film",
-"avatar": "data/avatars/UCwbV8cTR4yBgFdfa_BXV2OA.jpg"
-},
-{
-"id": "UC38MST1QfDAypgrjjr6FPBw",
-"name": "Secrets d'Histoire - France Télévisions",
-"handle": "@SecretsdHistoireOfficiel",
-"subs": "791K",
-"subsN": 791000,
-"videos": "425",
-"videosN": 425,
-"cat": "history",
-"source": "search:histoire",
-"avatar": "data/avatars/UC38MST1QfDAypgrjjr6FPBw.jpg"
+"id": "UCnrl_NbcPvJxXVWWLdTrqDQ",
+"name": "Caroline Easom",
+"handle": "@carolineeasom",
+"subs": "657K",
+"subsN": 657000,
+"videos": "493",
+"videosN": 493,
+"cat": "psychology",
+"source": "seed",
+"avatar": "data/avatars/UCnrl_NbcPvJxXVWWLdTrqDQ.jpg"
 },
 {
 "id": "UCmKCpHH5ATFMURHTRC2jLyA",
@@ -339,6 +447,18 @@
 "avatar": "data/avatars/UCouHAi3jWpC8lAqsoeM_zOA.jpg"
 },
 {
+"id": "UCSULDz1yaHLVQWHpm4g_GHA",
+"name": "Monsieur Bidouille",
+"handle": "@monsieurbidouille",
+"subs": "338K",
+"subsN": 338000,
+"videos": "144",
+"videosN": 144,
+"cat": "tech",
+"source": "seed",
+"avatar": "data/avatars/UCSULDz1yaHLVQWHpm4g_GHA.jpg"
+},
+{
 "id": "UCnnYqSNKKygemgmxC9PyLTw",
 "name": "Ludo Salenne",
 "handle": "@LudovicSalenne",
@@ -351,16 +471,16 @@
 "avatar": "data/avatars/UCnnYqSNKKygemgmxC9PyLTw.jpg"
 },
 {
-"id": "UCEmtmaRvD3lRdT_hhzS0BcQ",
-"name": "Médecine TV",
-"handle": "@MédecineTV",
-"subs": "191K",
-"subsN": 191000,
-"videos": "4.5K",
-"videosN": 4500,
-"cat": "health",
-"source": "search:médecin de santé",
-"avatar": "data/avatars/UCEmtmaRvD3lRdT_hhzS0BcQ.jpg"
+"id": "UCKpRJZK14ZH7ffHtXMwPcTg",
+"name": "Victor B.",
+"handle": "@INTHEPANDA",
+"subs": "263K",
+"subsN": 263000,
+"videos": "823",
+"videosN": 823,
+"cat": "film",
+"source": "search:critique de film",
+"avatar": "data/avatars/UCKpRJZK14ZH7ffHtXMwPcTg.jpg"
 },
 {
 "id": "UC8AdLDn2gJf2sam4HJXGX3g",
