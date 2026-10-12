@@ -149,7 +149,7 @@ function bindPodcasts(root) {
 function podcastPage(i) {
   const p = S.get('podcasts', [])[i]; if (!p) return location.hash = '#/library/podcasts';
   app().innerHTML = `<div class="main"><div class="top"><a class="btn g s" href="#/library/podcasts">‹</a><h1>${esc(p.title)}</h1></div><audio id="au" controls style="width:100%;margin-bottom:14px"></audio><div>${p.episodes.map((e, j) => `<div class="rl ep" data-j="${j}"><div class="av">▶</div><div><div>${esc(e.title)}</div><div class="muted small">${esc(e.date)}</div></div></div>`).join('')}</div></div>`;
-  $$('.ep').forEach(x => x.onclick = () => { const e = p.episodes[+x.dataset.j]; $('#au').src = e.audio; $('#au').play(); bump(); });
+  $$('.ep').forEach(x => x.onclick = () => { const e = p.episodes[+x.dataset.j]; $('#au').src = e.audio; $('#au').play().catch(() => toast('Браузер не может воспроизвести этот аудиофайл')); bump(); });
 }
 
 /* ---------- LIBRARY ---------- */
@@ -201,14 +201,34 @@ async function resolveChannel(v) {
   const title = xml && (new DOMParser().parseFromString(xml, 'text/xml').querySelector('feed > title') || {}).textContent;
   return { id, title: title || (handle ? '@' + handle : id) };
 }
+async function oembed(id) {
+  try { const j = await (await withTimeout(fetch('https://www.youtube.com/oembed?format=json&url=' + encodeURIComponent('https://www.youtube.com/watch?v=' + id)), 6000)).json(); return { title: j.title, channel: j.author_name }; } catch (e) { return null; }
+}
+// Channel uploads via the IFrame API: playlist "UU…" exposes video IDs without CORS; titles via oEmbed (CORS-enabled)
+function uploadsViaIframe(c) {
+  return new Promise(res => {
+    const run = () => {
+      const host = document.createElement('div'); host.style.cssText = 'position:fixed;left:-9999px;width:200px;height:120px'; const inner = document.createElement('div'); host.appendChild(inner); document.body.appendChild(host);
+      let done = false; const fin = async ids => { if (done) return; done = true; try { pl.destroy(); } catch (e) { } host.remove();
+        const vs = await Promise.all((ids || []).slice(0, 24).map(async id => Object.assign({ id, channel: c.title, title: '' }, await oembed(id) || {})));
+        res(vs.filter(v => v.title)); };
+      const pl = new YT.Player(inner, { playerVars: { listType: 'playlist', list: 'UU' + c.id.slice(2), autoplay: 0, mute: 1 }, events: {
+        onReady: () => { let n = 0; const t = setInterval(() => { const ids = pl.getPlaylist && pl.getPlaylist(); if ((ids && ids.length) || ++n > 20) { clearInterval(t); fin(ids || []); } }, 500); },
+        onError: () => fin([]) } });
+      setTimeout(() => fin([]), 15000);
+    };
+    ytReady ? run() : ytQ.push(run);
+  });
+}
 async function loadChannel(c) {
   const el = $('#chv'); if (!c) { el.textContent = 'Канал не найден'; return; }
   el.innerHTML = '<div class="empty"><div class="spin"></div><div>Загрузка видео канала…</div></div>';
   let vs = [];
   const j = await pipedJSON('/channel/' + c.id);
   if (j && j.relatedStreams) vs = j.relatedStreams.filter(x => x.url).map(x => ({ id: (x.url.match(/v=([\w-]{11})/) || [])[1], title: x.title, channel: x.uploaderName || c.title, dur: x.duration > 0 ? x.duration : 0 })).filter(x => x.id);
+  if (!vs.length) vs = await uploadsViaIframe(c);
   if (!vs.length) {
-    const xml = await extFetch('https://www.youtube.com/feeds/videos.xml?channel_id=' + c.id) || await fetchText('https://www.youtube.com/feeds/videos.xml?channel_id=' + c.id).catch(() => null);
+    const xml = await extFetch('https://www.youtube.com/feeds/videos.xml?channel_id=' + c.id);
     if (xml) vs = [...new DOMParser().parseFromString(xml, 'text/xml').getElementsByTagName('entry')].map(e => ({ id: (e.getElementsByTagName('yt:videoId')[0] || {}).textContent, title: (e.getElementsByTagName('title')[0] || {}).textContent, channel: c.title })).filter(x => x.id);
   }
   if (!vs.length) { el.innerHTML = empty(`Не удалось загрузить видео канала «${esc(c.title)}». Попробуйте позже или установите расширение Lingua.`, `<a class="btn" target="_blank" href="https://www.youtube.com/channel/${esc(c.id)}">Открыть на YouTube</a>`, false); return; }
@@ -229,6 +249,7 @@ function watch(id, start = 0) {
   app().innerHTML = `<div class="main"><div class="top"><a class="btn g s" href="#/home">‹</a><h1 style="flex:1">${esc(meta.title)}</h1><button class="btn g s" id="fav">${isFav ? '★ В избранном' : '☆ В избранное'}</button></div>
   <div class="pl"><div><div id="player"></div><details style="margin-top:14px"><summary class="muted">Вставить субтитры вручную (SRT/VTT)</summary><textarea id="subs" rows="6" style="width:100%;margin-top:8px" placeholder="Вставьте содержимое .srt или .vtt"></textarea><button class="btn s" id="subsgo">Загрузить</button></details></div>
   <div class="box" id="tr"><div class="muted">Загрузка транскрипта…</div></div></div></div>`;
+  if (!meta.channel) oembed(id).then(o => { if (o && curVid === id) { Object.assign(meta, o); const h1 = $('.main .top h1'); if (h1) h1.textContent = o.title; const hh = S.get('history', []); if (hh[0] && hh[0].id === id) { Object.assign(hh[0], o); S.set('history', hh); } } });
   $('#fav').onclick = () => { let f = S.get('fav', []); f = f.some(v => v.id === id) ? f.filter(v => v.id !== id) : [meta, ...f]; S.set('fav', f); watch(id, player && player.getCurrentTime ? player.getCurrentTime() : 0); };
   $('#subsgo').onclick = () => { cues = parseSubs($('#subs').value); renderTr(); toast('Строк: ' + cues.length); };
   const mk = () => { player = new YT.Player('player', { videoId: id, playerVars: { start: Math.floor(start), rel: 0 } }); };
