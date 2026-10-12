@@ -3,6 +3,42 @@
 "updated": "2026-10-12",
 "channels": [
 {
+"id": "UCoC47do520os_4DBMEFGg4A",
+"name": "李子柒 Liziqi",
+"handle": "@cnliziqi",
+"subs": "33.6M",
+"subsN": 33600000,
+"videos": "131",
+"videosN": 131,
+"cat": "vlog",
+"source": "seed",
+"avatar": "data/avatars/UCoC47do520os_4DBMEFGg4A.jpg"
+},
+{
+"id": "UCQG_fzADCunBTV1KwjkfAQQ",
+"name": "Dianxi Xiaoge",
+"handle": "@dianxixiaoge",
+"subs": "12.5M",
+"subsN": 12500000,
+"videos": "935",
+"videosN": 935,
+"cat": "food",
+"source": "seed",
+"avatar": "data/avatars/UCQG_fzADCunBTV1KwjkfAQQ.jpg"
+},
+{
+"id": "UCDDrB-yGonf4uL2NDf6njTA",
+"name": "Ms Shi and Mr He",
+"handle": "@msshiandmrhe",
+"subs": "6.84M",
+"subsN": 6840000,
+"videos": "711",
+"videosN": 711,
+"cat": "games",
+"source": "seed",
+"avatar": "data/avatars/UCDDrB-yGonf4uL2NDf6njTA.jpg"
+},
+{
 "id": "UCMUnInmOkrWN4gof9KlhNmQ",
 "name": "老高與小茉 Mr & Mrs Gao",
 "handle": "@laogao",
@@ -15,6 +51,18 @@
 "avatar": "data/avatars/UCMUnInmOkrWN4gof9KlhNmQ.jpg"
 },
 {
+"id": "UCJJDD-Hy76jvUMRG-dpFkcw",
+"name": "Xiaoying Cuisine",
+"handle": "@XiaoYingFood",
+"subs": "3.61M",
+"subsN": 3610000,
+"videos": "3.4K",
+"videosN": 3400,
+"cat": "minecraft",
+"source": "seed",
+"avatar": "data/avatars/UCJJDD-Hy76jvUMRG-dpFkcw.jpg"
+},
+{
 "id": "UC8CU5nVhCQIdAGrFFp4loOQ",
 "name": "周杰倫 Jay Chou",
 "handle": "@jaychou",
@@ -25,6 +73,18 @@
 "cat": "music",
 "source": "seed",
 "avatar": "data/avatars/UC8CU5nVhCQIdAGrFFp4loOQ.jpg"
+},
+{
+"id": "UCQFyMGc6h30NMCd6HCk0ZPA",
+"name": "Made By Bilibili - Chinese Donghua Animation",
+"handle": "@MadeByBilibili",
+"subs": "2.66M",
+"subsN": 2660000,
+"videos": "17K",
+"videosN": 17000,
+"cat": "entertainment",
+"source": "seed",
+"avatar": "data/avatars/UCQFyMGc6h30NMCd6HCk0ZPA.jpg"
 },
 {
 "id": "UCb3TZ4SD_Ys3j4z0-8o6auA",
@@ -87,6 +147,18 @@
 "avatar": "data/avatars/UC3w1_57LtKg5mI1PHmPc7Eg.jpg"
 },
 {
+"id": "UCgHXsynhD8GxbFcNlPEn-_w",
+"name": "Papi酱",
+"handle": "@papi_jiang",
+"subs": "464K",
+"subsN": 464000,
+"videos": "680",
+"videosN": 680,
+"cat": "entertainment",
+"source": "seed",
+"avatar": "data/avatars/UCgHXsynhD8GxbFcNlPEn-_w.jpg"
+},
+{
 "id": "UC3B-DH5W60TfVs1AKw_P1kw",
 "name": "Mandarin Corner",
 "handle": "@MandarinCorner",
@@ -97,6 +169,18 @@
 "cat": "education",
 "source": "seed",
 "avatar": "data/avatars/UC3B-DH5W60TfVs1AKw_P1kw.jpg"
+},
+{
+"id": "UCX-M8j9vQ-oUGO9Mckd601A",
+"name": "Where will Mr. Mai eat",
+"handle": "@MaiZong",
+"subs": "418K",
+"subsN": 418000,
+"videos": "2.8K",
+"videosN": 2800,
+"cat": "film",
+"source": "seed",
+"avatar": "data/avatars/UCX-M8j9vQ-oUGO9Mckd601A.jpg"
 },
 {
 "id": "UCKapoW6em0nllaXxNC49XHA",
@@ -111,6 +195,18 @@
 "avatar": "data/avatars/UCKapoW6em0nllaXxNC49XHA.jpg"
 },
 {
+"id": "UC-7jKPgRmLBiB1ltbABubNA",
+"name": "小白的奇幻旅行",
+"handle": "@jianxiaobai",
+"subs": "306K",
+"subsN": 306000,
+"videos": "810",
+"videosN": 810,
+"cat": "travel",
+"source": "search:旅行",
+"avatar": "data/avatars/UC-7jKPgRmLBiB1ltbABubNA.jpg"
+},
+{
 "id": "UCZtwTUonXxD0IrIySpt7ong",
 "name": "阿男的食谱AnanACookbook",
 "handle": "@AnanACookbook",
@@ -121,6 +217,18 @@
 "cat": "food",
 "source": "search:烹飪食譜",
 "avatar": "data/avatars/UCZtwTUonXxD0IrIySpt7ong.jpg"
+},
+{
+"id": "UC9l9iLR6XXeVSzvajSRh6hA",
+"name": "刘伟元的旅行",
+"handle": "@liuweiyuan",
+"subs": "238K",
+"subsN": 238000,
+"videos": "625",
+"videosN": 625,
+"cat": "travel",
+"source": "search:旅行",
+"avatar": "data/avatars/UC9l9iLR6XXeVSzvajSRh6hA.jpg"
 },
 {
 "id": "UCc5ueW8aqO73Q6MevB8L5PA",
@@ -169,6 +277,18 @@
 "cat": "minecraft",
 "source": "search:我的世界",
 "avatar": "data/avatars/UCp17m8Dp7yxGaIZkR8GpG_Q.jpg"
+},
+{
+"id": "UC1S6MSKVN7NQi0f8INP3ddA",
+"name": "大明的旅行  Daming  Travel",
+"handle": "@DamingTravel",
+"subs": "109K",
+"subsN": 109000,
+"videos": "530",
+"videosN": 530,
+"cat": "travel",
+"source": "search:旅行",
+"avatar": "data/avatars/UC1S6MSKVN7NQi0f8INP3ddA.jpg"
 },
 {
 "id": "UCU4cKEdjmchL_eN-X7VQ_mA",
