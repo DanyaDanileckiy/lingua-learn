@@ -319,7 +319,8 @@ function renderTr() {
 async function translateCues() {
   const vid = curVid;
   for (let i = 0; i < cues.length; i += 25) {
-    const chunk = cues.slice(i, i + 25), out = await translate(chunk.map(c => c.text).join('\n'));
+    const chunk = cues.slice(i, i + 25), src = chunk.map(c => c.text).join('\n'); let out = await translate(src);
+    for (let k = 0; !out && k < 3; k++) { await new Promise(r => setTimeout(r, 2000 * (k + 1))); out = await translate(src); }
     if (vid !== curVid) return; const parts = out.split('\n');
     chunk.forEach((c, j) => { c.tr = parts[j] || ''; const el = $(`.ln[data-i="${i + j}"] .t2`); if (el) el.textContent = c.tr; });
   }
