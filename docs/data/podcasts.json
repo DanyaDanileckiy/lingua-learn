@@ -790,5 +790,77 @@
 "image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/4b/cb/23/4bcb231b-0fb3-359b-2168-d758cb6974da/mza_14657295816552258095.jpg/100x100bb.jpg",
 "genre": "История"
 }
+],
+"he": [
+{
+"title": "העבריות מארחות",
+"author": "מדברים עברית",
+"feed": "https://feeds.captivate.fm/haevriot/",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/a8/c7/8c/a8c78c40-1456-5de1-1d7c-fde0c794d45b/mza_13647246696396539157.jpg/100x100bb.jpg",
+"genre": "Books"
+},
+{
+"title": "מדברים עברית",
+"author": "חמוטל איינהורן ונדב שטראוכלר",
+"feed": "https://anchor.fm/s/9b96fe60/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts122/v4/ca/b2/cd/cab2cdb4-0192-18ad-5550-60824346c7d8/mza_16034868998818102293.jpg/100x100bb.jpg",
+"genre": "Language Learning"
+},
+{
+"title": "על מה כל הסיפור?!",
+"author": "מדברים עברית",
+"feed": "https://feeds.captivate.fm/almakol/",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/85/15/28/851528aa-6397-fd87-0859-5612119228f4/mza_10814854103112233446.jpg/100x100bb.jpg",
+"genre": "Books"
+},
+{
+"title": "Hebrew Time - זמן עברית",
+"author": "Nadya Ures",
+"feed": "https://anchor.fm/s/3f7a77ec/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts114/v4/b6/d9/60/b6d96049-7382-63a7-2eea-41628eef5820/mza_6753111222173572654.jpg/100x100bb.jpg",
+"genre": "Language Learning"
+},
+{
+"title": "סופרות לאחור",
+"author": "מדברים עברית",
+"feed": "https://feeds.captivate.fm/sofrot/",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/7f/10/86/7f1086e9-f6c2-2954-ec6d-b6372cbeb3e5/mza_3144421176762379052.jpg/100x100bb.jpg",
+"genre": "Books"
+},
+{
+"title": "קצר על קצר",
+"author": "מדברים עברית",
+"feed": "https://feeds.captivate.fm/katzar/",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/d0/eb/35/d0eb35b8-c778-7691-4c30-06e5b30f2956/mza_12332059407957751466.jpg/100x100bb.jpg",
+"genre": "Books"
+},
+{
+"title": "קולולושה - עברית לשון שפה",
+"author": "ירעם נתניהו",
+"feed": "https://anchor.fm/s/106a79b74/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts118/v4/c6/0c/cf/c60ccf16-0910-a624-83b6-432d122fd1ca/mza_1323732067300221176.jpg/100x100bb.jpg",
+"genre": "Education"
+},
+{
+"title": "שיעור בעיון עברית",
+"author": "Project Likkutei Sichos",
+"feed": "https://feeds.captivate.fm/iyunhebrew/",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/e7/da/17/e7da17bb-e608-e256-4725-c669ed74eadb/mza_16199849052269099450.jpg/100x100bb.jpg",
+"genre": "Judaism"
+},
+{
+"title": "HaSha’ar Historia השאר היסטוריה",
+"author": "Nir Fadida ניר פדידה",
+"feed": "https://anchor.fm/s/10bacaba0/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/6a/51/ae/6a51ae99-4499-6254-0577-7a4e456b893c/mza_12600452629290514559.jpg/100x100bb.jpg",
+"genre": "History"
+},
+{
+"title": "עושים היסטוריה עם ערן ניצן Osim Historia",
+"author": "רשת עושים היסטוריה",
+"feed": "https://www.spreaker.com/show/4227531/episodes/feed",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/45/61/9c/45619cdf-5610-94b2-68ae-54eea66c2a3d/mza_14823628610635834406.jpg/100x100bb.jpg",
+"genre": "Science"
+}
 ]
 }

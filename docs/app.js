@@ -32,13 +32,16 @@ async function translate(text) {
   }
   return '';
 }
-function speak(text, lang = 'en-US', rate = 0.95) { if (!window.speechSynthesis) return toast('TTS недоступен'); speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = lang; u.rate = rate; speechSynthesis.speak(u); return u; }
+const TTS_LANG = { en: 'en-US', es: 'es-ES', de: 'de-DE', fr: 'fr-FR', it: 'it-IT', pt: 'pt-BR', ja: 'ja-JP', ko: 'ko-KR', zh: 'zh-CN', tr: 'tr-TR', ru: 'ru-RU', he: 'he-IL' };
+const learnTTS = () => TTS_LANG[S.get('learnLang', 'en')] || 'en-US';
+const guessTTS = t => /[\u0590-\u05ff]/.test(t) ? 'he-IL' : /[\u0400-\u04ff]/.test(t) ? 'ru-RU' : /[\u3040-\u30ff]/.test(t) ? 'ja-JP' : /[\uac00-\ud7af]/.test(t) ? 'ko-KR' : /[\u4e00-\u9fff]/.test(t) ? 'zh-CN' : learnTTS();
+function speak(text, lang, rate = 0.95) { lang = lang || guessTTS(text); if (!window.speechSynthesis) return toast('TTS недоступен'); speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = lang; u.rate = rate; speechSynthesis.speak(u); return u; }
 function listen(cb) {
   const R = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!R) { toast('Распознавание речи не поддерживается этим браузером'); return; }
-  const r = new R(); r.lang = 'en-US'; r.interimResults = false; r.onresult = e => cb(e.results[0][0].transcript); r.onerror = e => toast('Микрофон: ' + e.error); r.start(); toast('🎙 Говорите…');
+  const r = new R(); r.lang = learnTTS(); r.interimResults = false; r.onresult = e => cb(e.results[0][0].transcript); r.onerror = e => toast('Микрофон: ' + e.error); r.start(); toast('🎙 Говорите…');
 }
-const clean = w => w.replace(/^[^\p{L}\p{N}']+|[^\p{L}\p{N}']+$/gu, '');
+const clean = w => w.replace(/^[^\p{L}\p{M}\p{N}'׳״]+|[^\p{L}\p{M}\p{N}'׳״]+$/gu, '');
 const wordsHTML = t => esc(t).split(/(\s+)/).map(w => /\S/.test(w) ? `<span class="w">${w}</span>` : w).join('');
 const CAT = (c = '#8b5cf6') => `<svg viewBox="0 0 120 120"><ellipse cx="60" cy="104" rx="42" ry="8" fill="#000" opacity=".3"/><path d="M22 92l38-10 38 10-38 12z" fill="#f5f0e6"/><path d="M60 82v22" stroke="#cfc6b3" stroke-width="2"/><path d="M34 40l6-22 14 14M86 40l-6-22-14 14" fill="${c}"/><ellipse cx="60" cy="54" rx="30" ry="26" fill="${c}"/><ellipse cx="60" cy="80" rx="20" ry="14" fill="${c}"/><circle cx="49" cy="52" r="7" fill="#fff"/><circle cx="71" cy="52" r="7" fill="#fff"/><circle cx="50" cy="53" r="3.5" fill="#222"/><circle cx="72" cy="53" r="3.5" fill="#222"/><path d="M56 63q4 4 8 0" stroke="#3b1f6e" stroke-width="2" fill="none"/><ellipse cx="60" cy="61" rx="2.5" ry="1.6" fill="#f9a8d4"/><text x="88" y="30" font-size="14" fill="#f5c542">?</text><text x="20" y="34" font-size="11" fill="#f5c542">?</text></svg>`;
 const empty = (msg, btns = '', big = true) => `<div class="empty ${big ? 'big' : ''}">${CAT()}<div>${msg}</div><div>${btns}</div></div>`;
@@ -80,7 +83,15 @@ document.addEventListener('mousedown', e => { const p = $('#pop'); if (!p.contai
 
 /* ---------- shared widgets ---------- */
 const thumb = id => `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
-const vcard = v => `<div class="v" data-id="${esc(v.id)}"><div class="th"><img loading="lazy" src="${thumb(v.id)}" alt=""><span class="d">${v.dur ? fmt(v.dur) : ''}</span></div><div class="ti">${esc(v.title)}</div><div class="ch">${esc(v.channel)}</div></div>`;
+function ago(iso) {
+  const t = Date.parse(iso); if (!t) return ''; const d = (Date.now() - t) / 864e5;
+  const pl = (n, a, b, c) => { const m10 = n % 10, m100 = n % 100; return n + ' ' + (m10 === 1 && m100 !== 11 ? a : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? b : c); };
+  if (d < 1 / 24) return 'только что'; if (d < 1) return pl(Math.floor(d * 24), 'час', 'часа', 'часов') + ' назад';
+  if (d < 30) return pl(Math.floor(d), 'день', 'дня', 'дней') + ' назад'; if (d < 365) return pl(Math.floor(d / 30), 'месяц', 'месяца', 'месяцев') + ' назад';
+  return pl(Math.floor(d / 365), 'год', 'года', 'лет') + ' назад';
+}
+const vcard = v => `<div class="v" data-id="${esc(v.id)}"><div class="th"><img loading="lazy" src="${thumb(v.id)}" alt=""><span class="d">${v.dur ? fmt(v.dur) : ''}</span></div><div class="ti">${esc(v.title)}</div><div class="ch">${esc(v.channel)}${v.published ? ' · ' + ago(v.published) : ''}</div></div>`;
+const skel = n => Array.from({ length: n }, () => '<div class="v skel"><div class="th"></div><div class="ti">&nbsp;</div><div class="ch">&nbsp;</div></div>').join('');
 const allVideos = () => VIDEOS.map(([id, title, channel, dur]) => ({ id, title, channel, dur }));
 function bindV(root) { $$('.v', root).forEach(v => v.onclick = () => location.hash = '#/watch/' + v.dataset.id); }
 function weekHTML() {
@@ -100,20 +111,21 @@ function barChart(vals, labels, color = '#8b5cf6', h = 90) {
 function last7(fn) { const out = [], lab = []; for (let i = 6; i >= 0; i--) { const d = new Date(Date.now() - i * DAY); out.push(fn(d.toISOString().slice(0, 10))); lab.push(['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'][d.getDay()]); } return [out, lab]; }
 
 /* ---------- HOME ---------- */
-let homeN = 10;
+let homeN = Math.max(10, Math.floor((window.innerWidth - 400) / 245) * 2);
 function home() {
   const st = srsStats(), reviewed = S.get('reviews', {})[today()] || 0, ws = words(), ss = S.get('sentences', []), books = S.get('books', []);
   const [pv, pl] = last7(k => ws.filter(w => (w.createdAt || '').slice(0, 10) === k).length);
   app().innerHTML = `<div class="main"><div class="top"><input id="hs" placeholder="Поиск / вставьте ссылку YouTube" style="width:340px"><button class="btn s" id="hgo">Открыть</button></div>
-  <h2>YouTube <a id="hmore">Показать больше ›</a></h2><div class="vgrid" id="hv">${allVideos().slice(0, homeN).map(vcard).join('')}</div>
-  ${homeN < VIDEOS.length ? '<p style="text-align:center"><button class="btn g" id="hmore2">Показать больше</button></p>' : ''}
+  <h2>${S.get('channels', []).length ? 'Новое на ваших каналах' : 'YouTube'} <span><button class="btn s" id="haddch">+ Добавить канал</button> <a id="hmore">Показать больше ›</a></span></h2><div class="vgrid" id="hv">${S.get('channels', []).length ? skel(homeN) : allVideos().slice(0, homeN).map(vcard).join('')}</div>
+  ${homeN < Math.max(VIDEOS.length, (feedMem && feedMem.v.length) || 0) ? '<p style="text-align:center"><button class="btn g" id="hmore2">Показать больше</button></p>' : ''}
   <h2>Podcast <a href="#/library/podcasts">Показать больше ›</a></h2><div class="box" id="hpod">${podcastsBlock()}</div></div>
   <div class="rp"><div class="box"><h3>Календарь <span class="muted small">Серия ${streak()} д.</span></h3>${weekHTML()}</div>
   <div class="box"><h3>Карточка</h3><div class="fc"><div><div class="muted small">Повторить</div><div class="n">${st.due}</div></div><div><div class="muted small">Обучение</div><div class="n">${st.fresh}</div></div><div class="sp"></div>${ring(reviewed, 10, reviewed + '/10', 'Цель', 76)}</div>
   <div class="row" style="display:flex;gap:8px;margin-top:10px"><a class="btn g s" href="#/vocab/saved/learn">Тренировка</a><a class="btn s" href="#/vocab/saved/review">Повторение</a></div></div>
   <div class="tiles"><a class="tile" href="#/vocab/saved/learn"><div><b>${st.fresh}</b><span class="muted small">Обучение</span></div>🎓</a><a class="tile" href="#/vocab"><div><b>${ws.length}</b><span class="muted small">Словарь</span></div>📕</a><a class="tile" href="#/sentences"><div><b>${ss.length}</b><span class="muted small">Предложения</span></div>💬</a><a class="tile" href="#/books"><div><b>${books.length}</b><span class="muted small">PDF / книги</span></div>📄</a></div>
   <div class="box"><h3>Активность</h3>${heatHTML()}</div><div class="box"><h3>Прогресс <span class="muted small">новые слова</span></h3>${barChart(pv, pl)}</div></div>`;
-  bindV(app()); bindPodcasts($('#hpod'));
+  bindV(app()); bindPodcasts($('#hpod')); $('#haddch').onclick = addChannelDialog;
+  if (S.get('channels', []).length) fillFeed($('#hv'), homeN, false);
   $('#hmore').onclick = () => location.hash = '#/library';
   if ($('#hmore2')) $('#hmore2').onclick = () => { homeN += 10; home(); };
   const go = () => { const v = $('#hs').value.trim(), id = parseId(v); if (id) location.hash = '#/watch/' + id + (parseT(v) ? '/' + parseT(v) : ''); else { location.hash = '#/library'; setTimeout(() => { const q = $('#lq'); if (q) { q.value = v; q.oninput(); } }, 0); } };
@@ -160,18 +172,20 @@ function podcastPage(i) {
 function library(tab = 'youtube') {
   const fav = S.get('fav', []), hist = S.get('history', []), chs = S.get('channels', []);
   let body = '';
-  if (tab === 'youtube') body = `<div class="vgrid" id="lg">${allVideos().map(vcard).join('')}</div>`;
+  if (tab === 'youtube') body = chs.length ? `<h2>Новое на ваших каналах</h2><div class="vgrid" id="lg">${skel(12)}</div>` : `<div class="vgrid" id="lg">${allVideos().map(vcard).join('')}</div>`;
   else if (tab === 'podcasts') body = `<div class="box" id="lp">${podcastsBlock()}</div>`;
   else if (tab === 'sets') { const ss = S.get('sentences', []); body = ss.length ? `<div class="wl">${ss.map(s => `<div class="wc">${esc(s.text)}<div class="ctx">${esc(s.translation)}</div></div>`).join('')}</div>` : empty('Наборов предложений пока нет. Сохраняйте фразы при просмотре видео.', '<a class="btn" href="#/home">К видео</a>'); }
   else if (tab === 'movies') body = empty('Фильмы появятся позже. Пока можно открыть любое видео по ссылке YouTube.', '<a class="btn" href="#/home">Открыть видео</a>');
   else if (tab === 'fav') body = fav.length ? `<div class="vgrid">${fav.map(vcard).join('')}</div>` : empty('В избранном пока пусто. Нажмите ★ на странице видео.');
   else if (tab === 'history') body = hist.length ? `<div class="vgrid">${hist.map(vcard).join('')}</div>` : empty('История просмотров пуста.');
   else if (tab.startsWith('ch:')) body = `<div id="chv" class="muted">Загрузка видео канала…</div>`;
-  app().innerHTML = `<div class="main"><div class="top"><h1>Библиотека</h1><div class="tabs">${[['youtube', '▶ YouTube'], ['podcasts', '🎧 Подкасты'], ['sets', '📑 Наборы предложений'], ['movies', '🎬 Фильмы']].map(([k, l]) => `<a class="tab ${tab === k ? 'on' : ''}" href="#/library/${k}">${l}</a>`).join('')}</div><div class="sp"></div><a class="btn s" href="#/catalog">+ Каталог каналов</a><input id="lq" placeholder="Поиск / Обзор" style="width:200px"></div>${body}</div>
+  app().innerHTML = `<div class="main"><div class="top"><h1>Библиотека</h1><div class="tabs">${[['youtube', '▶ YouTube'], ['podcasts', '🎧 Подкасты'], ['sets', '📑 Наборы предложений'], ['movies', '🎬 Фильмы']].map(([k, l]) => `<a class="tab ${tab === k ? 'on' : ''}" href="#/library/${k}">${l}</a>`).join('')}</div><div class="sp"></div><button class="btn s" id="addch">+ Добавить канал</button><a class="btn g s" href="#/catalog">Каталог каналов</a><input id="lq" placeholder="Поиск / Обзор" style="width:200px"></div>${body}</div>
   <div class="rp"><div class="box"><a class="rl" href="#/library/fav">⭐ Избранное <span class="muted" style="margin-left:auto">${fav.length}</span></a><a class="rl" href="#/library/history">🕘 История <span class="muted" style="margin-left:auto">${hist.length}</span></a></div>
   <div class="box"><h3>Подписанные каналы <a class="more" href="#/catalog">Каталог ›</a></h3>${chs.map((c, i) => `<a class="rl" href="#/library/ch:${i}">${c.avatar ? `<img class="av" src="${esc(c.avatar)}" alt="">` : `<div class="av" style="background:hsl(${(c.title.charCodeAt(0) * 37) % 360},45%,40%)">${esc(c.title[0] || '?')}</div>`}<span>${esc(c.title)}</span><button class="x chdel" data-i="${i}">✕</button></a>`).join('') || '<div class="muted small">Нет каналов</div>'}
   <div style="display:flex;gap:6px;margin-top:10px"><input id="chin" placeholder="URL канала или ID (UC…)" style="flex:1;min-width:0"><button class="btn s" id="chadd">+</button></div></div></div>`;
   bindV(app()); if ($('#lp')) bindPodcasts($('#lp'));
+  $('#addch').onclick = addChannelDialog;
+  if (tab === 'youtube' && chs.length) fillFeed($('#lg'), 0, true);
   $('#lq').oninput = () => { const q = $('#lq').value.toLowerCase(); $$('.v').forEach(v => v.style.display = v.textContent.toLowerCase().includes(q) ? '' : 'none'); };
   $$('.chdel').forEach(b => b.onclick = e => { e.preventDefault(); e.stopPropagation(); const c = S.get('channels', []); c.splice(+b.dataset.i, 1); S.set('channels', c); library(); });
   $('#chadd').onclick = async () => {
@@ -239,8 +253,60 @@ async function loadChannel(c) {
   el.className = 'vgrid'; el.innerHTML = vs.map(vcard).join(''); bindV(el);
   const known = S.get('vmeta', {}); vs.forEach(v => known[v.id] = v); S.set('vmeta', known);
 }
+/* ---------- SUBSCRIPTIONS FEED ---------- */
+let feedMem = null;
+async function channelVideos(c) {
+  const cache = S.get('feedc', {}), hit = cache[c.id];
+  if (hit && Date.now() - hit.t < 30 * 60e3) return hit.v;
+  let vs = [];
+  try {
+    const r = await withTimeout(fetch(WORKER + '/fetch?url=' + encodeURIComponent('https://www.youtube.com/feeds/videos.xml?channel_id=' + c.id)), 15000);
+    if (r.ok) { const xml = new DOMParser().parseFromString(await r.text(), 'text/xml');
+      vs = [...xml.getElementsByTagName('entry')].map(e => ({ id: (e.getElementsByTagName('yt:videoId')[0] || {}).textContent, title: (e.getElementsByTagName('title')[0] || {}).textContent, channel: c.title, channelId: c.id, published: (e.getElementsByTagName('published')[0] || {}).textContent })).filter(v => v.id); }
+  } catch (e) { }
+  if (!vs.length) vs = (await uploadsViaIframe(c)).slice(0, 12).map(v => Object.assign(v, { channelId: c.id }));
+  if (vs.length) { const cc = S.get('feedc', {}); cc[c.id] = { t: Date.now(), v: vs.slice(0, 15) }; S.set('feedc', cc); }
+  else if (hit) return hit.v;
+  return vs;
+}
+async function subsFeed() {
+  const chs = S.get('channels', []); if (!chs.length) return [];
+  const key = chs.map(c => c.id).join(','); if (feedMem && feedMem.key === key && Date.now() - feedMem.t < 5 * 60e3) return feedMem.v;
+  const out = []; let i = 0;
+  await Promise.all(Array.from({ length: Math.min(6, chs.length) }, async () => { while (i < chs.length) { const c = chs[i++]; out.push(...await channelVideos(c)); } }));
+  const seen = new Set(), v = out.filter(x => !seen.has(x.id) && seen.add(x.id)).sort((a, b) => (Date.parse(b.published) || 0) - (Date.parse(a.published) || 0));
+  const known = S.get('vmeta', {}); v.forEach(x => known[x.id] = { id: x.id, title: x.title, channel: x.channel }); S.set('vmeta', known);
+  feedMem = { key, t: Date.now(), v }; return v;
+}
+async function fillFeed(el, limit, withCurated) {
+  const vs = await subsFeed(); if (!el.isConnected) return;
+  if (!vs.length) { el.innerHTML = allVideos().slice(0, limit || 999).map(vcard).join(''); bindV(el); return; }
+  el.innerHTML = vs.slice(0, limit || 999).map(vcard).join('') + (withCurated ? `<h2 style="grid-column:1/-1">Рекомендованное</h2>` + allVideos().map(vcard).join('') : '');
+  bindV(el); const q = $('#lq'); if (q && q.value) q.oninput();
+}
+
+/* ---------- ADD CHANNEL DIALOG ---------- */
+function addChannelDialog() {
+  const m = document.createElement('div'); m.className = 'modal';
+  m.innerHTML = `<div class="mbox"><h3>Добавить канал <button class="x" id="mx">✕</button></h3><p class="muted small">Вставьте любую ссылку: youtube.com/@handle, /channel/UC…, /c/имя, /user/имя, ссылку на видео (youtu.be, m.youtube, shorts) — или просто @handle.</p>
+  <div style="display:flex;gap:8px"><input id="mq" placeholder="https://www.youtube.com/@…" style="flex:1"><button class="btn" id="mfind">Найти</button></div><div id="mprev"></div></div>`;
+  document.body.appendChild(m); const close = () => m.remove(); $('#mx').onclick = close; m.onclick = e => { if (e.target === m) close(); };
+  const inp = $('#mq'); inp.focus();
+  const find = async () => {
+    const q = inp.value.trim(); if (!q) return; $('#mprev').innerHTML = '<div class="empty"><div class="spin"></div><div>Ищем канал…</div></div>';
+    let c = null;
+    try { const r = await withTimeout(fetch(WORKER + '/resolve?q=' + encodeURIComponent(q)), 25000); if (r.ok) c = await r.json(); } catch (e) { }
+    if (!c || !c.id) { const r2 = await resolveChannel(q).catch(() => null); if (r2) c = { id: r2.id, name: r2.title }; }
+    if (!c || !c.id) { $('#mprev').innerHTML = '<p class="muted">Канал не найден. Проверьте ссылку.</p>'; return; }
+    const on = isSub(c.id);
+    $('#mprev').innerHTML = `<div class="crow sel" style="margin-top:14px">${c.avatar ? `<img class="cav" src="${esc(c.avatar)}" alt="">` : '<div class="cav"></div>'}<div class="cinfo"><b>${esc(c.name)}</b><span>${c.subsN ? ruNum(c.subsN) + ' подписчиков' : ''}&nbsp;&nbsp;${c.videosN ? ruNum(c.videosN) + ' видео' : ''}${c.handle ? ' · ' + esc(c.handle) : ''}</span></div><button class="btn" id="mok" ${on ? 'disabled' : ''}>${on ? '✓ Уже подписаны' : 'Подписаться'}</button></div>`;
+    if (!on) $('#mok').onclick = () => { toggleSub(c, true); feedMem = null; close(); route(); };
+  };
+  $('#mfind').onclick = find; inp.onkeydown = e => { if (e.key === 'Enter') find(); if (e.key === 'Escape') close(); };
+}
+
 /* ---------- CATALOG ---------- */
-const LEARN_LANGS = [['en', 'English'], ['es', 'Español'], ['de', 'Deutsch'], ['fr', 'Français'], ['it', 'Italiano'], ['pt', 'Português'], ['ja', '日本語'], ['ko', '한국어'], ['zh', '中文'], ['tr', 'Türkçe'], ['ru', 'Русский']];
+const LEARN_LANGS = [['en', 'English'], ['es', 'Español'], ['de', 'Deutsch'], ['fr', 'Français'], ['it', 'Italiano'], ['pt', 'Português'], ['ja', '日本語'], ['ko', '한국어'], ['zh', '中文'], ['tr', 'Türkçe'], ['ru', 'Русский'], ['he', 'עברית']];
 const CAT_LABELS = [['all', 'Все'], ['vlog', 'Влог'], ['animation', 'Анимация'], ['music', 'Музыка'], ['film', 'Кино и сериалы'], ['food', 'Еда'], ['travel', 'Путешествия'], ['tech', 'Технологии'], ['ai', 'ИИ'], ['science', 'Наука'], ['education', 'Образование'], ['psychology', 'Психология'], ['career', 'Карьера'], ['art', 'Искусство'], ['history', 'История'], ['sport', 'Спорт'], ['health', 'Здоровье'], ['news', 'Новости'], ['interview', 'Интервью'], ['lectures', 'Лекции'], ['entertainment', 'Развлечения'], ['games', 'Игры'], ['minecraft', 'Майнкрафт'], ['urbex', 'Заброшки / Паранормальное']];
 const catData = {}; let catState = { tab: 'yt', cat: 'all', q: '' };
 async function loadCatalog(lang) {
@@ -274,7 +340,7 @@ function toggleSub(c, forceOn) {
   let list = S.get('channels', []); const on = list.some(x => x.id === c.id);
   if (on && !forceOn) { list = list.filter(x => x.id !== c.id); toast('Отписка: ' + c.name); }
   else if (!on) { list.push({ id: c.id, title: c.name, avatar: c.avatar || '', subs: c.subsN || 0 }); toast('Подписка: ' + c.name); }
-  S.set('channels', list);
+  S.set('channels', list); feedMem = null;
 }
 function renderCatList() {
   const el = $('#cl'); if (!el) return; const lang = S.get('learnLang', 'en'), q = catState.q.toLowerCase();
@@ -307,9 +373,13 @@ function watch(id, start = 0) {
   const meta = allVideos().find(v => v.id === id) || S.get('vmeta', {})[id] || S.get('history', []).find(v => v.id === id) || { id, title: 'Видео ' + id, channel: '' };
   const h = S.get('history', []).filter(v => v.id !== id); h.unshift(meta); S.set('history', h.slice(0, 60)); bump();
   const isFav = S.get('fav', []).some(v => v.id === id);
-  app().innerHTML = `<div class="main"><div class="top"><a class="btn g s" href="#/home">‹</a><h1 style="flex:1">${esc(meta.title)}</h1><button class="btn g s" id="fav">${isFav ? '★ В избранном' : '☆ В избранное'}</button></div>
-  <div class="pl"><div><div id="player"></div><details style="margin-top:14px"><summary class="muted">Вставить субтитры вручную (SRT/VTT)</summary><textarea id="subs" rows="6" style="width:100%;margin-top:8px" placeholder="Вставьте содержимое .srt или .vtt"></textarea><button class="btn s" id="subsgo">Загрузить</button></details></div>
+  const ovl = S.get('ovl', true), panel = S.get('tpanel', true);
+  app().innerHTML = `<div class="main watch ${panel ? '' : 'nopanel'}"><div class="top"><a class="btn g s" href="#/home">‹</a><h1 style="flex:1">${esc(meta.title)}</h1><button class="btn g s" id="tovl" title="Субтитры поверх видео">${ovl ? '☑' : '☐'} Субтитры на видео</button><button class="btn g s" id="tpan">${panel ? '⇥ Скрыть панель' : '⇤ Показать панель'}</button><button class="btn g s" id="fav">${isFav ? '★ В избранном' : '☆ В избранное'}</button></div>
+  <div class="pl"><div class="pcol"><div class="pwrap"><div id="player"></div><div id="ovl" class="${ovl ? '' : 'hidden'}"><div class="o1"></div><div class="o2"></div></div></div><details style="margin-top:14px"><summary class="muted">Вставить субтитры вручную (SRT/VTT)</summary><textarea id="subs" rows="6" style="width:100%;margin-top:8px" placeholder="Вставьте содержимое .srt или .vtt"></textarea><button class="btn s" id="subsgo">Загрузить</button></details></div>
   <div class="box" id="tr"><div class="muted">Загрузка транскрипта…</div></div></div></div>`;
+  $('#tovl').onclick = () => { const v = !S.get('ovl', true); S.set('ovl', v); $('#ovl').classList.toggle('hidden', !v); $('#tovl').textContent = (v ? '☑' : '☐') + ' Субтитры на видео'; };
+  $('#tpan').onclick = () => { const v = !S.get('tpanel', true); S.set('tpanel', v); $('.watch').classList.toggle('nopanel', !v); $('#tpan').textContent = v ? '⇥ Скрыть панель' : '⇤ Показать панель'; };
+  $('#ovl').onclick = e => { if (!e.target.classList.contains('w')) return; const c = cues[+$('#ovl').dataset.i]; if (!c) return; if (player && player.pauseVideo) player.pauseVideo(); wordPopup(e.target, e.target.textContent, c.text, { sentenceTranslation: c.tr, meta: { videoId: curVid, videoUrl: `https://www.youtube.com/watch?v=${curVid}&t=${Math.floor(c.s)}s`, timestamp: Math.floor(c.s) } }); };
   if (!meta.channel) oembed(id).then(o => { if (o && curVid === id) { Object.assign(meta, o); const h1 = $('.main .top h1'); if (h1) h1.textContent = o.title; const hh = S.get('history', []); if (hh[0] && hh[0].id === id) { Object.assign(hh[0], o); S.set('history', hh); } } });
   $('#fav').onclick = () => { let f = S.get('fav', []); f = f.some(v => v.id === id) ? f.filter(v => v.id !== id) : [meta, ...f]; S.set('fav', f); watch(id, player && player.getCurrentTime ? player.getCurrentTime() : 0); };
   $('#subsgo').onclick = () => { cues = parseSubs($('#subs').value); renderTr(); toast('Строк: ' + cues.length); };
@@ -319,6 +389,8 @@ function watch(id, start = 0) {
   clearInterval(hlTimer); hlTimer = setInterval(() => {
     if (!location.hash.startsWith('#/watch') || !player || !player.getCurrentTime || !cues.length) return;
     const t = player.getCurrentTime(); let idx = -1; cues.forEach((c, i) => { if (c.s <= t) idx = i; });
+    const ov = $('#ovl'); if (ov && ov.dataset.i !== String(idx)) { ov.dataset.i = idx; const c = cues[idx]; ov.querySelector('.o1').innerHTML = c ? wordsHTML(c.text) : ''; ov.querySelector('.o2').textContent = c ? (c.tr || '') : ''; ov.style.visibility = c ? 'visible' : 'hidden'; }
+    else if (ov && cues[idx] && cues[idx].tr && !ov.querySelector('.o2').textContent) ov.querySelector('.o2').textContent = cues[idx].tr;
     const cur = $('.ln.on'); if (cur && +cur.dataset.i === idx) return; if (cur) cur.classList.remove('on');
     const l = $(`.ln[data-i="${idx}"]`); if (l) { l.classList.add('on'); l.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
   }, 400);
@@ -333,7 +405,7 @@ const WORKER = 'https://lingua.lingua-learn.workers.dev';
 async function viaWorker(id) {
   for (let i = 0; i < 3; i++) {
     try {
-      const r = await withTimeout(fetch(WORKER + '/transcript?id=' + id), 30000); const d = await r.json();
+      const r = await withTimeout(fetch(WORKER + '/transcript?id=' + id + '&lang=' + S.get('learnLang', 'en')), 30000); const d = await r.json();
       if (d.cues && d.cues.length) { if (d.title && curVid === id) { const h1 = $('.main .top h1'); if (h1 && /^Видео /.test(h1.textContent)) h1.textContent = d.title; } return d.cues; }
       if (d.error && d.error !== 'blocked') return null; // no captions / unavailable: don't retry
     } catch (e) { }
@@ -610,7 +682,7 @@ function sentences(tab = 'fav') {
   if ($$('#sentences .w').length || tab === 'fav') $$('.wc .w').forEach(w => w.onclick = () => wordPopup(w, w.textContent, w.closest('.wc').firstElementChild.textContent));
   if (tab === 'fav') return;
   const t = pool[sIdx % pool.length];
-  $('#play').onclick = () => speak(t); if ($('#slow')) $('#slow').onclick = () => speak(t, 'en-US', 0.6);
+  $('#play').onclick = () => speak(t); if ($('#slow')) $('#slow').onclick = () => speak(t, undefined, 0.6);
   $('#nx').onclick = () => { sIdx++; sentences(tab); };
   const show = got => { const r = diff(t, got); $('#res').innerHTML = `<div>${r.html}</div><div class="small muted" style="margin-top:8px">Точность: ${r.score}% ${r.score > 85 ? '🎉' : ''}${tab === 'shadow' ? '<br>Распознано: ' + esc(got) : '<br>' + esc(t)}</div>`; bump(); };
   if ($('#chk')) { $('#chk').onclick = () => show($('#din').value); $('#din').onkeydown = e => e.key === 'Enter' && show($('#din').value); }

@@ -7,7 +7,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, 'docs', 'data', 'channels'); AV = os.path.join(ROOT, 'docs', 'data', 'avatars')
 os.makedirs(OUT, exist_ok=True); os.makedirs(AV, exist_ok=True)
 H = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/135 Safari/537.36', 'Accept-Language': 'en-US,en;q=0.9', 'Cookie': 'CONSENT=YES+cb; SOCS=CAI'}
-GL = {'en': 'US', 'es': 'ES', 'de': 'DE', 'fr': 'FR', 'it': 'IT', 'pt': 'BR', 'ja': 'JP', 'ko': 'KR', 'zh': 'TW', 'tr': 'TR', 'ru': 'RU'}
+GL = {'en': 'US', 'es': 'ES', 'de': 'DE', 'fr': 'FR', 'it': 'IT', 'pt': 'BR', 'ja': 'JP', 'ko': 'KR', 'zh': 'TW', 'tr': 'TR', 'ru': 'RU', 'he': 'IL'}
 CATS = {'vlog': 'vlog', 'animation': 'animation cartoon', 'music': 'music', 'film': 'movie review', 'food': 'cooking recipes', 'travel': 'travel', 'tech': 'technology reviews', 'ai': 'artificial intelligence', 'science': 'science', 'education': 'education lessons', 'psychology': 'psychology', 'career': 'career business', 'art': 'drawing art', 'history': 'history', 'sport': 'football sport', 'health': 'health doctor', 'news': 'news', 'interview': 'interview podcast', 'lectures': 'lectures university', 'entertainment': 'entertainment comedy', 'games': 'gaming lets play', 'minecraft': 'minecraft', 'urbex': 'abandoned places paranormal'}
 MIN_SEED, MIN_SEARCH, PER_CAT = 20000, 50000, 2
 
@@ -41,7 +41,7 @@ def detect(text):
 EXTRA_Q = {'ru': {'urbex': ['заброшки', 'паранормальное'], 'minecraft': ['майнкрафт летсплей'], 'music': ['русская музыка клипы']}, 'de': {'urbex': ['lost places deutschland', 'paranormal deutsch'], 'entertainment': ['comedy deutsch']},
   'ko': {'urbex': ['폐가 체험', '흉가 미스터리'], 'minecraft': ['마인크래프트']}, 'it': {'urbex': ['luoghi abbandonati', 'paranormale italia'], 'entertainment': ['comici italiani']}, 'zh': {'urbex': ['廢墟探險', '靈異', '鬼故事'], 'tech': ['科技 開箱', '3C 評測'], 'vlog': ['台灣 vlog', '日常 vlog'], 'entertainment': ['搞笑 台灣', '綜藝'], 'games': ['遊戲實況'], 'minecraft': ['麥塊', '我的世界'], 'ai': ['人工智慧 AI 教學'], 'music': ['華語 MV'], 'food': ['美食 台灣'], 'travel': ['旅遊 台灣'], 'education': ['教學 知識'], 'history': ['歷史 故事'], 'science': ['科普']},
   'tr': {'urbex': ['terk edilmiş yerler', 'paranormal türkçe'], 'games': ['oyun türkçe']}, 'fr': {'urbex': ['urbex france', 'paranormal français'], 'minecraft': ['minecraft français']}, 'es': {'urbex': ['lugares abandonados', 'paranormal español'], 'tech': ['tecnología reseñas español']},
-  'pt': {'urbex': ['lugares abandonados brasil']}, 'ja': {'urbex': ['廃墟 探索', '心霊スポット']}, 'en': {}}
+  'pt': {'urbex': ['lugares abandonados brasil']}, 'he': {'urbex': ['מקומות נטושים', 'פאראנורמלי', 'בית רדוף'], 'minecraft': ['מיינקראפט'], 'vlog': ['ולוג ישראלי'], 'games': ['גיימינג ישראלי'], 'food': ['מתכונים', 'בישול'], 'tech': ['טכנולוגיה סקירה'], 'ai': ['בינה מלאכותית'], 'science': ['מדע'], 'history': ['היסטוריה'], 'psychology': ['פסיכולוגיה'], 'career': ['קריירה עסקים'], 'art': ['ציור אומנות'], 'health': ['בריאות רופא'], 'interview': ['פודקאסט ראיון'], 'travel': ['טיולים'], 'animation': ['אנימציה לילדים'], 'film': ['סרטים ביקורת'], 'education': ['שיעורים לימוד'], 'lectures': ['הרצאה'], 'entertainment': ['קומדיה ישראלית'], 'sport': ['כדורגל ישראלי'], 'music': ['שירים ישראליים']}, 'ja': {'urbex': ['廃墟 探索', '心霊スポット']}, 'en': {}}
 def search(q, lang):
     h = get('https://www.youtube.com/results?search_query=' + urllib.parse.quote(q) + '&sp=EgIQAg%253D%253D&hl=' + lang + '&gl=' + GL[lang])
     m = re.search(r'var ytInitialData = (\{.*?\});</script>', h, re.S)
@@ -88,7 +88,7 @@ def build(lang):
             with cf.ThreadPoolExecutor(6) as ex: langs = list(ex.map(lambda c: detect(c['name'] + '. ' + c['desc']), cands))
             for c, dl in sorted(zip(cands, langs), key=lambda x: -x[0]['subsN']):
                 if have >= per: break
-                if not dl.lower().startswith(lang[:2]) and not (lang == 'zh' and dl.startswith('zh')): continue
+                if not dl.lower().startswith(lang[:2]) and not (lang == 'zh' and dl.startswith('zh')) and not (lang == 'he' and dl in ('iw', 'he')): continue
                 seen.add(c['id']); c['cat'] = cat; c['source'] = 'search:' + q; res.append(c); have += 1
     with cf.ThreadPoolExecutor(8) as ex: list(ex.map(avatar, res))
     for c in res: c.pop('avatarRemote', None); c.pop('desc', None)
