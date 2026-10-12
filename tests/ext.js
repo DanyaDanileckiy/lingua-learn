@@ -1,5 +1,5 @@
 const { chromium } = require('playwright-core');
-const EXT = '/workspace/lingua/extension';
+require('child_process').execSync('rm -rf /tmp/extcopy && cp -r /workspace/lingua/extension /tmp/extcopy'); const EXT = '/tmp/extcopy';
 (async () => {
   const ctx = await chromium.launchPersistentContext('/tmp/pw/prof-' + Date.now(), {
     executablePath: process.env.HOME + '/.cache/ms-playwright/chromium-1248/chrome-linux64/chrome', headless: false,
