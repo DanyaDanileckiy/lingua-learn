@@ -4,7 +4,7 @@ async function translate(text, tl) {
   try { const j = await (await fetch(u)).json(); const t = (j[0] || []).map(x => x[0]).join(''); if (t) return t; } catch (e) { }
   try { const j = await (await fetch('https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl=' + encodeURIComponent(tl) + '&q=' + encodeURIComponent(text))).json(); const x = j[0]; const t = Array.isArray(x) ? x[0] : x; if (t) return t; } catch (e) { }
   const j = await (await fetch('https://api.mymemory.translated.net/get?langpair=en|' + encodeURIComponent(tl) + '&q=' + encodeURIComponent(text.slice(0, 480)))).json();
-  return j.responseData ? j.responseData.translatedText : '';
+  const t = j.responseData ? j.responseData.translatedText : ''; return /MYMEMORY WARNING|QUERY LENGTH/i.test(t) ? '' : t;
 }
 chrome.runtime.onMessage.addListener((msg, _s, send) => {
   if (msg.type === 'translate') {

@@ -115,10 +115,12 @@ async function transcript(id, lang) {
   const p = await viaPiped(id, lang, tried); if (p) return Object.assign({ id }, p);
   return { id, error: 'blocked', tried };
 }
-async function translate(q, tl) {
-  try { const j = await (await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&dt=t&tl=' + encodeURIComponent(tl) + '&q=' + encodeURIComponent(q))).json(); const t = (j[0] || []).map(x => x[0]).join(''); if (t) return t; } catch (e) { }
-  try { const j = await (await fetch('https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl=' + encodeURIComponent(tl) + '&q=' + encodeURIComponent(q))).json(); const x = j[0]; const t = Array.isArray(x) ? x[0] : x; if (t) return t; } catch (e) { }
-  try { const parts = []; for (const line of q.split('\n')) { const j = await (await fetch('https://api.mymemory.translated.net/get?langpair=en|' + encodeURIComponent(tl) + '&q=' + encodeURIComponent(line.slice(0, 480)))).json(); parts.push(j.responseData ? j.responseData.translatedText : ''); } const t = parts.join('\n'); if (t.trim()) return t; } catch (e) { }
+async function translate(q, tl, sl = 'auto') { const same = t => t && t.trim().toLowerCase() === q.trim().toLowerCase(); const r = await translate0(q, tl, sl, same); return same(r) ? '' : r; }
+async function translate0(q, tl, sl, same) {
+  try { const j = await (await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&dt=t&tl=' + encodeURIComponent(tl) + '&q=' + encodeURIComponent(q))).json(); const t = (j[0] || []).map(x => x[0]).join(''); if (t && !same(t)) return t; } catch (e) { }
+  try { const j = await (await fetch('https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl=' + encodeURIComponent(tl) + '&q=' + encodeURIComponent(q))).json(); const x = j[0]; const t = Array.isArray(x) ? x[0] : x; if (t && !same(t)) return t; } catch (e) { }
+  try { const parts = []; for (const line of q.split('\n')) { const j = await (await fetch('https://api.mymemory.translated.net/get?langpair=' + (sl === 'auto' ? 'en' : sl === 'he' ? 'iw' : sl) + '|' + encodeURIComponent(tl) + '&q=' + encodeURIComponent(line.slice(0, 480)))).json(); parts.push(j.responseData && !/MYMEMORY WARNING|QUERY LENGTH/i.test(j.responseData.translatedText) ? j.responseData.translatedText : ''); } const t = parts.join('\n'); if (t.trim() && !same(t)) return t; } catch (e) { }
+  for (const h of ['lingva.ml', 'lingva.lunar.icu']) { try { const j = await (await fetch(`https://${h}/api/v1/${sl}/${encodeURIComponent(tl)}/${encodeURIComponent(q.slice(0, 1500))}`)).json(); if (j.translation && !same(j.translation)) return j.translation; } catch (e) { } }
   return '';
 }
 function fetchAllowed(u) {
@@ -201,7 +203,7 @@ export default {
     if (url.pathname === '/translate') {
       const q = (url.searchParams.get('q') || '').slice(0, 5000), tl = url.searchParams.get('tl') || 'ru';
       if (!q) return json(req, { error: 'empty' }, 400);
-      return json(req, { text: await translate(q, tl) });
+      return json(req, { text: await translate(q, tl, url.searchParams.get('sl') || 'auto') });
     }
     if (url.pathname === '/fetch') {
       let u; try { u = new URL(url.searchParams.get('url')); } catch (e) { return json(req, { error: 'bad url' }, 400); }

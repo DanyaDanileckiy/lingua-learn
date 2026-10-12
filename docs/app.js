@@ -18,19 +18,20 @@ const withTimeout = (p, ms = 9000) => Promise.race([p, new Promise((_, no) => se
 const TR_PROVIDERS = [
   async (t, tl) => { const j = await (await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&dt=t&tl=' + tl + '&q=' + encodeURIComponent(t))).json(); return (j[0] || []).map(x => x[0]).join(''); },
   async (t, tl) => { const j = await (await fetch('https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl=' + tl + '&q=' + encodeURIComponent(t))).json(); const x = j[0]; return Array.isArray(x) ? x[0] : x; },
-  async (t, tl) => { const parts = []; for (const line of t.split('\n')) { const j = await (await fetch('https://api.mymemory.translated.net/get?langpair=en|' + tl + '&q=' + encodeURIComponent(line.slice(0, 480)))).json(); parts.push(j.responseStatus == 200 ? j.responseData.translatedText : ''); } return parts.join('\n'); },
+  async (t, tl) => { const parts = []; for (const line of t.split('\n')) { const j = await (await fetch('https://api.mymemory.translated.net/get?langpair=' + (S.get('learnLang', 'en') === 'he' ? 'iw' : S.get('learnLang', 'en')) + '|' + tl + '&q=' + encodeURIComponent(line.slice(0, 480)))).json(); parts.push(j.responseStatus == 200 && !/MYMEMORY WARNING|QUERY LENGTH LIMIT/i.test(j.responseData.translatedText) ? j.responseData.translatedText : ''); } return parts.join('\n'); },
   async (t, tl) => { const j = await (await fetch(WORKER + '/translate?tl=' + tl + '&q=' + encodeURIComponent(t))).json(); return j.text; },
   async (t, tl) => { const j = await (await fetch('https://lingva.ml/api/v1/auto/' + tl + '/' + encodeURIComponent(t))).json(); return j.translation !== t ? j.translation : ''; }
 ];
 const trBad = {};
 async function translate(text) {
   const tl = TL(), k = tl + '|' + text; if (trCache[k]) return trCache[k];
+  let echo = '';
   for (let i = 0; i < TR_PROVIDERS.length; i++) {
     if ((trBad[i] || 0) > Date.now()) continue;
-    try { const r = await withTimeout(TR_PROVIDERS[i](text, tl), 8000); if (r && r.trim()) return trCache[k] = r; } catch (e) { }
+    try { const r = await withTimeout(TR_PROVIDERS[i](text, tl), 8000); if (r && r.trim()) { if (r.trim().toLowerCase() !== text.trim().toLowerCase() || /^[\d\s\p{P}]+$/u.test(text)) return trCache[k] = r; echo = r; continue; } } catch (e) { }
     trBad[i] = Date.now() + 60000; // back off this provider for a minute
   }
-  return '';
+  return echo;
 }
 const TTS_LANG = { en: 'en-US', es: 'es-ES', de: 'de-DE', fr: 'fr-FR', it: 'it-IT', pt: 'pt-BR', ja: 'ja-JP', ko: 'ko-KR', zh: 'zh-CN', tr: 'tr-TR', ru: 'ru-RU', he: 'he-IL' };
 const learnTTS = () => TTS_LANG[S.get('learnLang', 'en')] || 'en-US';
@@ -445,7 +446,7 @@ async function viaWorker(id) {
     try {
       const r = await withTimeout(fetch(WORKER + '/transcript?id=' + id + '&lang=' + S.get('learnLang', 'en')), 30000); const d = await r.json();
       if (d.cues && d.cues.length) { if (d.title && curVid === id) { const h1 = $('.main .top h1'); if (h1 && /^Видео /.test(h1.textContent)) h1.textContent = d.title; } return d.cues; }
-      if (d.error && d.error !== 'blocked') return null; // no captions / unavailable: don't retry
+      if (d.error && d.error !== 'blocked') { if (/no captions/.test(d.error)) window.__nocap = id; return null; } // no captions / unavailable: don't retry
     } catch (e) { }
   }
   return null;
@@ -544,6 +545,7 @@ async function fetchTranscript(id) {
     if (id !== curVid) return; trStatus(msg);
     let cs = null; try { cs = await fn(); } catch (e) { }
     if (id !== curVid) return;
+    if (window.__nocap === id && !window.__linguaExt && !(cs && cs.length) && msg.indexOf('сервер') > 0) break;
     if (cs && cs.length) {
       cues = dedupe(cs.map(c => ({ s: c.s, text: c.text })));
       if (msg.indexOf('готового') < 0) { const tc = S.get('tcache', {}); const keys = Object.keys(tc); if (keys.length > 15) delete tc[keys[0]]; tc[id] = cues; S.set('tcache', tc); }
@@ -559,7 +561,7 @@ function parseSubs(txt) {
 }
 function renderTr() {
   const el = $('#tr'); if (!el) return;
-  if (!cues.length) { el.innerHTML = `<div class="empty">${CAT()}<div>Не удалось автоматически получить субтитры для этого видео (YouTube блокирует запросы из браузера, а у видео может не быть субтитров).<br>Установите расширение Lingua — оно загружает субтитры любого видео — или вставьте SRT/VTT вручную ниже.</div></div>`; return; }
+  if (!cues.length) { el.innerHTML = `<div class="empty">${CAT()}<div>${window.__nocap === curVid ? '<b>У этого видео нет субтитров на YouTube.</b><br>' : ''}Не удалось автоматически получить субтитры для этого видео (YouTube блокирует запросы из браузера, а у видео может не быть субтитров).<br>Установите расширение Lingua — оно загружает субтитры любого видео — или вставьте SRT/VTT вручную ниже.</div></div>`; return; }
   el.innerHTML = cues.map((c, i) => `<div class="ln" data-i="${i}"><span class="ts">${fmt(c.s)}</span>${wordsHTML(c.text)}<div class="t2"></div></div>`).join('');
   $$('.ln', el).forEach(l => l.onclick = e => {
     const c = cues[+l.dataset.i];

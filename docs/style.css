@@ -89,3 +89,8 @@ img.flag{width:20px;height:14px;object-fit:cover;border-radius:2px;vertical-alig
 .lmenu button{display:flex;align-items:center;gap:10px}.chl img.flag{width:18px;height:13px}
 @media(max-width:700px){#langsw{width:auto}}
 #langsw.inh{display:inline-flex;vertical-align:middle;margin-right:8px;font-size:14px}
+/* mobile / narrow fixes */
+@media(max-width:1000px){#app{flex-wrap:wrap}.rp{display:flex!important;width:100%;box-sizing:border-box;border-left:0;border-top:1px solid #111}.main{flex-basis:100%}}
+@media(max-width:700px){.main{box-sizing:border-box;max-width:calc(100vw - 44px)}.top{flex-wrap:wrap;gap:8px}.top input,.purl,#hs,#lq{width:100%!important;min-width:0;box-sizing:border-box}.top .sp{display:none}.tabs{max-width:100%;overflow-x:auto;flex-wrap:nowrap}.tabs .tab{white-space:nowrap}
+.vgrid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))!important}.chips{flex-wrap:wrap}h2{flex-wrap:wrap;gap:6px}.box{max-width:100%;box-sizing:border-box;overflow-x:auto}}
+@media(max-width:700px){#app{max-width:calc(100% - 44px);overflow-x:clip}.main{max-width:100%}.catsearch{flex-wrap:wrap}.catsearch input{min-width:0;flex:1}#clang{max-width:100%}}
