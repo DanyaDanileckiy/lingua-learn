@@ -10,21 +10,34 @@
   function tr(text) {
     return new Promise(res => chrome.runtime.sendMessage({ type: 'translate', text, tl }, r => res(r && r.ok ? r.text : '')));
   }
-  window.addEventListener('message', async e => {
-    const d = e.data;
-    if (!d || d.source !== 'lingua-inject' || !d.videoId || d.videoId === curVideo) return;
-    if (new URL(location.href).searchParams.get('v') !== d.videoId) return;
-    curVideo = d.videoId; cues = []; trans = {}; lastIdx = -1;
-    const fallback = () => chrome.runtime.sendMessage({ type: 'transcript', id: d.videoId }, r => { if (r && r.cues && curVideo === d.videoId) cues = r.cues.map((c, i, a) => ({ start: c.s, end: a[i + 1] ? a[i + 1].s : c.s + 4, text: c.text })); });
-    if (!d.tracks.length) return fallback();
-    const en = d.tracks.filter(t => /^en/.test(t.lang));
-    const t = en.find(t => t.kind !== 'asr') || en[0] || d.tracks.find(t => t.kind !== 'asr') || d.tracks[0];
-    try {
-      const r = await fetch(t.baseUrl + '&fmt=json3');
-      const j = await r.json();
-      cues = (j.events || []).filter(ev => ev.segs).map(ev => ({ start: ev.tStartMs / 1000, end: (ev.tStartMs + (ev.dDurationMs || 2000)) / 1000, text: ev.segs.map(x => x.utf8).join('').replace(/\n/g, ' ').trim() })).filter(c => c.text);
-      if (!cues.length) fallback();
-    } catch (err) { console.warn('Lingua: captions failed', err); fallback(); }
+  function parseTimed(t) {
+    t = (t || '').trim(); if (!t) return [];
+    if (t[0] === '{') return (JSON.parse(t).events || []).filter(ev => ev.segs).map(ev => ({ start: ev.tStartMs / 1000, end: (ev.tStartMs + (ev.dDurationMs || 2000)) / 1000, text: ev.segs.map(x => x.utf8).join('').replace(/\n/g, ' ').trim() })).filter(c => c.text);
+    const doc = new DOMParser().parseFromString(t, 'text/xml'), out = [];
+    doc.querySelectorAll('p').forEach(p => out.push({ start: +p.getAttribute('t') / 1000, end: (+p.getAttribute('t') + +(p.getAttribute('d') || 2000)) / 1000, text: p.textContent.replace(/\s+/g, ' ').trim() }));
+    return out.filter(c => c.text);
+  }
+  // merge rolling auto-caption segments: drop exact repeats
+  const tidy = cs => cs.filter((c, i) => !i || c.text !== cs[i - 1].text);
+  let srcScore = 0; // 3 manual en, 2 asr en, 1 other
+  window.addEventListener('message', e => {
+    const d = e.data; if (!d) return;
+    const urlVid = new URL(location.href).searchParams.get('v');
+    if (d.source === 'lingua-timedtext' && d.videoId === urlVid && !d.tlang) {
+      const score = /^en/.test(d.lang) ? (d.kind === 'asr' ? 2 : 3) : 1;
+      if (curVideo === d.videoId && score <= srcScore && cues.length) return;
+      let cs = []; try { cs = tidy(parseTimed(d.text)); } catch (err) { }
+      if (cs.length) { if (curVideo !== d.videoId) { trans = {}; } curVideo = d.videoId; cues = cs; trans = {}; lastIdx = -1; srcScore = score; }
+      return;
+    }
+    if (d.source !== 'lingua-inject' || !d.videoId || d.videoId === curVideo || d.videoId !== urlVid) return;
+    curVideo = d.videoId; cues = []; trans = {}; lastIdx = -1; srcScore = 0;
+    window.postMessage({ source: 'lingua-enable-cc' }, '*');
+    const vid = d.videoId;
+    setTimeout(() => {
+      if (cues.length || curVideo !== vid) return;
+      chrome.runtime.sendMessage({ type: 'transcript', id: vid }, r => { if (r && r.cues && curVideo === vid && !cues.length) cues = r.cues.map((c, i, a) => ({ start: c.s, end: a[i + 1] ? a[i + 1].s : c.s + 4, text: c.text })); });
+    }, 4000);
   });
   function poll() {
     if (location.pathname === '/watch') window.postMessage({ source: 'lingua-req' }, '*');

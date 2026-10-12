@@ -260,7 +260,7 @@ function extTranscript(id) {
   return new Promise(res => {
     const rid = Math.random().toString(36).slice(2), h = e => { if (e.source === window && e.data && e.data.source === 'lingua-ext-transcript' && e.data.rid === rid) { window.removeEventListener('message', h); res(e.data.cues || null); } };
     window.addEventListener('message', h); window.postMessage({ source: 'lingua-req-transcript', id, rid }, location.origin);
-    setTimeout(() => { window.removeEventListener('message', h); res(null); }, window.__linguaExt ? 15000 : 1500);
+    setTimeout(() => { window.removeEventListener('message', h); res(null); }, (window.__linguaExt || document.documentElement.dataset.linguaExt) ? 20000 : 1200);
   });
 }
 async function viaInnertube(id) {
@@ -537,4 +537,6 @@ function route() {
   }
 }
 window.addEventListener('hashchange', route);
+if (document.documentElement.dataset.linguaExt) window.__linguaExt = true;
+window.postMessage({ source: 'lingua-hello' }, location.origin);
 route();

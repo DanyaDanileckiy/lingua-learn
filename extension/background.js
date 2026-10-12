@@ -28,12 +28,12 @@ function parseTimed(t) {
 async function getTranscript(id) {
   for (const client of IT_CLIENTS) {
     try {
-      const r = await fetch('https://www.youtube.com/youtubei/v1/player?prettyPrint=false', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ context: { client }, videoId: id }) });
+      const r = await fetch('https://www.youtube.com/youtubei/v1/player?prettyPrint=false', { method: 'POST', credentials: 'omit', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ context: { client }, videoId: id }) });
       const tracks = (((await r.json()).captions || {}).playerCaptionsTracklistRenderer || {}).captionTracks || [];
       if (!tracks.length) continue;
       const en = tracks.filter(t => /^en/.test(t.languageCode));
       const tr = en.find(t => t.kind !== 'asr') || en.find(t => t.kind === 'asr') || tracks.find(t => t.kind === 'asr') || tracks[0];
-      const cues = parseTimed(await (await fetch(tr.baseUrl.replace(/&fmt=[^&]*/, '') + '&fmt=json3')).text());
+      const cues = parseTimed(await (await fetch(tr.baseUrl.replace(/&fmt=[^&]*/, '') + '&fmt=json3', { credentials: 'omit' })).text());
       if (cues.length) return cues;
     } catch (e) { }
   }
