@@ -1,10 +1,15 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lingua — учим языки по видео</title><link rel="stylesheet" href="style.css"></head><body>
-<header><div class="logo">🎬 Lingua</div><nav><button data-tab="vocab" class="active">Словарь</button><button data-tab="cards">Карточки</button><button data-tab="video">Видео</button><button data-tab="import">Импорт</button></nav></header>
-<main>
-<section id="vocab" class="tab active"><div class="row"><input id="q" placeholder="Поиск слова или перевода…"><span id="stats"></span></div><div id="wlist" class="grid"></div></section>
-<section id="cards" class="tab"><div id="cardbox"></div></section>
-<section id="video" class="tab"><div class="row"><input id="vurl" placeholder="Ссылка на YouTube видео"><button id="vload" class="pri">Открыть</button></div>
-<div class="vwrap"><div id="player"></div><div id="transcript" class="panel"><p class="muted">Транскрипт появится здесь.</p></div></div>
-<details><summary>Вставить субтитры вручную (SRT/VTT)</summary><textarea id="subs" rows="6" placeholder="Вставьте содержимое .srt или .vtt"></textarea><button id="subsgo" class="pri">Загрузить</button></details></section>
-<section id="import" class="tab"><div class="panel"><h2>Импорт слов</h2><p>Выберите файл <code>lingua-words.json</code>, экспортированный из расширения.</p><input type="file" id="file" accept=".json"><p><button id="export" class="sec">Экспорт словаря</button> <button id="clear" class="danger">Очистить всё</button></p><p id="imsg"></p></div></section>
-</main><div id="toast"></div><script src="app.js"></script></body></html>
+<aside id="side">
+<a class="logo" href="#/home" title="Lingua">🐱</a>
+<a href="#/home" data-r="home" title="Главная"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a>
+<a href="#/library" data-r="library" title="Библиотека"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/></svg></a>
+<a href="#/talk" data-r="talk" title="AI Talk"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></a>
+<a href="#/books" data-r="books" title="Мои книги"><svg viewBox="0 0 24 24"><path d="M4 5c3-1 6-1 8 1 2-2 5-2 8-1v14c-3-1-6-1-8 1-2-2-5-2-8-1z"/></svg></a>
+<a href="#/vocab" data-r="vocab" title="Словарь"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></a>
+<a href="#/sentences" data-r="sentences" title="Предложения"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></a>
+<a href="#/import" data-r="import" title="Импорт / экспорт" class="bottom"><svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5l5 5 5-5M4 21h16"/></svg></a>
+</aside>
+<div id="app"></div>
+<div id="pop" class="pop hidden"></div>
+<div id="toast"></div>
+<script src="data.js"></script><script src="app.js"></script></body></html>
