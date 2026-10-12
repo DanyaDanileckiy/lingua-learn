@@ -121,21 +121,23 @@ function home() {
 
 /* ---------- PODCASTS ---------- */
 async function fetchText(url) {
-  const tries = [url, 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url), 'https://corsproxy.io/?url=' + encodeURIComponent(url)];
-  for (const u of tries) { try { const r = await fetch(u); if (r.ok) { const t = await r.text(); if (t && t.length > 50) return t; } } catch (e) { } }
+  const t = await tryFetch(url, {}, true); if (t) return t;
   throw new Error('fetch failed');
 }
+const POD_PRESETS = [['BBC 6 Minute English', 'https://podcasts.files.bbci.co.uk/p02pc9tn.rss'], ['The Daily (NYT)', 'https://rss.art19.com/the-daily'], ['Stuff You Should Know', 'https://www.omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/A91018A4-EA4F-4130-BF55-AE270180C327/44710ECC-10BB-48D1-93C7-AE270180C33E/podcast.rss']];
 function podcastsBlock() {
   const ps = S.get('podcasts', []);
-  const form = `<div style="display:flex;gap:8px;justify-content:center;margin-top:8px"><input class="purl" placeholder="URL RSS-ленты подкаста" style="width:320px"><button class="btn s padd">Добавить подкаст</button></div>`;
+  const form = `<div style="display:flex;gap:8px;justify-content:center;margin-top:8px"><input class="purl" placeholder="URL RSS-ленты подкаста" style="width:320px"><button class="btn s padd">Добавить подкаст</button></div><div class="chips" style="justify-content:center;margin-top:8px">${POD_PRESETS.map(([n, u]) => `<button class="chip ppre" data-u="${esc(u)}">+ ${esc(n)}</button>`).join('')}</div>`;
   if (!ps.length) return `<div class="empty">${CAT()}<div>Подкастов пока нет</div>${form}</div>`;
   return `<div class="vgrid">${ps.map((p, i) => `<div class="v pod" data-i="${i}"><div class="th">${p.image ? `<img src="${esc(p.image)}" alt="">` : '<div class="empty">🎧</div>'}</div><div class="ti">${esc(p.title)}</div><div class="ch">${p.episodes.length} эпизодов <button class="x pdel" data-i="${i}">✕</button></div></div>`).join('')}</div>${form}`;
 }
 function bindPodcasts(root) {
+  $$('.ppre', root).forEach(b => b.onclick = () => { $('.purl', root).value = b.dataset.u; $('.padd', root).click(); });
   $$('.padd', root).forEach(b => b.onclick = async () => {
     const url = $('.purl', root).value.trim(); if (!url) return; b.textContent = 'Загрузка…';
+    if (S.get('podcasts', []).some(p => p.url === url)) { toast('Уже добавлен'); b.textContent = 'Добавить подкаст'; return; }
     try {
-      const xml = new DOMParser().parseFromString(await fetchText(url), 'text/xml'); const ch = xml.querySelector('channel'); if (!ch) throw 0;
+      const xml = new DOMParser().parseFromString(await extFetch(url) || await fetchText(url), 'text/xml'); const ch = xml.querySelector('channel'); if (!ch) throw 0;
       const img = ch.querySelector('image url') || [...ch.children].find(n => n.localName === 'image' && n.getAttribute('href'));
       const p = { url, title: ch.querySelector('title')?.textContent || url, image: img ? (img.textContent || img.getAttribute('href')) : '', episodes: [...xml.querySelectorAll('item')].slice(0, 50).map(it => ({ title: it.querySelector('title')?.textContent || '', audio: it.querySelector('enclosure')?.getAttribute('url') || '', date: it.querySelector('pubDate')?.textContent || '' })) };
       const ps = S.get('podcasts', []); ps.push(p); S.set('podcasts', ps); toast('Подкаст добавлен'); route();
@@ -169,26 +171,50 @@ function library(tab = 'youtube') {
   $('#lq').oninput = () => { const q = $('#lq').value.toLowerCase(); $$('.v').forEach(v => v.style.display = v.textContent.toLowerCase().includes(q) ? '' : 'none'); };
   $$('.chdel').forEach(b => b.onclick = e => { e.preventDefault(); e.stopPropagation(); const c = S.get('channels', []); c.splice(+b.dataset.i, 1); S.set('channels', c); library(); });
   $('#chadd').onclick = async () => {
-    const v = $('#chin').value.trim(); if (!v) return; let id = (v.match(/(UC[\w-]{22})/) || [])[1];
-    try {
-      if (!id) { const html = await fetchText(/^https?:/.test(v) ? v : 'https://www.youtube.com/' + (v.startsWith('@') ? v : '@' + v)); id = (html.match(/"(?:channelId|externalId)":"(UC[\w-]{22})"/) || [])[1]; }
-      if (!id) throw 0;
-      const xml = new DOMParser().parseFromString(await fetchText('https://www.youtube.com/feeds/videos.xml?channel_id=' + id), 'text/xml');
-      const title = xml.querySelector('feed > title')?.textContent || id;
-      const c = S.get('channels', []); if (!c.some(x => x.id === id)) c.push({ id, title }); S.set('channels', c); toast('Канал добавлен'); library('ch:' + (c.length - 1));
-    } catch (e) { const c = S.get('channels', []); if (id) { c.push({ id, title: id }); S.set('channels', c); library(); } else toast('Не удалось найти канал. Укажите ID вида UC…'); }
+    const v = $('#chin').value.trim(); if (!v) return; $('#chadd').textContent = '…';
+    const ch = await resolveChannel(v); $('#chadd').textContent = '+';
+    if (!ch) return toast('Канал не найден. Укажите ссылку, @handle или ID вида UC…');
+    const c = S.get('channels', []); let i = c.findIndex(x => x.id === ch.id); if (i < 0) { c.push({ id: ch.id, title: ch.title }); i = c.length - 1; } S.set('channels', c); toast('Канал добавлен'); location.hash = '#/library/ch:' + i;
   };
   if (tab.startsWith('ch:')) loadChannel(S.get('channels', [])[+tab.slice(3)]);
 }
-async function loadChannel(c) {
-  const el = $('#chv'); if (!c) return el.textContent = 'Канал не найден';
-  try {
-    const xml = new DOMParser().parseFromString(await fetchText('https://www.youtube.com/feeds/videos.xml?channel_id=' + c.id), 'text/xml');
-    const vs = [...xml.getElementsByTagName('entry')].map(e => ({ id: e.getElementsByTagName('yt:videoId')[0]?.textContent, title: e.querySelector('title')?.textContent, channel: c.title }));
-    el.className = 'vgrid'; el.innerHTML = vs.map(vcard).join(''); bindV(el);
-  } catch (e) { el.textContent = 'Не удалось загрузить ленту канала (ограничение CORS).'; }
+async function pipedJSON(path) {
+  for (const base of PIPED) { try { const r = await withTimeout(fetch(base + path), 8000); if (r.ok) { const j = await r.json(); if (!j.error) return j; } } catch (e) { } }
+  return null;
 }
-
+function extFetch(url) {
+  return new Promise(res => {
+    if (!(window.__linguaExt || document.documentElement.dataset.linguaExt)) return res(null);
+    const rid = Math.random().toString(36).slice(2), h = e => { if (e.source === window && e.data && e.data.source === 'lingua-ext-fetch' && e.data.rid === rid) { window.removeEventListener('message', h); res(e.data.text || null); } };
+    window.addEventListener('message', h); window.postMessage({ source: 'lingua-req-fetch', url, rid }, location.origin); setTimeout(() => res(null), 15000);
+  });
+}
+async function resolveChannel(v) {
+  let id = (v.match(/(UC[\w-]{22})/) || [])[1];
+  const handle = (v.match(/@([\w.-]+)/) || v.match(/youtube\.com\/(?:c|user)\/([\w.-]+)/) || [null, /^[\w.-]+$/.test(v) ? v : null])[1];
+  let j = id ? await pipedJSON('/channel/' + id) : null;
+  if (!j && handle) j = await pipedJSON('/c/' + handle) || await pipedJSON('/user/' + handle) || await pipedJSON('/@' + handle);
+  if (j && j.id) return { id: j.id, title: j.name || j.id, videos: j.relatedStreams };
+  if (!id && handle) { const html = await extFetch('https://www.youtube.com/@' + handle) || await fetchText('https://www.youtube.com/@' + handle).catch(() => null); id = html && (html.match(/"(?:channelId|externalId)":"(UC[\w-]{22})"/) || [])[1]; }
+  if (!id) return null;
+  const xml = await extFetch('https://www.youtube.com/feeds/videos.xml?channel_id=' + id);
+  const title = xml && (new DOMParser().parseFromString(xml, 'text/xml').querySelector('feed > title') || {}).textContent;
+  return { id, title: title || (handle ? '@' + handle : id) };
+}
+async function loadChannel(c) {
+  const el = $('#chv'); if (!c) { el.textContent = 'Канал не найден'; return; }
+  el.innerHTML = '<div class="empty"><div class="spin"></div><div>Загрузка видео канала…</div></div>';
+  let vs = [];
+  const j = await pipedJSON('/channel/' + c.id);
+  if (j && j.relatedStreams) vs = j.relatedStreams.filter(x => x.url).map(x => ({ id: (x.url.match(/v=([\w-]{11})/) || [])[1], title: x.title, channel: x.uploaderName || c.title, dur: x.duration > 0 ? x.duration : 0 })).filter(x => x.id);
+  if (!vs.length) {
+    const xml = await extFetch('https://www.youtube.com/feeds/videos.xml?channel_id=' + c.id) || await fetchText('https://www.youtube.com/feeds/videos.xml?channel_id=' + c.id).catch(() => null);
+    if (xml) vs = [...new DOMParser().parseFromString(xml, 'text/xml').getElementsByTagName('entry')].map(e => ({ id: (e.getElementsByTagName('yt:videoId')[0] || {}).textContent, title: (e.getElementsByTagName('title')[0] || {}).textContent, channel: c.title })).filter(x => x.id);
+  }
+  if (!vs.length) { el.innerHTML = empty(`Не удалось загрузить видео канала «${esc(c.title)}». Попробуйте позже или установите расширение Lingua.`, `<a class="btn" target="_blank" href="https://www.youtube.com/channel/${esc(c.id)}">Открыть на YouTube</a>`, false); return; }
+  el.className = 'vgrid'; el.innerHTML = vs.map(vcard).join(''); bindV(el);
+  const known = S.get('vmeta', {}); vs.forEach(v => known[v.id] = v); S.set('vmeta', known);
+}
 /* ---------- PLAYER ---------- */
 let player, cues = [], curVid, ytReady = false, ytQ = [], hlTimer;
 window.onYouTubeIframeAPIReady = () => { ytReady = true; ytQ.forEach(f => f()); ytQ = []; };
@@ -197,7 +223,7 @@ function parseId(u) { const m = String(u).match(/(?:v=|youtu\.be\/|embed\/|short
 function parseT(u) { const m = String(u).match(/[?&]t=(\d+)/); return m ? +m[1] : 0; }
 function watch(id, start = 0) {
   curVid = id; cues = [];
-  const meta = allVideos().find(v => v.id === id) || S.get('history', []).find(v => v.id === id) || { id, title: 'Видео ' + id, channel: '' };
+  const meta = allVideos().find(v => v.id === id) || S.get('vmeta', {})[id] || S.get('history', []).find(v => v.id === id) || { id, title: 'Видео ' + id, channel: '' };
   const h = S.get('history', []).filter(v => v.id !== id); h.unshift(meta); S.set('history', h.slice(0, 60)); bump();
   const isFav = S.get('fav', []).some(v => v.id === id);
   app().innerHTML = `<div class="main"><div class="top"><a class="btn g s" href="#/home">‹</a><h1 style="flex:1">${esc(meta.title)}</h1><button class="btn g s" id="fav">${isFav ? '★ В избранном' : '☆ В избранное'}</button></div>

@@ -8,3 +8,8 @@ window.addEventListener('message', e => {
 });
 document.documentElement.dataset.linguaExt = '1';
 push(); window.addEventListener('load', push);
+// Generic fetch for YouTube channel pages/feeds and podcast RSS (sites without CORS)
+window.addEventListener('message', e => {
+  if (e.source !== window || !e.data || e.data.source !== 'lingua-req-fetch') return;
+  chrome.runtime.sendMessage({ type: 'fetch', url: e.data.url }, r => window.postMessage({ source: 'lingua-ext-fetch', rid: e.data.rid, text: r && r.text }, location.origin));
+});

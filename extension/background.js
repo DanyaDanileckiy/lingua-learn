@@ -42,3 +42,12 @@ async function getTranscript(id) {
 chrome.runtime.onMessage.addListener((msg, _s, send) => {
   if (msg.type === 'transcript') { getTranscript(msg.id).then(cues => send({ cues })); return true; }
 });
+chrome.runtime.onMessage.addListener((msg, _s, send) => {
+  if (msg.type !== 'fetch') return;
+  let u; try { u = new URL(msg.url); } catch (e) { send({}); return; }
+  const yt = /(^|\.)youtube\.com$/.test(u.hostname) && (u.pathname.startsWith('/feeds/') || u.pathname.startsWith('/@') || u.pathname.startsWith('/channel/'));
+  const rss = /^https:$/.test(u.protocol) && !yt && /rss|feed|xml|podcast/i.test(u.href);
+  if (!yt && !rss) { send({}); return; }
+  fetch(u.href, { credentials: 'omit' }).then(r => r.text()).then(text => send({ text: text.slice(0, 5e6) })).catch(() => send({}));
+  return true;
+});
