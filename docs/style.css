@@ -73,3 +73,6 @@ input,textarea{unicode-bidi:plaintext}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:70;display:flex;align-items:flex-start;justify-content:center;padding-top:12vh}.mbox{background:#222;border:1px solid #333;border-radius:16px;padding:20px;width:min(620px,92vw)}.mbox h3{margin:0 0 6px;display:flex;justify-content:space-between}
 h2 span{display:flex;gap:10px;align-items:center}
 @media(max-width:700px){#side{width:44px}#app{margin-left:44px}.main{padding:12px}}
+.watch .pl{justify-content:center}.watch .pcol{flex:1 1 auto;max-width:calc((100vh - 80px) * 16 / 9);min-width:0}
+.watch .pwrap iframe,.watch #player{display:block;width:100%!important;height:auto!important;aspect-ratio:16/9}
+@media(max-width:900px){.watch .pcol{max-width:100%;width:100%}.main.watch{min-width:0;overflow-x:hidden}}
