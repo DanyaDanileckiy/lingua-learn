@@ -3,6 +3,18 @@
 "updated": "2026-10-12",
 "channels": [
 {
+"id": "UCWpk9PSGHoJW1hZT4egxTNQ",
+"name": "Ruhi Cenet Documentaries",
+"handle": "@ruhicenetdocs",
+"subs": "19.7M",
+"subsN": 19700000,
+"videos": "421",
+"videosN": 421,
+"cat": "urbex",
+"source": "seed",
+"avatar": "data/avatars/UCWpk9PSGHoJW1hZT4egxTNQ.jpg"
+},
+{
 "id": "UCUcfej7lPDoeqTlferD2mcw",
 "name": "Czn Burak",
 "handle": "@CznBurak",
@@ -15,6 +27,18 @@
 "avatar": "data/avatars/UCUcfej7lPDoeqTlferD2mcw.jpg"
 },
 {
+"id": "UCG0HA4uyuuzPzeq_US_ywVg",
+"name": "Enes Batur S",
+"handle": "@newdaynewgame",
+"subs": "17.8M",
+"subsN": 17800000,
+"videos": "1.9K",
+"videosN": 1900,
+"cat": "entertainment",
+"source": "seed",
+"avatar": "data/avatars/UCG0HA4uyuuzPzeq_US_ywVg.jpg"
+},
+{
 "id": "UCIXYyHANDvinQMIdauzSNJA",
 "name": "Orkun Işıtmak",
 "handle": "@orkunisitmak",
@@ -25,6 +49,18 @@
 "cat": "vlog",
 "source": "seed",
 "avatar": "data/avatars/UCIXYyHANDvinQMIdauzSNJA.jpg"
+},
+{
+"id": "UC2XbMXD6jSrixkpgs7vHFUA",
+"name": "Minecraft Parodies",
+"handle": "@MinecraftParodileri",
+"subs": "7.67M",
+"subsN": 7670000,
+"videos": "2.4K",
+"videosN": 2400,
+"cat": "minecraft",
+"source": "seed",
+"avatar": "data/avatars/UC2XbMXD6jSrixkpgs7vHFUA.jpg"
 },
 {
 "id": "UCv6jcPwFujuTIwFQ11jt1Yw",
@@ -63,6 +99,18 @@
 "avatar": "data/avatars/UCQpeujIamj2ZOKXZnrxTRhA.jpg"
 },
 {
+"id": "UCm3vDH7Uvz_qwql5Qih4yGw",
+"name": "tonguç AKADEMİ",
+"handle": "@tongucakademi",
+"subs": "3.94M",
+"subsN": 3940000,
+"videos": "2.4K",
+"videosN": 2400,
+"cat": "education",
+"source": "seed",
+"avatar": "data/avatars/UCm3vDH7Uvz_qwql5Qih4yGw.jpg"
+},
+{
 "id": "UC51-ljNFrvY5ZmV0C_61XcA",
 "name": "Elraenn",
 "handle": "@Elraenn",
@@ -87,6 +135,18 @@
 "avatar": "data/avatars/UCTpnOrDAyEUsCCfC0AE6zDw.jpg"
 },
 {
+"id": "UC26buublzO30XpR-KP2TfAw",
+"name": "webtekno",
+"handle": "@webteknotv",
+"subs": "3.21M",
+"subsN": 3210000,
+"videos": "2.5K",
+"videosN": 2500,
+"cat": "tech",
+"source": "seed",
+"avatar": "data/avatars/UC26buublzO30XpR-KP2TfAw.jpg"
+},
+{
 "id": "UC6OI7Crv96jgra5pwJNDFRQ",
 "name": "Sezen Aksu",
 "handle": "@sezenaksu",
@@ -97,6 +157,18 @@
 "cat": "music",
 "source": "seed",
 "avatar": "data/avatars/UC6OI7Crv96jgra5pwJNDFRQ.jpg"
+},
+{
+"id": "UCgqlho3-8a6FmDqQm7Q6gJw",
+"name": "Fenerbahce",
+"handle": "@fenerbahce",
+"subs": "3.18M",
+"subsN": 3180000,
+"videos": "3.1K",
+"videosN": 3100,
+"cat": "sport",
+"source": "seed",
+"avatar": "data/avatars/UCgqlho3-8a6FmDqQm7Q6gJw.jpg"
 },
 {
 "id": "UCnxZBLfmnZwjh8vSg6Kt-Dg",
@@ -123,18 +195,6 @@
 "avatar": "data/avatars/UCJXKKGzjjqnHAEkJsdC7ZKw.jpg"
 },
 {
-"id": "UC7DDcxd92wR0LzlMKIcHDAA",
-"name": "Show Ana Haber",
-"handle": "@showanahaber",
-"subs": "2.92M",
-"subsN": 2920000,
-"videos": "79K",
-"videosN": 79000,
-"cat": "news",
-"source": "search:haberler",
-"avatar": "data/avatars/UC7DDcxd92wR0LzlMKIcHDAA.jpg"
-},
-{
 "id": "UCO3MaQR-Vh6cgBZRlD44jWg",
 "name": "Refika'nın Mutfağı",
 "handle": "@refikaninmutfagi",
@@ -147,16 +207,76 @@
 "avatar": "data/avatars/UCO3MaQR-Vh6cgBZRlD44jWg.jpg"
 },
 {
-"id": "UClP3FueJeQ9wrMqiEDxJkDg",
-"name": "Oyun Rotası",
-"handle": "@OYUNROTASI",
-"subs": "2.32M",
-"subsN": 2320000,
-"videos": "4.1K",
-"videosN": 4100,
+"id": "UCOulx_rep5O4i9y6AyDqVvw",
+"name": "SÖZCÜ Televizyonu",
+"handle": "@Sozcutelevizyonu",
+"subs": "2.31M",
+"subsN": 2310000,
+"videos": "74K",
+"videosN": 74000,
+"cat": "news",
+"source": "seed",
+"avatar": "data/avatars/UCOulx_rep5O4i9y6AyDqVvw.jpg"
+},
+{
+"id": "UCzNu79N8Lq1wUY52MkhWKSA",
+"name": "ShiftDelete.Net",
+"handle": "@ShiftDeleteNet",
+"subs": "2.26M",
+"subsN": 2260000,
+"videos": "10K",
+"videosN": 10000,
+"cat": "tech",
+"source": "seed",
+"avatar": "data/avatars/UCzNu79N8Lq1wUY52MkhWKSA.jpg"
+},
+{
+"id": "UCdVBWUBCuREx1Q2Ikw9R8Mw",
+"name": "TRT Belgesel",
+"handle": "@trtbelgesel",
+"subs": "1.99M",
+"subsN": 1990000,
+"videos": "4.5K",
+"videosN": 4500,
+"cat": "education",
+"source": "seed",
+"avatar": "data/avatars/UCdVBWUBCuREx1Q2Ikw9R8Mw.jpg"
+},
+{
+"id": "UCkwHQ7DWv9aqEtvAOSO74dQ",
+"name": "Cüneyt Özdemir",
+"handle": "@cuneytozdemir",
+"subs": "1.78M",
+"subsN": 1780000,
+"videos": "10K",
+"videosN": 10000,
+"cat": "interview",
+"source": "seed",
+"avatar": "data/avatars/UCkwHQ7DWv9aqEtvAOSO74dQ.jpg"
+},
+{
+"id": "UCdS7OE5qbJQc7AG4SwlTzKg",
+"name": "Fatih Altaylı",
+"handle": "@fatihaltayli",
+"subs": "1.74M",
+"subsN": 1740000,
+"videos": "1.4K",
+"videosN": 1400,
+"cat": "interview",
+"source": "seed",
+"avatar": "data/avatars/UCdS7OE5qbJQc7AG4SwlTzKg.jpg"
+},
+{
+"id": "UC1WPpGXSgMlKBJx9u8ovXxA",
+"name": "Unlostv",
+"handle": "@unlosttv",
+"subs": "1.56M",
+"subsN": 1560000,
+"videos": "263",
+"videosN": 263,
 "cat": "games",
-"source": "search:oyun türkçe",
-"avatar": "data/avatars/UClP3FueJeQ9wrMqiEDxJkDg.jpg"
+"source": "seed",
+"avatar": "data/avatars/UC1WPpGXSgMlKBJx9u8ovXxA.jpg"
 },
 {
 "id": "UC6AdnJAlvHwlWKGC40-nVUg",
@@ -171,6 +291,18 @@
 "avatar": "data/avatars/UC6AdnJAlvHwlWKGC40-nVUg.jpg"
 },
 {
+"id": "UCJ5KzVnmaIIVyLQUCRii2uw",
+"name": "Arda'nın Mutfağı",
+"handle": "@ArdaninMutfagi",
+"subs": "1.04M",
+"subsN": 1040000,
+"videos": "382",
+"videosN": 382,
+"cat": "food",
+"source": "seed",
+"avatar": "data/avatars/UCJ5KzVnmaIIVyLQUCRii2uw.jpg"
+},
+{
 "id": "UC9YPf9TUU4B6VCvvTyJyJ5g",
 "name": "Prof. Dr. Yavuz Yörükoğlu",
 "handle": "@Prof.Dr.YavuzYörükoğlu",
@@ -181,6 +313,18 @@
 "cat": "health",
 "source": "search:sağlık doktoru",
 "avatar": "data/avatars/UC9YPf9TUU4B6VCvvTyJyJ5g.jpg"
+},
+{
+"id": "UCFWOCsO264XTkBYc3UCvnMA",
+"name": "mabelmatiz",
+"handle": "@mabelmatiz",
+"subs": "941K",
+"subsN": 941000,
+"videos": "227",
+"videosN": 227,
+"cat": "music",
+"source": "seed",
+"avatar": "data/avatars/UCFWOCsO264XTkBYc3UCvnMA.jpg"
 },
 {
 "id": "UC9TDTjbOjFB9jADmPhSAPsw",
@@ -195,52 +339,28 @@
 "avatar": "data/avatars/UC9TDTjbOjFB9jADmPhSAPsw.jpg"
 },
 {
-"id": "UCmlScqxImnMFT8YPiPv3p-w",
-"name": "Nur Özkurt",
-"handle": "@NurOzkurt",
-"subs": "672K",
-"subsN": 672000,
-"videos": "1.4K",
-"videosN": 1400,
-"cat": "urbex",
-"source": "search:paranormal türkçe",
-"avatar": "data/avatars/UCmlScqxImnMFT8YPiPv3p-w.jpg"
-},
-{
-"id": "UCIvykQC_8j2-u2D6A_c1K9w",
-"name": "Tarih Obası",
-"handle": "@Tarih_Obası",
-"subs": "581K",
-"subsN": 581000,
-"videos": "1.4K",
-"videosN": 1400,
-"cat": "history",
-"source": "search:tarih",
-"avatar": "data/avatars/UCIvykQC_8j2-u2D6A_c1K9w.jpg"
-},
-{
-"id": "UCVoNfzLtczc_TV8-xKjcmKg",
-"name": "Türkiye Futbol Federasyonu",
-"handle": "@TFF",
-"subs": "526K",
-"subsN": 526000,
-"videos": "2.8K",
-"videosN": 2800,
-"cat": "sport",
-"source": "search:futbol sporu",
-"avatar": "data/avatars/UCVoNfzLtczc_TV8-xKjcmKg.jpg"
-},
-{
-"id": "UCdNF8Mh7F69h595BpVMPFOA",
-"name": "Enes Özen",
-"handle": "@EnesÖzen",
-"subs": "363K",
-"subsN": 363000,
+"id": "UCFK97P1mRAY9tQ2PUDjubEA",
+"name": "wtcN",
+"handle": "@wtcNFerit",
+"subs": "614K",
+"subsN": 614000,
 "videos": "1.7K",
 "videosN": 1700,
-"cat": "tech",
-"source": "search:teknoloji incelemeleri",
-"avatar": "data/avatars/UCdNF8Mh7F69h595BpVMPFOA.jpg"
+"cat": "games",
+"source": "seed",
+"avatar": "data/avatars/UCFK97P1mRAY9tQ2PUDjubEA.jpg"
+},
+{
+"id": "UCulhl59jt6JWPb2Se7HsmUg",
+"name": "Pepee",
+"handle": "@pepeedunyasi",
+"subs": "575K",
+"subsN": 575000,
+"videos": "1.2K",
+"videosN": 1200,
+"cat": "animation",
+"source": "seed",
+"avatar": "data/avatars/UCulhl59jt6JWPb2Se7HsmUg.jpg"
 },
 {
 "id": "UCZJnqMUewKd2OdHOJmOKGgQ",
@@ -267,28 +387,28 @@
 "avatar": "data/avatars/UCq2CcdNJ4wu9PmA9QLViTZw.jpg"
 },
 {
-"id": "UCMnQIht9Hk5RkDIzvN1j9uw",
-"name": "Murat Evegü",
-"handle": "@MuratEvegü",
-"subs": "288K",
-"subsN": 288000,
-"videos": "342",
-"videosN": 342,
-"cat": "urbex",
-"source": "search:paranormal türkçe",
-"avatar": "data/avatars/UCMnQIht9Hk5RkDIzvN1j9uw.jpg"
+"id": "UCslWm4Vv2pXozjf1-uyqNzw",
+"name": "İlber Ortaylı",
+"handle": "@IlberOrtaylresmi",
+"subs": "249K",
+"subsN": 249000,
+"videos": "74",
+"videosN": 74,
+"cat": "history",
+"source": "seed",
+"avatar": "data/avatars/UCslWm4Vv2pXozjf1-uyqNzw.jpg"
 },
 {
-"id": "UCJ9f0193Mp6NcqyyodE0CLg",
-"name": "Bizim Okul Eğitim Kanalı",
-"handle": "@BizimOkul",
-"subs": "183K",
-"subsN": 183000,
-"videos": "3K",
-"videosN": 3000,
-"cat": "education",
-"source": "search:eğitim dersleri",
-"avatar": "data/avatars/UCJ9f0193Mp6NcqyyodE0CLg.jpg"
+"id": "UCxu1Oq3ywqOedOq-Mw_VLUA",
+"name": "Fırat Özmen",
+"handle": "@firatozmen.",
+"subs": "227K",
+"subsN": 227000,
+"videos": "68",
+"videosN": 68,
+"cat": "urbex",
+"source": "search:terk edilmiş yerler",
+"avatar": "data/avatars/UCxu1Oq3ywqOedOq-Mw_VLUA.jpg"
 },
 {
 "id": "UCyDWbCBzrXAMwLbiPXR_8ww",
@@ -303,28 +423,16 @@
 "avatar": "data/avatars/UCyDWbCBzrXAMwLbiPXR_8ww.jpg"
 },
 {
-"id": "UC9DkLqZvawpkU68oH9L3EZA",
-"name": "Teknoblog",
-"handle": "@teknoblog",
-"subs": "82.2K",
-"subsN": 82200,
-"videos": "1.8K",
-"videosN": 1800,
-"cat": "tech",
-"source": "search:teknoloji incelemeleri",
-"avatar": "data/avatars/UC9DkLqZvawpkU68oH9L3EZA.jpg"
-},
-{
-"id": "UCnYJ_1bXTx9aSc4tr_c4Gyw",
-"name": "Latif Öz sanat eğitim",
-"handle": "@LatifÖzsanateğitim",
-"subs": "75K",
-"subsN": 75000,
-"videos": "1.3K",
-"videosN": 1300,
-"cat": "education",
-"source": "search:eğitim dersleri",
-"avatar": "data/avatars/UCnYJ_1bXTx9aSc4tr_c4Gyw.jpg"
+"id": "UCI64vXCoqHH6lXTGnE_kmEg",
+"name": "Benze พริกไทย",
+"handle": "@Benzeพริกไทย",
+"subs": "115K",
+"subsN": 115000,
+"videos": "492",
+"videosN": 492,
+"cat": "minecraft",
+"source": "seed",
+"avatar": "data/avatars/UCI64vXCoqHH6lXTGnE_kmEg.jpg"
 },
 {
 "id": "UCLPAPjaWibVsIM85XWJMiXA",
