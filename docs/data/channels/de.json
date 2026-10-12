@@ -126,8 +126,8 @@
 "id": "UCwRH985XgMYXQ6NxXDo8npw",
 "name": "Dinge Erklärt – Kurzgesagt",
 "handle": "@KurzgesagtDE",
-"subs": "2.67M",
-"subsN": 2670000,
+"subs": "2.68M",
+"subsN": 2680000,
 "videos": "189",
 "videosN": 189,
 "cat": "animation",
@@ -150,8 +150,8 @@
 "id": "UCKGMHVipEvuZudhHD05FOYA",
 "name": "Simplicissimus",
 "handle": "@Simplicissimus",
-"subs": "2.58M",
-"subsN": 2580000,
+"subs": "2.59M",
+"subsN": 2590000,
 "videos": "520",
 "videosN": 520,
 "cat": "education",
@@ -279,6 +279,18 @@
 "avatar": "data/avatars/UCA3mpqm67CpJ13YfA8qAnow.jpg"
 },
 {
+"id": "UCjkSqbf8E4MybdYmfhlW10A",
+"name": "{ungeskriptet} by Ben",
+"handle": "@ben_ungeskriptet",
+"subs": "1.3M",
+"subsN": 1300000,
+"videos": "2K",
+"videosN": 2000,
+"cat": "interview",
+"source": "seed",
+"avatar": "data/avatars/UCjkSqbf8E4MybdYmfhlW10A.jpg"
+},
+{
 "id": "UC173FCaSv6VvqDxuoinDr3g",
 "name": "Felixba",
 "handle": "@felixba",
@@ -303,16 +315,16 @@
 "avatar": "data/avatars/UCaH02uiAaEbNmNjEfN0NT_w.jpg"
 },
 {
-"id": "UCT92wfMNKVmyUET93bPwXFg",
-"name": "PJ Adventure - Paul Schridde",
-"handle": "@pjadventure-paulschridde",
-"subs": "660K",
-"subsN": 660000,
-"videos": "587",
-"videosN": 587,
-"cat": "urbex",
-"source": "search:lost places deutschland",
-"avatar": "data/avatars/UCT92wfMNKVmyUET93bPwXFg.jpg"
+"id": "UCv1WDP5EiipMQ__C4Cg6aow",
+"name": "Jung & Naiv",
+"handle": "@tilojung",
+"subs": "621K",
+"subsN": 621000,
+"videos": "4.5K",
+"videosN": 4500,
+"cat": "interview",
+"source": "seed",
+"avatar": "data/avatars/UCv1WDP5EiipMQ__C4Cg6aow.jpg"
 },
 {
 "id": "UC2kuG2O3pr60xmclc2c6b4g",
@@ -325,6 +337,30 @@
 "cat": "travel",
 "source": "search:reisen",
 "avatar": "data/avatars/UC2kuG2O3pr60xmclc2c6b4g.jpg"
+},
+{
+"id": "UCUEtFt2xPo-4OWCRTLrzOkQ",
+"name": "Dennis Koenig",
+"handle": "@DennisKoenigg",
+"subs": "451K",
+"subsN": 451000,
+"videos": "780",
+"videosN": 780,
+"cat": "urbex",
+"source": "search:lost places deutschland",
+"avatar": "data/avatars/UCUEtFt2xPo-4OWCRTLrzOkQ.jpg"
+},
+{
+"id": "UCYKZObv8VH_Z2xXpftQXw3w",
+"name": "Exploring Abandoned Mines and Unusual Places",
+"handle": "@AbandonedMines11",
+"subs": "434K",
+"subsN": 434000,
+"videos": "803",
+"videosN": 803,
+"cat": "urbex",
+"source": "seed",
+"avatar": "data/avatars/UCYKZObv8VH_Z2xXpftQXw3w.jpg"
 },
 {
 "id": "UCesjlAoEgN_Sz_cKTvKEmmw",
@@ -387,6 +423,18 @@
 "avatar": "data/avatars/UC8T5gQ4U4GbI2h8kYCkEcvg.jpg"
 },
 {
+"id": "UCRzFjvhfjG4EPtnPXGCfKsw",
+"name": "doc felix",
+"handle": "@docfelix",
+"subs": "291K",
+"subsN": 291000,
+"videos": "1.3K",
+"videosN": 1300,
+"cat": "health",
+"source": "seed",
+"avatar": "data/avatars/UCRzFjvhfjG4EPtnPXGCfKsw.jpg"
+},
+{
 "id": "UCLGY6_j7kZfA1dmmjR1J_7w",
 "name": "The Morpheus Tutorials",
 "handle": "@TheMorpheusTutorials",
@@ -409,6 +457,18 @@
 "cat": "music",
 "source": "search:Musik",
 "avatar": "data/avatars/UCALMg3QaZvaskh2L2ISK_LQ.jpg"
+},
+{
+"id": "UClimlKiB3xLJlpP1BbzfXSA",
+"name": "psychologeek",
+"handle": "@psychologeek_funk",
+"subs": "183K",
+"subsN": 183000,
+"videos": "157",
+"videosN": 157,
+"cat": "psychology",
+"source": "seed",
+"avatar": "data/avatars/UClimlKiB3xLJlpP1BbzfXSA.jpg"
 },
 {
 "id": "UCC1MMvvHuJHvxKGiUCRyFvA",
