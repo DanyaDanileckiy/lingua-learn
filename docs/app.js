@@ -223,10 +223,14 @@ const IT_CLIENTS = [
   { clientName: 'IOS', clientVersion: '20.10.4', deviceModel: 'iPhone16,2', hl: 'en' },
   { clientName: 'TVHTML5_SIMPLY_EMBEDDED_PLAYER', clientVersion: '2.0', hl: 'en' }
 ];
+const deadProxy = {};
 const withTimeout = (p, ms = 9000) => Promise.race([p, new Promise((_, no) => setTimeout(() => no(new Error('timeout')), ms))]);
 async function tryFetch(url, opts, direct = true) {
-  const urls = (direct ? [url] : []).concat(PROXIES.map(f => f(url)));
-  for (const u of urls) { try { const r = await withTimeout(fetch(u, opts)); if (r.ok) { const t = await r.text(); if (t && t.length > 20) return t; } } catch (e) { } }
+  const urls = (direct ? [[-1, url]] : []).concat(PROXIES.map((f, i) => [i, f(url)]).filter(([i]) => (deadProxy[i] || 0) < 2));
+  for (const [i, u] of urls) {
+    try { const r = await withTimeout(fetch(u, opts), 7000); if (r.ok) { const t = await r.text(); if (t && t.length > 20) { deadProxy[i] = 0; return t; } } else if (i >= 0) deadProxy[i] = (deadProxy[i] || 0) + 1; }
+    catch (e) { if (i >= 0) deadProxy[i] = (deadProxy[i] || 0) + 1; }
+  }
   return null;
 }
 function parseTimed(t) {
