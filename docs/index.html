@@ -1,0 +1,10 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lingua — учим языки по видео</title><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="logo">🎬 Lingua</div><nav><button data-tab="vocab" class="active">Словарь</button><button data-tab="cards">Карточки</button><button data-tab="video">Видео</button><button data-tab="import">Импорт</button></nav></header>
+<main>
+<section id="vocab" class="tab active"><div class="row"><input id="q" placeholder="Поиск слова или перевода…"><span id="stats"></span></div><div id="wlist" class="grid"></div></section>
+<section id="cards" class="tab"><div id="cardbox"></div></section>
+<section id="video" class="tab"><div class="row"><input id="vurl" placeholder="Ссылка на YouTube видео"><button id="vload" class="pri">Открыть</button></div>
+<div class="vwrap"><div id="player"></div><div id="transcript" class="panel"><p class="muted">Транскрипт появится здесь.</p></div></div>
+<details><summary>Вставить субтитры вручную (SRT/VTT)</summary><textarea id="subs" rows="6" placeholder="Вставьте содержимое .srt или .vtt"></textarea><button id="subsgo" class="pri">Загрузить</button></details></section>
+<section id="import" class="tab"><div class="panel"><h2>Импорт слов</h2><p>Выберите файл <code>lingua-words.json</code>, экспортированный из расширения.</p><input type="file" id="file" accept=".json"><p><button id="export" class="sec">Экспорт словаря</button> <button id="clear" class="danger">Очистить всё</button></p><p id="imsg"></p></div></section>
+</main><div id="toast"></div><script src="app.js"></script></body></html>

@@ -1,0 +1,7 @@
+#lingua-overlay{position:absolute;left:50%;bottom:70px;transform:translateX(-50%);z-index:60;max-width:80%;text-align:center;font-family:Arial,sans-serif;pointer-events:auto}
+#lingua-overlay .lg-orig,#lingua-overlay .lg-tr{background:rgba(0,0,0,.75);color:#fff;padding:4px 10px;border-radius:6px;margin:3px auto;display:inline-block}
+#lingua-overlay .lg-orig{font-size:22px}#lingua-overlay .lg-tr{font-size:18px;color:#ffd666;display:table;margin:3px auto}
+.lg-w{cursor:pointer;border-radius:3px}.lg-w:hover{background:#6c5ce7}
+#lingua-pop{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:#fff;color:#222;padding:10px 14px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.4);min-width:180px;font-size:16px}
+#lingua-pop button{margin-top:6px;background:#6c5ce7;color:#fff;border:0;border-radius:6px;padding:5px 12px;cursor:pointer}
+.ytp-caption-window-container{opacity:0}
