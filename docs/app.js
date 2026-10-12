@@ -136,16 +136,19 @@ function bindPodcasts(root) {
   $$('.ppre', root).forEach(b => b.onclick = () => { $('.purl', root).value = b.dataset.u; $('.padd', root).click(); });
   $$('.padd', root).forEach(b => b.onclick = async () => {
     const url = $('.purl', root).value.trim(); if (!url) return; b.textContent = 'Загрузка…';
-    if (S.get('podcasts', []).some(p => p.url === url)) { toast('Уже добавлен'); b.textContent = 'Добавить подкаст'; return; }
-    try {
-      const xml = new DOMParser().parseFromString(await extFetch(url) || await fetchText(url), 'text/xml'); const ch = xml.querySelector('channel'); if (!ch) throw 0;
-      const img = ch.querySelector('image url') || [...ch.children].find(n => n.localName === 'image' && n.getAttribute('href'));
-      const p = { url, title: ch.querySelector('title')?.textContent || url, image: img ? (img.textContent || img.getAttribute('href')) : '', episodes: [...xml.querySelectorAll('item')].slice(0, 50).map(it => ({ title: it.querySelector('title')?.textContent || '', audio: it.querySelector('enclosure')?.getAttribute('url') || '', date: it.querySelector('pubDate')?.textContent || '' })) };
-      const ps = S.get('podcasts', []); ps.push(p); S.set('podcasts', ps); toast('Подкаст добавлен'); route();
-    } catch (e) { toast('Не удалось загрузить RSS'); b.textContent = 'Добавить подкаст'; }
+    const r = await addPodcastFeed(url); b.textContent = 'Добавить подкаст'; if (r) route();
   });
   $$('.pdel', root).forEach(b => b.onclick = e => { e.stopPropagation(); const ps = S.get('podcasts', []); ps.splice(+b.dataset.i, 1); S.set('podcasts', ps); route(); });
   $$('.pod', root).forEach(v => v.onclick = () => location.hash = '#/podcast/' + v.dataset.i);
+}
+async function addPodcastFeed(url, fallback = {}) {
+  if (S.get('podcasts', []).some(p => p.url === url)) { toast('Уже добавлен'); return false; }
+  try {
+    const xml = new DOMParser().parseFromString(await extFetch(url) || await fetchText(url), 'text/xml'); const ch = xml.querySelector('channel'); if (!ch) throw 0;
+    const img = ch.querySelector('image url') || [...ch.children].find(n => n.localName === 'image' && n.getAttribute('href'));
+    const p = { url, title: ch.querySelector('title')?.textContent || fallback.title || url, image: fallback.image || (img ? (img.textContent || img.getAttribute('href')) : ''), episodes: [...xml.querySelectorAll('item')].slice(0, 50).map(it => ({ title: it.querySelector('title')?.textContent || '', audio: it.querySelector('enclosure')?.getAttribute('url') || '', date: it.querySelector('pubDate')?.textContent || '' })) };
+    const ps = S.get('podcasts', []); ps.push(p); S.set('podcasts', ps); toast('Подкаст добавлен'); return true;
+  } catch (e) { toast('Не удалось загрузить RSS'); return false; }
 }
 function podcastPage(i) {
   const p = S.get('podcasts', [])[i]; if (!p) return location.hash = '#/library/podcasts';
@@ -164,9 +167,9 @@ function library(tab = 'youtube') {
   else if (tab === 'fav') body = fav.length ? `<div class="vgrid">${fav.map(vcard).join('')}</div>` : empty('В избранном пока пусто. Нажмите ★ на странице видео.');
   else if (tab === 'history') body = hist.length ? `<div class="vgrid">${hist.map(vcard).join('')}</div>` : empty('История просмотров пуста.');
   else if (tab.startsWith('ch:')) body = `<div id="chv" class="muted">Загрузка видео канала…</div>`;
-  app().innerHTML = `<div class="main"><div class="top"><h1>Библиотека</h1><div class="tabs">${[['youtube', '▶ YouTube'], ['podcasts', '🎧 Подкасты'], ['sets', '📑 Наборы предложений'], ['movies', '🎬 Фильмы']].map(([k, l]) => `<a class="tab ${tab === k ? 'on' : ''}" href="#/library/${k}">${l}</a>`).join('')}</div><div class="sp"></div><input id="lq" placeholder="Поиск / Обзор" style="width:200px"></div>${body}</div>
+  app().innerHTML = `<div class="main"><div class="top"><h1>Библиотека</h1><div class="tabs">${[['youtube', '▶ YouTube'], ['podcasts', '🎧 Подкасты'], ['sets', '📑 Наборы предложений'], ['movies', '🎬 Фильмы']].map(([k, l]) => `<a class="tab ${tab === k ? 'on' : ''}" href="#/library/${k}">${l}</a>`).join('')}</div><div class="sp"></div><a class="btn s" href="#/catalog">+ Каталог каналов</a><input id="lq" placeholder="Поиск / Обзор" style="width:200px"></div>${body}</div>
   <div class="rp"><div class="box"><a class="rl" href="#/library/fav">⭐ Избранное <span class="muted" style="margin-left:auto">${fav.length}</span></a><a class="rl" href="#/library/history">🕘 История <span class="muted" style="margin-left:auto">${hist.length}</span></a></div>
-  <div class="box"><h3>Подписанные каналы</h3>${chs.map((c, i) => `<a class="rl" href="#/library/ch:${i}"><div class="av" style="background:hsl(${(c.title.charCodeAt(0) * 37) % 360},45%,40%)">${esc(c.title[0] || '?')}</div><span>${esc(c.title)}</span><button class="x chdel" data-i="${i}">✕</button></a>`).join('') || '<div class="muted small">Нет каналов</div>'}
+  <div class="box"><h3>Подписанные каналы <a class="more" href="#/catalog">Каталог ›</a></h3>${chs.map((c, i) => `<a class="rl" href="#/library/ch:${i}">${c.avatar ? `<img class="av" src="${esc(c.avatar)}" alt="">` : `<div class="av" style="background:hsl(${(c.title.charCodeAt(0) * 37) % 360},45%,40%)">${esc(c.title[0] || '?')}</div>`}<span>${esc(c.title)}</span><button class="x chdel" data-i="${i}">✕</button></a>`).join('') || '<div class="muted small">Нет каналов</div>'}
   <div style="display:flex;gap:6px;margin-top:10px"><input id="chin" placeholder="URL канала или ID (UC…)" style="flex:1;min-width:0"><button class="btn s" id="chadd">+</button></div></div></div>`;
   bindV(app()); if ($('#lp')) bindPodcasts($('#lp'));
   $('#lq').oninput = () => { const q = $('#lq').value.toLowerCase(); $$('.v').forEach(v => v.style.display = v.textContent.toLowerCase().includes(q) ? '' : 'none'); };
@@ -236,6 +239,63 @@ async function loadChannel(c) {
   el.className = 'vgrid'; el.innerHTML = vs.map(vcard).join(''); bindV(el);
   const known = S.get('vmeta', {}); vs.forEach(v => known[v.id] = v); S.set('vmeta', known);
 }
+/* ---------- CATALOG ---------- */
+const LEARN_LANGS = [['en', 'English'], ['es', 'Español'], ['de', 'Deutsch'], ['fr', 'Français'], ['it', 'Italiano'], ['pt', 'Português'], ['ja', '日本語'], ['ko', '한국어'], ['zh', '中文'], ['tr', 'Türkçe'], ['ru', 'Русский']];
+const CAT_LABELS = [['all', 'Все'], ['vlog', 'Влог'], ['animation', 'Анимация'], ['music', 'Музыка'], ['film', 'Кино и сериалы'], ['food', 'Еда'], ['travel', 'Путешествия'], ['tech', 'Технологии'], ['ai', 'ИИ'], ['science', 'Наука'], ['education', 'Образование'], ['psychology', 'Психология'], ['career', 'Карьера'], ['art', 'Искусство'], ['history', 'История'], ['sport', 'Спорт'], ['health', 'Здоровье'], ['news', 'Новости'], ['interview', 'Интервью'], ['lectures', 'Лекции'], ['entertainment', 'Развлечения'], ['games', 'Игры'], ['minecraft', 'Майнкрафт'], ['urbex', 'Заброшки / Паранормальное']];
+const catData = {}; let catState = { tab: 'yt', cat: 'all', q: '' };
+async function loadCatalog(lang) {
+  if (!catData[lang]) catData[lang] = (await (await fetch('data/channels/' + lang + '.json')).json()).channels;
+  if (!catData.pods) catData.pods = await (await fetch('data/podcasts.json')).json();
+  return catData[lang];
+}
+const ruNum = n => n >= 1e9 ? (n / 1e9).toFixed(1).replace(/\.0$/, '') + 'B' : n >= 1e6 ? (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M' : n >= 1e3 ? (n / 1e3).toFixed(1).replace(/\.0$/, '') + 'K' : String(n);
+async function catalog() {
+  const lang = S.get('learnLang', 'en');
+  app().innerHTML = `<div class="main cat"><div class="catsearch"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="7" stroke="#888" stroke-width="2" fill="none"/><path d="M16 16l5 5" stroke="#888" stroke-width="2"/></svg><input id="cq" placeholder="Поиск YouTube или подкастов" value="${esc(catState.q)}"><select id="clang" title="Изучаемый язык">${LEARN_LANGS.map(([v, l]) => `<option value="${v}" ${v === lang ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
+  <div class="cattabs"><button class="ctab ${catState.tab === 'yt' ? 'on' : ''}" data-t="yt">▶ YouTube</button><button class="ctab ${catState.tab === 'pod' ? 'on' : ''}" data-t="pod">🎧 Podcast</button></div>
+  <div class="catbody"><div class="catlist" id="cl"><div class="empty"><div class="spin"></div></div></div>${catState.tab === 'yt' ? `<div class="catcats" id="cc"></div>` : ''}</div></div>`;
+  $('#clang').onchange = () => { S.set('learnLang', $('#clang').value); catState.cat = 'all'; catalog(); };
+  $$('.ctab').forEach(b => b.onclick = () => { catState.tab = b.dataset.t; catalog(); });
+  $('#cq').oninput = () => { catState.q = $('#cq').value; renderCatList(); };
+  $('#cq').onkeydown = async e => {
+    if (e.key !== 'Enter' || catState.tab !== 'yt') return; const v = $('#cq').value.trim();
+    if (/youtube\.com|^@|^UC[\w-]{22}$/.test(v)) { toast('Ищем канал…'); const ch = await resolveChannel(v); if (!ch) return toast('Канал не найден'); toggleSub({ id: ch.id, name: ch.title }, true); renderCatList(); }
+  };
+  let chans; try { chans = await loadCatalog(lang); } catch (e) { $('#cl').innerHTML = empty('Не удалось загрузить каталог', '', false); return; }
+  if ($('#cc')) {
+    const counts = {}; chans.forEach(c => counts[c.cat] = (counts[c.cat] || 0) + 1);
+    $('#cc').innerHTML = CAT_LABELS.filter(([k]) => k === 'all' || counts[k]).map(([k, l]) => `<button class="ccat ${catState.cat === k ? 'on' : ''}" data-c="${k}">${l}<span>${k === 'all' ? chans.length : counts[k]}</span></button>`).join('');
+    $$('.ccat').forEach(b => b.onclick = () => { catState.cat = b.dataset.c; $$('.ccat').forEach(x => x.classList.toggle('on', x === b)); renderCatList(); });
+  }
+  renderCatList();
+}
+function isSub(id) { return S.get('channels', []).some(c => c.id === id); }
+function toggleSub(c, forceOn) {
+  let list = S.get('channels', []); const on = list.some(x => x.id === c.id);
+  if (on && !forceOn) { list = list.filter(x => x.id !== c.id); toast('Отписка: ' + c.name); }
+  else if (!on) { list.push({ id: c.id, title: c.name, avatar: c.avatar || '', subs: c.subsN || 0 }); toast('Подписка: ' + c.name); }
+  S.set('channels', list);
+}
+function renderCatList() {
+  const el = $('#cl'); if (!el) return; const lang = S.get('learnLang', 'en'), q = catState.q.toLowerCase();
+  if (catState.tab === 'pod') {
+    const pods = (catData.pods || {})[lang] || [], subs = S.get('podcasts', []);
+    const list = pods.filter(p => !q || (p.title + ' ' + p.author).toLowerCase().includes(q));
+    el.innerHTML = `<div class="cathead">Рекомендованные подкасты</div>` + (list.map(p => { const on = subs.some(x => x.url === p.feed); return `<div class="crow"><img class="cav sq" src="${esc(p.image)}" alt="" loading="lazy"><div class="cinfo"><b>${esc(p.title)}</b><span>${esc(p.author)} · ${esc(p.genre)}</span></div><button class="csub ${on ? 'on' : ''}" data-f="${esc(p.feed)}" title="${on ? 'Отписаться' : 'Подписаться'}">${on ? '✓' : '+'}</button></div>`; }).join('') || empty('Ничего не найдено', '', false));
+    $$('.csub', el).forEach(b => b.onclick = async () => {
+      const p = pods.find(x => x.feed === b.dataset.f);
+      if (b.classList.contains('on')) { S.set('podcasts', S.get('podcasts', []).filter(x => x.url !== p.feed)); toast('Отписка'); renderCatList(); return; }
+      b.textContent = '…'; await addPodcastFeed(p.feed, { title: p.title, image: p.image }); renderCatList();
+    });
+    return;
+  }
+  const chans = catData[lang] || [];
+  const list = chans.filter(c => (catState.cat === 'all' || c.cat === catState.cat) && (!q || (c.name + ' ' + c.handle).toLowerCase().includes(q)));
+  const label = (CAT_LABELS.find(([k]) => k === catState.cat) || [])[1];
+  el.innerHTML = `<div class="cathead">Рекомендованные каналы YouTube${catState.cat !== 'all' ? ' · ' + label : ''}</div>` + (list.map(c => { const on = isSub(c.id); return `<div class="crow ${on ? 'sel' : ''}"><img class="cav" src="${esc(c.avatar)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div class="cinfo"><b>${esc(c.name)}</b><span>${ruNum(c.subsN)} подписчиков&nbsp;&nbsp; ${c.videosN ? ruNum(c.videosN) + ' видео' : ''}</span></div><button class="csub ${on ? 'on' : ''}" data-id="${c.id}" title="${on ? 'Отписаться' : 'Подписаться'}">${on ? '✓' : '+'}</button></div>`; }).join('') || empty(q ? 'Ничего не найдено. Вставьте ссылку на канал или @handle и нажмите Enter.' : 'Нет каналов', '', false));
+  $$('.csub', el).forEach(b => b.onclick = () => { toggleSub(chans.find(c => c.id === b.dataset.id)); renderCatList(); });
+}
+
 /* ---------- PLAYER ---------- */
 let player, cues = [], curVid, ytReady = false, ytQ = [], hlTimer;
 window.onYouTubeIframeAPIReady = () => { ytReady = true; ytQ.forEach(f => f()); ytQ = []; };
@@ -582,10 +642,11 @@ window.addEventListener('message', e => { if (e.source === window && e.data && e
 function route() {
   const [r, a, b, c] = location.hash.replace(/^#\/?/, '').split('/');
   $('#pop').classList.add('hidden'); if (r !== 'watch' && player && player.destroy) { try { player.destroy(); } catch (e) { } player = null; }
-  $$('#side a[data-r]').forEach(x => x.classList.toggle('on', x.dataset.r === (r === 'watch' || r === 'podcast' ? 'library' : r === 'read' ? 'books' : r || 'home')));
+  $$('#side a[data-r]').forEach(x => x.classList.toggle('on', x.dataset.r === (r === 'watch' || r === 'podcast' || r === 'catalog' ? 'library' : r === 'read' ? 'books' : r || 'home')));
   window.scrollTo(0, 0);
   switch (r) {
     case 'library': return library(a ? decodeURIComponent(a) : 'youtube');
+    case 'catalog': return catalog();
     case 'watch': return watch(a, +b || 0);
     case 'podcast': return podcastPage(+a);
     case 'talk': return a != null && a !== '' ? chat(+a) : talk();

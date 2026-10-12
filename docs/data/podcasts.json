@@ -1,0 +1,794 @@
+{
+"en": [
+{
+"title": "Learn English | EnglishClass101.com",
+"author": "EnglishClass101.com",
+"feed": "https://www.englishclass101.com/wp-feed-audio-video.php",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts123/v4/6a/5d/ae/6a5dae07-1174-dfe1-62c5-aa4b2ff93366/mza_2679248944706651363.jpg/100x100bb.jpg",
+"genre": "Language Learning"
+},
+{
+"title": "Daily Easy English Expression Podcast",
+"author": "Coach Shane",
+"feed": "https://rss.libsyn.com/shows/54133/destinations/197908.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/1a/59/3f/1a593fb9-0a6a-1556-9e49-70de0189fa63/mza_1870991887510831346.jpg/100x100bb.jpg",
+"genre": "Language Learning"
+},
+{
+"title": "Slow English Podcast",
+"author": "Slow English Podcast With Emilie",
+"feed": "https://anchor.fm/s/101e4fb7c/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/e9/0d/57/e90d5779-b10c-842d-6266-1b3150018d03/mza_2730639504478693154.jpg/100x100bb.jpg",
+"genre": "Language Learning"
+},
+{
+"title": "Easy English: Learn English with everyday conversations",
+"author": "Isi & Mitch",
+"feed": "https://feeds.fireside.fm/easyenglish/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/8b/e4/21/8be421e6-2331-de70-e4a8-0a43f234b0a4/mza_17917379900531690977.jpg/100x100bb.jpg",
+"genre": "Language Learning"
+},
+{
+"title": "Learning English Conversations",
+"author": "BBC Radio",
+"feed": "https://podcasts.files.bbci.co.uk/p02pc9zn.rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/9d/9f/9a/9d9f9ac2-18ed-fef1-6b5a-2370cb2d2eca/mza_16678796634995991769.jpg/100x100bb.jpg",
+"genre": "Language Learning"
+},
+{
+"title": "American English Podcast",
+"author": "Shana Thompson",
+"feed": "https://rss.pdrl.fm/bce084/feeds.megaphone.fm/americanenglishpodcast",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/c1/b5/60/c1b560a1-585d-5f25-6ff5-195161e03f53/mza_8466093335227729312.jpg/100x100bb.jpg",
+"genre": "Language Learning"
+},
+{
+"title": "Real Life English with Camille",
+"author": "Learn English with Camille",
+"feed": "https://feed.podbean.com/reallifeenglishwithcamille/feed.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/3f/a5/04/3fa50488-e24a-7653-4d62-fb8af167fefb/mza_6109473880387472343.jpg/100x100bb.jpg",
+"genre": "Language Learning"
+},
+{
+"title": "RealLife English: Learn and Speak Confident, Natural English",
+"author": "RealLife English",
+"feed": "https://rss.libsyn.com/shows/41632/destinations/126390.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts112/v4/6a/16/96/6a16968c-e765-54f6-d222-ed5fbe16efdc/mza_17156835718007196421.png/100x100bb.jpg",
+"genre": "Language Learning"
+},
+{
+"title": "TED Talks Daily",
+"author": "TED",
+"feed": "https://feeds.acast.com/public/shows/67587e77c705e441797aff96",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/2e/cf/99/2ecf996f-71f7-604f-b0a0-43116b9d6619/mza_10257768296573848480.png/100x100bb.jpg",
+"genre": "Society & Culture"
+},
+{
+"title": "Ted Talks Fitness",
+"author": "Ted Gorman",
+"feed": "https://anchor.fm/s/58f48794/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts112/v4/bf/32/4e/bf324ecf-27e7-e2ec-26d2-07637fb21413/mza_6268883022662457373.jpg/100x100bb.jpg",
+"genre": "Health & Fitness"
+}
+],
+"es": [
+{
+"title": "Podcast para aprender español",
+"author": "Spanish with Vicente",
+"feed": "https://feeds.ivoox.com/feed_fg_f1781469_filtro_1.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/80/24/90/802490cf-a08d-41e1-f2e6-e9844a1e9ead/mza_1120123045095470155.jpg/100x100bb.jpg",
+"genre": "Aprendizaje de idiomas"
+},
+{
+"title": "Aprender francés con Parlez-vous Paris? (en español)",
+"author": "Français Facile - RFI",
+"feed": "https://apis.fle.rfi.fr/products/get_product/fle_getpodcast_by_nid?token_application=applepodcast_fle&program.entrepriseId=WBMZ25249-FLE-FR-20230622",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/8e/f1/40/8ef140f8-03e5-7de1-3cdc-9f17e934b6d2/mza_6159296322745398381.jpg/100x100bb.jpg",
+"genre": "Cultura y sociedad"
+},
+{
+"title": "Aprender español con la andaluza divertida",
+"author": "Vanesa Molina",
+"feed": "https://media.rss.com/educaryaprender/feed.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/5a/00/d4/5a00d48b-f1ae-944b-6462-ed28098dcdcf/mza_11042210105205897336.jpg/100x100bb.jpg",
+"genre": "Aprendizaje de idiomas"
+},
+{
+"title": "Smart Spanish for Business Success. El pódcast para aprender español de negocios.",
+"author": "Smart Spanish for Business Success",
+"feed": "https://anchor.fm/s/f4735ad8/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/9d/72/5a/9d725a89-502e-6b76-2247-9ee75e1e7632/mza_8758255876367043203.jpg/100x100bb.jpg",
+"genre": "Aprendizaje de idiomas"
+},
+{
+"title": "APRENDER ESPAÑOL CON NOTICIAS",
+"author": "Jose Faus",
+"feed": "https://anchor.fm/s/3b3c8bd4/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts114/v4/25/1b/26/251b26d3-dc5b-8c09-f5a9-6b4c86ed0b6e/mza_994803263360942526.jpg/100x100bb.jpg",
+"genre": "Aprendizaje de idiomas"
+},
+{
+"title": "Spanish Adventures: un podcast para aprender español",
+"author": "Andrea Castrillon",
+"feed": "https://anchor.fm/s/10868893c/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/af/03/b7/af03b728-3e6a-ebab-9163-6a44b5a0a327/mza_10922118894184405239.jpg/100x100bb.jpg",
+"genre": "Aprendizaje de idiomas"
+},
+{
+"title": "Curiosidades de la Historia National Geographic",
+"author": "National Geographic España",
+"feed": "https://feeds.ivoox.com/feed_fg_f1715166_filtro_1.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/c5/18/f5/c518f528-58a5-0fa1-eac6-88ea5e493e83/mza_5726812221270559590.jpg/100x100bb.jpg",
+"genre": "Historia"
+},
+{
+"title": "SER Historia",
+"author": "SER Podcast",
+"feed": "https://fapi-top.prisasd.com/api/v2/feed-rss/playser/ser-historia/itunestfp",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/fb/d5/90/fbd5905f-4170-1594-5d33-80b860ac8ac8/mza_17223974165789533875.jpeg/100x100bb.jpg",
+"genre": "Historia"
+},
+{
+"title": "La Historia de España",
+"author": "David Cot",
+"feed": "https://anchor.fm/s/ee089b7c/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts124/v4/56/bb/ee/56bbee90-5d0a-74d2-680a-45b3a5a31213/mza_7889201331237141787.jpg/100x100bb.jpg",
+"genre": "Historia"
+},
+{
+"title": "Relatos de la Historia",
+"author": "Marta Caniego",
+"feed": "https://feeds.ivoox.com/feed_fg_f12597222_filtro_1.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/e5/45/a1/e545a1b4-6aba-c4e2-503e-edef596fa58f/mza_15343446133279266392.jpg/100x100bb.jpg",
+"genre": "Historia"
+}
+],
+"de": [
+{
+"title": "Deutsch lernen durch Hören",
+"author": "www. einfachdeutschlernen.com",
+"feed": "https://anchor.fm/s/fee008e0/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/62/0c/b2/620cb265-ce5e-8ee6-58ed-92d136c3e2cf/mza_11700861982678335191.jpg/100x100bb.jpg",
+"genre": "Bildung"
+},
+{
+"title": "Easy German Dialogues - Deutsch lernen mit Dan",
+"author": "Daniel Augustin",
+"feed": "https://anchor.fm/s/1023f5270/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/c1/cd/d1/c1cdd1b6-04e6-15b7-a327-28e21470d970/mza_1026887783227514746.jpg/100x100bb.jpg",
+"genre": "Sprachen lernen"
+},
+{
+"title": "Nicos Weg – Deutschkurs A1 | Videos | DW Deutsch lernen",
+"author": "DW",
+"feed": "https://rss.dw.com/xml/DKpodcast_nicosweg_video_A1_de",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts112/v4/ae/45/34/ae453465-d9fe-0412-626e-5dded84619a5/mza_5404327108427138081.jpg/100x100bb.jpg",
+"genre": "Sprachen lernen"
+},
+{
+"title": "Langsam Gesprochene Nachrichten | Audios | DW Deutsch lernen",
+"author": "DW",
+"feed": "https://rss.dw.com/xml/DKpodcast_lgn_de",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/1e/df/06/1edf0665-4988-efe0-9d61-e63c758b9c6d/mza_15919451077030319178.jpg/100x100bb.jpg",
+"genre": "Sprachen lernen"
+},
+{
+"title": "Deutsche im Alltag – Alltagsdeutsch | Audios | DW Deutsch lernen",
+"author": "DW",
+"feed": "https://rss.dw.com/xml/DKpodcast_alltagsdeutsch_de",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/97/1a/1e/971a1ea0-8012-3424-426b-2cd681366548/mza_12101906685527459974.jpg/100x100bb.jpg",
+"genre": "Sprachen lernen"
+},
+{
+"title": "Deutschlernen mit Spaß",
+"author": "DAAF - Aprender Aleman",
+"feed": "https://anchor.fm/s/1eee9a80/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/bb/cc/3b/bbcc3b18-eed5-0480-7353-04b98d2922ca/mza_5988855103718939446.jpg/100x100bb.jpg",
+"genre": "Sprachen lernen"
+},
+{
+"title": "Nicos Weg – Deutschkurs B1 | Videos | DW Deutsch lernen",
+"author": "DW",
+"feed": "https://rss.dw.com/xml/DKpodcast_nicosweg_video_B1_de",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/3e/37/a5/3e37a557-a2f9-bbc1-9570-9fd173df150a/mza_12953244867164737432.jpg/100x100bb.jpg",
+"genre": "Sprachen lernen"
+},
+{
+"title": "Die Nachrichten",
+"author": "Deutschlandfunk",
+"feed": "https://www.deutschlandfunk.de/nachrichten-108.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/5e/ac/76/5eac766f-2230-383b-0e2d-038ea0ab779f/mza_17109931051476107979.jpg/100x100bb.jpg",
+"genre": "Nachrichten"
+},
+{
+"title": "F.A.Z. Frühdenker - Die Nachrichten am Morgen",
+"author": "Frankfurter Allgemeine Zeitung",
+"feed": "https://fazfruehdenker.podigee.io/feed/mp3",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts122/v4/e1/ca/82/e1ca8216-c1de-afa4-8d65-962c05d7dc8a/mza_1302525986315930402.png/100x100bb.jpg",
+"genre": "Nachrichten des Tages"
+},
+{
+"title": "tagesschau: Die 20 Uhr Nachrichten (Audio)",
+"author": "tagesschau",
+"feed": "https://www.tagesschau.de/multimedia/sendung/tagesschau_20_uhr/podcast-ts2000-audio-100~podcast.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/ec/df/07/ecdf075b-c158-adb3-b9d8-dc33a5518b01/mza_17864003101634814089.jpg/100x100bb.jpg",
+"genre": "Nachrichten des Tages"
+}
+],
+"fr": [
+{
+"title": "Histoires en français facile - Apprendre le français en douceur, une histoire à la fois",
+"author": "Bouchard Jimmy",
+"feed": "https://anchor.fm/s/1137b8450/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/82/38/2a/82382a35-d4ae-2e39-89c2-64831153f53d/mza_16649572318460371262.jpg/100x100bb.jpg",
+"genre": "Apprentissage des langues"
+},
+{
+"title": "Apprendre le Français avec La Marinière : Compréhension orale, grammaire, culture et société (A2–C1)",
+"author": "Coline - La Marinière School of French",
+"feed": "https://api.substack.com/feed/podcast/4303019.rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/0e/92/83/0e928348-8889-ea87-c3b4-c25418ab6f9d/mza_6708098414777813959.jpg/100x100bb.jpg",
+"genre": "Apprentissage des langues"
+},
+{
+"title": "Apprendre le Français with shay",
+"author": "CHAIMAA",
+"feed": "https://anchor.fm/s/51926f20/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts114/v4/09/2d/dc/092ddce1-8c3e-657b-798c-79dd046f1e0f/mza_17489155617715231627.jpg/100x100bb.jpg",
+"genre": "Apprentissage des langues"
+},
+{
+"title": "Une maison en France - Podcast pour apprendre le français",
+"author": "Jérôme Paul",
+"feed": "https://feed.ausha.co/5NZmZflgwmVd",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/2e/b5/10/2eb51064-753c-ccd1-3cef-c6385fa685fe/mza_8935082659152325499.jpeg/100x100bb.jpg",
+"genre": "Apprentissage des langues"
+},
+{
+"title": "Apprendre Français",
+"author": "Lilex UAZ",
+"feed": "https://anchor.fm/s/5bee9c28/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/3c/d4/38/3cd438df-eb0b-dec3-09e7-266b16ab0aac/mza_7803797095974948658.jpg/100x100bb.jpg",
+"genre": "Éducation"
+},
+{
+"title": "Stratégies Pour Apprendre Le Français",
+"author": "Cristina López",
+"feed": "https://anchor.fm/s/507064bc/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/b1/ca/c3/b1cac358-6ecb-a19b-2800-295e285a5d29/mza_17871156924173303946.jpg/100x100bb.jpg",
+"genre": "Apprentissage des langues"
+},
+{
+"title": "Secrets d'Histoire",
+"author": "Initial Studio / France Télévisions",
+"feed": "https://feeds.audiomeans.fr/feed/6054dcbc-e621-4922-9639-ce9dc00a8a93.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/61/3a/11/613a116d-d013-6f1d-97aa-8737fde2e65d/mza_679663832358408913.jpg/100x100bb.jpg",
+"genre": "Histoire"
+},
+{
+"title": "Entrez dans l'Histoire",
+"author": "RTL",
+"feed": "https://feeds.audiomeans.fr/feed/971b31f2-42d6-4d41-95ee-1c0554528483.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/08/ea/63/08ea63fe-95da-648c-bdcc-a5b8d194bd10/mza_634527514977132492.jpg/100x100bb.jpg",
+"genre": "Histoire"
+},
+{
+"title": "Au Cœur de l'Histoire",
+"author": "Europe 1",
+"feed": "https://feeds.audiomeans.fr/feed/7c44ef0d-1d1c-4230-9da1-b2e4f839108c.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/44/de/6e/44de6e25-53c3-5a25-0214-a6b7af672d2f/mza_12802615177183908746.jpg/100x100bb.jpg",
+"genre": "Histoire"
+},
+{
+"title": "Mythes et Légendes",
+"author": "Quelle Histoire",
+"feed": "https://feeds.acast.com/public/shows/ecc4ef0f-1ca8-4ca0-90f2-cce7084aff43",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/59/de/09/59de099c-5ae8-3924-6c68-b483ad0a2782/mza_3120011804163890397.jpeg/100x100bb.jpg",
+"genre": "Éducation"
+}
+],
+"it": [
+{
+"title": "Easy Italian: Learn Italian with real conversations | Imparare l'italiano con conversazioni reali",
+"author": "Matteo, Raffaele and the Easy Italian team",
+"feed": "https://feeds.fireside.fm/easyitalian/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/39/5d/5c/395d5c71-9301-c69a-e834-9d06652c60ea/mza_11255336885456062244.jpg/100x100bb.jpg",
+"genre": "Impara le lingue"
+},
+{
+"title": "Italiano con Amore",
+"author": "Eleonora Silanus",
+"feed": "https://anchor.fm/s/2fc9fd90/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts122/v4/da/4d/96/da4d965d-1d27-7123-2179-db0836d0974a/mza_1307743332820938740.jpg/100x100bb.jpg",
+"genre": "Impara le lingue"
+},
+{
+"title": "Rewind - Fatti di Storia",
+"author": "Factanza Media",
+"feed": "https://feeds.megaphone.fm/rewind",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/00/b8/af/00b8af50-04b4-b036-3422-84d7075ef8bc/mza_3632092467289119525.jpeg/100x100bb.jpg",
+"genre": "Storia"
+},
+{
+"title": "Curiosità della Storia",
+"author": "Storica National Geographic",
+"feed": "https://feeds.ivoox.com/feed_fg_f11813788_filtro_1.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/c1/39/79/c13979bb-7083-3a42-6308-8d287904d908/mza_15866785353297406923.jpg/100x100bb.jpg",
+"genre": "Storia"
+},
+{
+"title": "Corso di Storia e Letteratura",
+"author": "DianaP",
+"feed": "https://anchor.fm/s/4097b054/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/39/1f/0e/391f0ee8-7dde-7c0b-36b5-783b982e0e79/mza_15948908347210283010.jpg/100x100bb.jpg",
+"genre": "Corsi"
+},
+{
+"title": "La Storia - Novecento",
+"author": "Claudia Diletta Milioni Guerriero",
+"feed": "https://anchor.fm/s/12b453b8/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/8d/42/2c/8d422c65-0c44-86fd-1a85-2c32e97f2bac/mza_10428396466411053608.jpg/100x100bb.jpg",
+"genre": "Istruzione"
+},
+{
+"title": "BISTORY - Storie dalla Storia",
+"author": "Bistory",
+"feed": "https://www.spreaker.com/show/3032568/episodes/feed",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/68/a0/50/68a0507e-4e29-a7f9-3cbf-d6ef1823ad17/mza_4104227298328573688.jpg/100x100bb.jpg",
+"genre": "Storia"
+},
+{
+"title": "Storia in Podcast",
+"author": "Focus",
+"feed": "https://feeds.megaphone.fm/MONDADORI7805258396",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/e6/1e/93/e61e93d3-9d65-a212-5196-3b30edac81bd/mza_12104299540611644514.jpg/100x100bb.jpg",
+"genre": "Storia"
+},
+{
+"title": "Il podcast che racconta la storia in un modo diverso",
+"author": "Sabina Marineo",
+"feed": "https://feeds.soundcloud.com/users/soundcloud:users:255511609/sounds.rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/b4/38/0f/b4380fba-b8ba-7043-3e34-7aa35b8b05a9/mza_4902152119956124191.jpg/100x100bb.jpg",
+"genre": "Cultura e società"
+},
+{
+"title": "Il podcast di Alessandro Barbero: Lezioni e Conferenze di Storia",
+"author": "A cura di: Fabrizio Mele",
+"feed": "https://www.spreaker.com/show/4255213/episodes/feed",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/40/69/92/4069925f-f1c8-3187-f5ac-bb2b5474529c/mza_8226611620958075994.jpg/100x100bb.jpg",
+"genre": "Storia"
+}
+],
+"pt": [
+{
+"title": "Tudo bem? Vamos aprender português!",
+"author": "Natália Hickman",
+"feed": "https://anchor.fm/s/105350970/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/21/67/aa/2167aae9-4364-028c-8443-c18564331e4a/mza_2607074901353472045.jpg/100x100bb.jpg",
+"genre": "Aprenda um idioma"
+},
+{
+"title": "História FM",
+"author": "Prof. Dr. Icles Rodrigues",
+"feed": "https://anchor.fm/s/ac0f2b0/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/92/41/c1/9241c113-210d-6520-bb37-a834c3985d19/mza_8798065953921684826.jpg/100x100bb.jpg",
+"genre": "História"
+},
+{
+"title": "Historia",
+"author": "PAULO FEITOSA DE LIMA",
+"feed": "https://anchor.fm/s/672f6ff4/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/55/0a/43/550a43b0-7ff3-98ea-cc50-3078e486769b/mza_11638147744422464901.jpg/100x100bb.jpg",
+"genre": "História"
+},
+{
+"title": "Café Com História",
+"author": "Romário José",
+"feed": "https://anchor.fm/s/16cac52c/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts112/v4/08/7f/0c/087f0c1e-8a8b-3d04-a38d-52af918098f1/mza_14574268389429567184.jpg/100x100bb.jpg",
+"genre": "História"
+},
+{
+"title": "Escutando História",
+"author": "Escutando História",
+"feed": "https://anchor.fm/s/efccbec/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/59/7e/ec/597eecad-8848-3d20-2a9e-3dcff24325c6/mza_17384621701327651042.jpg/100x100bb.jpg",
+"genre": "História"
+},
+{
+"title": "Aventuras na História",
+"author": "Editora Perfil",
+"feed": "https://anchor.fm/s/3606026c/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts112/v4/65/8a/85/658a8585-f9e4-df5d-3d35-85aad43676da/mza_7664500745628580098.jpg/100x100bb.jpg",
+"genre": "História"
+},
+{
+"title": "História do Brasil",
+"author": "Professor Gustavo Blank",
+"feed": "https://anchor.fm/s/5d97be88/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/05/26/21/05262191-280e-522a-050e-cfecf12f34b6/mza_12124062470282920472.jpg/100x100bb.jpg",
+"genre": "História"
+},
+{
+"title": "Que História!",
+"author": "BBC Brasil",
+"feed": "https://podcasts.files.bbci.co.uk/p07r3r3t.rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/9e/51/ad/9e51ad8f-fd1d-5f1e-4a1f-83baacb84bce/mza_200124448957093627.jpg/100x100bb.jpg",
+"genre": "Documentário"
+},
+{
+"title": "Sinapse",
+"author": "Ciência Todo Dia",
+"feed": "https://anchor.fm/s/814b18c/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/2f/2b/82/2f2b8220-92eb-4c50-4718-108759a44f3d/mza_17340910036120784150.jpg/100x100bb.jpg",
+"genre": "Ciência"
+},
+{
+"title": "Ciência Sem Fim",
+"author": "Estúdios Flow",
+"feed": "https://anchor.fm/s/d3eb3f24/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/d5/6d/c6/d56dc646-2a8a-77c5-d593-cae6c1d1dd6a/mza_477667617773183888.png/100x100bb.jpg",
+"genre": "Ciência"
+}
+],
+"ja": [
+{
+"title": "Aya的日本語学習 Aya's 4-min Japanese (預告片/Trailer)",
+"author": "Aya",
+"feed": "https://anchor.fm/s/11237aa74/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/6a/64/3d/6a643dc9-51b6-77bb-db73-20bb2635b9b2/mza_16414760141217277410.jpg/100x100bb.jpg",
+"genre": "言語学習"
+},
+{
+"title": "日本語学習のコツを教えないポッドキャスト",
+"author": "UPD Japanese",
+"feed": "https://anchor.fm/s/af2d0050/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts112/v4/3d/0c/4a/3d0c4a75-8e34-8827-74b4-003261c9be28/mza_14634782443256716521.jpg/100x100bb.jpg",
+"genre": "言語学習"
+},
+{
+"title": "楽しく学ぶフランス語 | FRANCE 365：フランス最新情報・フランス語学習お役立ち情報",
+"author": "楽しく学ぶフランス語 – FRANCE 365：フランス最新情報・フランス語学習お役立ち情報",
+"feed": "https://info.ensemblefr.com/category/france365-podcast/feed",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/58/ea/2c/58ea2c4a-e33c-878c-2b10-6c0b707e0a20/mza_3861084903575892917.png/100x100bb.jpg",
+"genre": "言語学習"
+},
+{
+"title": "【英語学習】名作文学で学ぶ15分シャドーイング",
+"author": "名作文学で英語学習",
+"feed": "https://pub-6f3203a140244070853c966d0ebeb1d9.r2.dev/feed.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/d7/af/8b/d7af8bf1-3433-a057-165a-f2c3e5ba5a04/mza_12812376286648469636.png/100x100bb.jpg",
+"genre": "言語学習"
+},
+{
+"title": "A la Cafet' 旬のフランス・フランス語学習方法をご紹介",
+"author": "オンラインフランス語学校　アンサンブル アン フランセ",
+"feed": "https://alacafet.ensemblefr.com/category/feed",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/9b/69/bb/9b69bb81-03f6-84da-ca16-0e597b1a0e14/mza_15173148481650312052.jpg/100x100bb.jpg",
+"genre": "言語学習"
+},
+{
+"title": "共同通信Podcastーニュースの裏側も、多言語学習も、経済もー",
+"author": "共同通信社 KyodoNews(Japan News Agency)",
+"feed": "https://www.omnycontent.com/d/playlist/6c1d6f91-c940-481f-98bc-af8200beb4a9/b9715a87-f925-4804-a155-af8e003728dc/fc5cf3b3-7c9a-4f1f-97f9-af8e003728fd/podcast.rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/0c/02/11/0c0211bc-5aec-cecf-49a2-bc419b5abfce/mza_11685009861958746641.jpg/100x100bb.jpg",
+"genre": "ニュース解説"
+},
+{
+"title": "TBSラジオニュース",
+"author": "TBS RADIO",
+"feed": "https://feeds.megaphone.fm/TBS9658464326",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/45/f1/74/45f1740e-413b-827a-b79a-0a2ae3b7b15c/mza_5897362217621500248.jpg/100x100bb.jpg",
+"genre": "ニュース"
+},
+{
+"title": "NHKラジオニュース",
+"author": "NHK (Japan Broadcasting Corporation)",
+"feed": "https://www.nhk.or.jp/s-media/news/podcast/list/v1/all.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/14/3e/01/143e0148-1d4a-197e-8db6-7c28f22fb70a/mza_1995634670380288253.jpg/100x100bb.jpg",
+"genre": "ニュース"
+},
+{
+"title": "日経ビジネス　モーニングニュース",
+"author": "日経ビジネス",
+"feed": "https://feeds.megaphone.fm/NBP3303775005",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/0a/18/b1/0a18b146-a3fa-92c7-9eb1-c37ac35fa96d/mza_10965601974259432343.jpg/100x100bb.jpg",
+"genre": "ビジネス"
+},
+{
+"title": "日経ビジネス　ニュースの真相",
+"author": "日経ビジネス",
+"feed": "https://feeds.megaphone.fm/NBP8933008590",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/d2/31/3e/d2313eec-4e2c-7eb2-f824-72c2fe4cbb8e/mza_1573482040138931027.jpg/100x100bb.jpg",
+"genre": "マネージメント"
+}
+],
+"ko": [
+{
+"title": "한량교수의 슬기로운 유학준비 & 유학생활",
+"author": "한량교수",
+"feed": "https://anchor.fm/s/243903cc/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/88/99/49/889949dc-83f5-45cf-2722-c152cf34be57/mza_10716676454604988061.jpg/100x100bb.jpg",
+"genre": "교육"
+},
+{
+"title": "한국어 한 조각 Korean teacher A piece of Korean",
+"author": "Korean teacher 한국어 한 조각",
+"feed": "https://anchor.fm/s/4247182c/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/c7/36/15/c7361589-8d34-8bd9-38d1-c4ae9004ba69/mza_4835263897582859321.jpg/100x100bb.jpg",
+"genre": "언어 학습"
+},
+{
+"title": "LIKE KOREAN زبان کره ای",
+"author": "Korean Teacher",
+"feed": "https://anchor.fm/s/79b544f0/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/e1/e0/d1/e1e0d157-2b77-525c-6140-5f7e3c4a2a77/mza_9105461170250944921.jpg/100x100bb.jpg",
+"genre": "교육"
+},
+{
+"title": "Korean Study Cafe Podcast",
+"author": "Vanessa & Chris",
+"feed": "https://feeds.redcircle.com/c9262de7-9c96-4902-a028-0615426a8741",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/e5/02/66/e50266f2-3e1c-02e2-6c3a-992fafa1dcde/mza_816221848335236287.jpg/100x100bb.jpg",
+"genre": "언어 학습"
+},
+{
+"title": "코리아헤럴드 팟캐스트",
+"author": "The Korea Herald",
+"feed": "https://anchor.fm/s/a38cc384/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/f2/07/a2/f207a269-b78f-7f3c-a9a5-b37652cc4012/mza_11359686694821229289.jpeg/100x100bb.jpg",
+"genre": "뉴스"
+},
+{
+"title": "AI Polyglot 일본어 | 흘려듣기 Japanese",
+"author": "AI Polyglot",
+"feed": "https://podcast.aipolyglot.jp/aipolyglot-ko_ja/feed.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/48/33/a4/4833a4db-a331-bad0-d1d6-b6ff06332d2a/mza_11501070102769793534.png/100x100bb.jpg",
+"genre": "언어 학습"
+},
+{
+"title": "Let's Learn Korean with K-mama",
+"author": "K-mama",
+"feed": "https://anchor.fm/s/34c474d8/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts124/v4/11/9a/8a/119a8a8a-1b2d-39d0-327c-41651e8f28bc/mza_13529161226762944611.jpg/100x100bb.jpg",
+"genre": "언어 학습"
+},
+{
+"title": "일일 뉴스 요약",
+"author": "NiteNews",
+"feed": "https://nitenews.online/summary/ko/rss.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/3c/92/b3/3c92b351-a83a-5a17-9da1-97df4760da1f/mza_16794271356702451878.jpeg/100x100bb.jpg",
+"genre": "데일리 뉴스"
+},
+{
+"title": "CBS 아침뉴스 [뉴스쏙:속]",
+"author": "CBS",
+"feed": "https://www.omnycontent.com/d/playlist/53ac8cb6-b299-4f93-8280-af50012ddab0/047943e3-0c15-447b-a4a7-af56000e102d/d63a45b2-e3e3-4136-996c-af56000e103b/podcast.rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts112/v4/de/32/9b/de329bd0-9b06-ef7b-917c-7d059cacd2bc/mza_7195210376143007376.jpg/100x100bb.jpg",
+"genre": "데일리 뉴스"
+},
+{
+"title": "성지영의 뉴스 바사삭",
+"author": "MBC",
+"feed": "https://minicast.imbc.com/PodCast/pod.aspx?code=1006106100000100000",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/a9/c2/c7/a9c2c77b-4b3c-ef56-f563-57cd397cf497/mza_17950835322859839825.jpg/100x100bb.jpg",
+"genre": "뉴스"
+}
+],
+"zh": [
+{
+"title": "Taiwan Language Episode",
+"author": "Learning & Insights in Mandarin & Taiwanese | 說國語．講台語．學中文．觀點台灣",
+"feed": "https://feeds.soundon.fm/podcasts/bfdbabf7-530e-42d8-8a9c-234a417e9682.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/d1/58/c9/d158c9f0-c02a-cb03-38aa-09b452dada83/mza_16755619995551721081.jpeg/100x100bb.jpg",
+"genre": "語言學習"
+},
+{
+"title": "外國學生講中文",
+"author": "Wgxshjiangzhongwen",
+"feed": "https://anchor.fm/s/36f954a8/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/4b/38/7c/4b387c25-baa4-ea13-6a9f-47b29b69d432/mza_4521897835075047023.jpg/100x100bb.jpg",
+"genre": "自我成長"
+},
+{
+"title": "Easy Chinese Learning | 轻松学中文| Beginner-Friendly | Daily Conversations | Culture Tips | HSK 1-4",
+"author": "AI WENJUN",
+"feed": "https://anchor.fm/s/110d66e54/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/d2/2b/8c/d22b8c78-ae3b-6553-9202-4fc1d37a15b8/mza_18366923032082650799.jpg/100x100bb.jpg",
+"genre": "語言學習"
+},
+{
+"title": "Learn real-life Taiwanese Mandarin 聽播客學中文",
+"author": "說說話 Talk Talk Mandarin Chinese",
+"feed": "https://feeds.soundon.fm/podcasts/2358efb4-70aa-4408-9b1d-365470ab47d9.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/d4/4a/c6/d44ac649-6cbd-2a94-47bb-7d44f927ccb7/mza_11222418047200740560.jpeg/100x100bb.jpg",
+"genre": "教育"
+},
+{
+"title": "Learn Chinese from Taiwanese 跟台灣人學中文",
+"author": "台灣瘋 | Chinese Learning Podcast | Daily fun Taiwanese Podcast",
+"feed": "https://anchor.fm/s/84b403f0/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts113/v4/31/11/c7/3111c76a-45a9-1b3f-2dfb-8395b26c72ab/mza_2952112606798831186.jpg/100x100bb.jpg",
+"genre": "教育"
+},
+{
+"title": "Taiwan Accent - Chinese Classical Literature▪台灣腔 中國古典文學 ▪  台湾腔 中国古典文学 ▪ Learn Manda",
+"author": "Elaine▪ Atypical Mandarin Teacher▪非典型中文老師",
+"feed": "https://feed.firstory.me/rss/user/ck9tcffevgslp08733bo2bgl7",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts114/v4/5d/e0/2a/5de02a22-18d4-831e-796b-aa7504884825/mza_14512428347163943875.png/100x100bb.jpg",
+"genre": "語言學習"
+},
+{
+"title": "10分鐘早報",
+"author": "中廣新聞網NewsRadio",
+"feed": "https://feeds.soundon.fm/podcasts/5122cf56-9e52-4fef-8258-e168e1e2694b.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/8d/3c/17/8d3c1752-ef52-c098-233e-7062dd19a461/mza_4394005760480490614.jpeg/100x100bb.jpg",
+"genre": "新聞"
+},
+{
+"title": "TVBS新聞",
+"author": "TVBS",
+"feed": "https://feeds.soundon.fm/podcasts/07593470-9f99-4b05-b8d2-98a6350a2891.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/a7/26/bb/a726bbca-8cd2-5e87-6b97-ba64528bd962/mza_16662720384881072027.jpeg/100x100bb.jpg",
+"genre": "每日新聞"
+},
+{
+"title": "公視每日新聞 Daily News",
+"author": "Taiwan Public Television Service",
+"feed": "https://anchor.fm/s/27b2c13c/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/fe/20/f3/fe20f3af-dc2b-da00-6a4a-75c2e21c81ad/mza_9824673027828834126.jpg/100x100bb.jpg",
+"genre": "每日新聞"
+},
+{
+"title": "☀️ 全球串連早安新聞｜Morning Taiwan Glocal News",
+"author": "浩爾&小路",
+"feed": "https://feed.firstory.me/rss/user/cklqae6gy388f0892i2qmv851",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/53/9c/62/539c6292-bbe2-0842-0407-128274b25622/mza_4645210477538011202.jpg/100x100bb.jpg",
+"genre": "每日新聞"
+}
+],
+"tr": [
+{
+"title": "Türkçe Rap Öğreniyorum",
+"author": "Podiostation",
+"feed": "https://anchor.fm/s/fd4a67dc/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/56/e7/3c/56e73cd0-2a16-c6f6-71ef-eb415591ecee/mza_9134956526289004992.jpg/100x100bb.jpg",
+"genre": "Music Commentary"
+},
+{
+"title": "Popüler Tarih",
+"author": "Vakavinüs",
+"feed": "https://www.spreaker.com/show/7152055/episodes/feed",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/97/ff/4c/97ff4c1d-f9c5-f2ab-fcdc-c10dfd68eba4/mza_4557518849785960366.jpg/100x100bb.jpg",
+"genre": "History"
+},
+{
+"title": "Tarihin Tozlu Sayfaları",
+"author": "Hastlesh",
+"feed": "https://anchor.fm/s/ffc75754/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/cb/c7/c8/cbc7c830-2e3e-489f-c5a4-0eb22e625093/mza_15018188916837705744.jpg/100x100bb.jpg",
+"genre": "History"
+},
+{
+"title": "KPSS TARİH PODCAST",
+"author": "huseyindik",
+"feed": "https://anchor.fm/s/1086c7588/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/cf/c6/7d/cfc67df4-0782-7124-139c-a3bd9db4fe97/mza_8577254004925724581.jpg/100x100bb.jpg",
+"genre": "Courses"
+},
+{
+"title": "Tarih Dedektifi",
+"author": "Tarih Dedektifi",
+"feed": "https://anchor.fm/s/f8c9e098/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/a8/eb/d0/a8ebd08d-b61e-2bc3-03cb-c019af1c7446/mza_5460199288808736006.jpg/100x100bb.jpg",
+"genre": "History"
+},
+{
+"title": "Tarih Köşesi",
+"author": "Yasin Acar",
+"feed": "https://anchor.fm/s/4f598040/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/5a/ea/a6/5aeaa6b3-d0ad-a504-be04-affe5bb703ca/mza_13651741183414510030.jpg/100x100bb.jpg",
+"genre": "Documentary"
+},
+{
+"title": "Gizemli Tarih",
+"author": "gizpodcast",
+"feed": "https://feed.podbean.com/gizpodcast/feed.xml",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/f7/05/f6/f705f624-10e3-5940-15be-841ff82342e1/mza_699590168704081254.jpg/100x100bb.jpg",
+"genre": "History"
+},
+{
+"title": "ODTÜ Tarih Topluluğu Tarih Söyleşileri",
+"author": "ODTÜ Tarih Topluluğu",
+"feed": "https://anchor.fm/s/519a3304/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts124/v4/f6/10/a3/f610a3f8-1219-9389-77bf-ae43f20847cd/mza_304294406209891237.jpg/100x100bb.jpg",
+"genre": "History"
+},
+{
+"title": "Evrim Ağacı ile Bilime Dair Her Şey!",
+"author": "Evrim Ağacı",
+"feed": "https://evrimagaci.org/rss/podcast/1",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/5d/74/ca/5d74cabb-c814-7044-839e-6267d9be7534/mza_15700797348100605949.jpg/100x100bb.jpg",
+"genre": "Astronomy"
+},
+{
+"title": "Hypatia Bilim",
+"author": "Hypatia Bilim",
+"feed": "https://anchor.fm/s/e2836a20/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/b8/9f/5d/b89f5d56-7f89-434a-c769-120096666b74/mza_15340101799861351524.jpg/100x100bb.jpg",
+"genre": "Science"
+}
+],
+"ru": [
+{
+"title": "Русский язык: с нуля до мастерства!",
+"author": "Мария Калашникова",
+"feed": "https://cloud.mave.digital/54047",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/c4/81/c6/c481c612-2831-b198-4472-aeac966eae45/mza_14351229982835176243.jpg/100x100bb.jpg",
+"genre": "Изучаем языки"
+},
+{
+"title": "RussianCast",
+"author": "Anton Karasev",
+"feed": "https://anchor.fm/s/2f2b69dc/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts124/v4/c4/8a/a4/c48aa492-91c2-4902-c4f4-110118bb9a75/mza_517885227782779574.jpg/100x100bb.jpg",
+"genre": "Изучаем языки"
+},
+{
+"title": "Хитрить и трахаться",
+"author": "Maria",
+"feed": "https://anchor.fm/s/462dbf40/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts114/v4/c7/64/5f/c7645ffd-76b7-aaef-62b4-dbecbeadc746/mza_15941101829993073452.jpg/100x100bb.jpg",
+"genre": "Общество и культура"
+},
+{
+"title": "История на каждый день",
+"author": "https://vk.com/historydata",
+"feed": "https://cloud.mave.digital/47855",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/06/b8/b8/06b8b889-8c67-e0d6-1ff5-4727cc3c0257/mza_1514978713301057574.jpg/100x100bb.jpg",
+"genre": "История"
+},
+{
+"title": "История России",
+"author": "Владимир Милов",
+"feed": "https://anchor.fm/s/107163264/podcast/rss",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/bc/9a/2a/bc9a2a41-7398-d122-d467-3130069def3d/mza_9813273163808865148.jpg/100x100bb.jpg",
+"genre": "История"
+},
+{
+"title": "История психологии",
+"author": "Абанина Алёна семейный психолог",
+"feed": "https://cloud.mave.digital/62710",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/0b/4b/84/0b4b84b3-bd0f-b57c-6f7a-d1dd0083c52d/mza_1270106703423028305.png/100x100bb.jpg",
+"genre": "Самосовершенствование"
+},
+{
+"title": "Рассказы из Русской Истории",
+"author": "Владимир Мединский",
+"feed": "https://cloud.mave.digital/51526",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/52/34/b0/5234b0e9-921d-8e1d-5069-d33b95fe9dc8/mza_2340117076961769464.jpg/100x100bb.jpg",
+"genre": "История"
+},
+{
+"title": "Короче, история",
+"author": "Максим Зеленский и Алексей Катефин",
+"feed": "https://cloud.mave.digital/35541",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/d5/50/51/d55051d7-08f0-8915-df9b-1df97dce7261/mza_3184196666906761301.jpg/100x100bb.jpg",
+"genre": "История"
+},
+{
+"title": "История всего",
+"author": "История всего",
+"feed": "https://cloud.mave.digital/33538",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts124/v4/9b/26/76/9b2676a3-2872-9aae-d10e-223abf8a008a/mza_9585908994345284993.jpg/100x100bb.jpg",
+"genre": "История"
+},
+{
+"title": "История мира",
+"author": "Тамара Эйдельман",
+"feed": "https://pinecast.com/feed/world-history",
+"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/4b/cb/23/4bcb231b-0fb3-359b-2168-d758cb6974da/mza_14657295816552258095.jpg/100x100bb.jpg",
+"genre": "История"
+}
+]
+}
