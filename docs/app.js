@@ -769,7 +769,7 @@ function route() {
   }
 }
 window.addEventListener('hashchange', route);
-new MutationObserver(() => { if (!$('#langsw') || !$('#langsw').isConnected || ($('#langsw').classList.contains('fx') && $('#app .top, #app .catsearch') && $('#app .top, #app .catsearch').getBoundingClientRect().left < 200) || (!$('#langsw').classList.contains('fx') && !$('#app').contains($('#langsw')))) renderLangSw(); }).observe(document.getElementById('app'), { childList: true });
+new MutationObserver(() => { const e = $('#langsw'); if (!e || !$('#app').contains(e)) renderLangSw(); }).observe(document.getElementById('app'), { childList: true });
 if (document.documentElement.dataset.linguaExt) window.__linguaExt = true;
 window.postMessage({ source: 'lingua-hello' }, location.origin);
 renderLangSw(); migrateLangs().finally(route);
