@@ -1,14 +1,16 @@
 {
  "manifest_version": 3,
  "name": "Lingua — двойные субтитры",
- "version": "0.3.0",
+ "version": "0.4.0",
  "description": "Двойные субтитры на YouTube и сохранение слов",
  "permissions": [
   "storage"
  ],
  "host_permissions": [
   "https://www.youtube.com/*",
-  "https://translate.googleapis.com/*"
+  "https://translate.googleapis.com/*",
+  "https://clients5.google.com/*",
+  "https://api.mymemory.translated.net/*"
  ],
  "background": {
   "service_worker": "background.js"

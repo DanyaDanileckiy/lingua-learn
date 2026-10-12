@@ -1,9 +1,10 @@
 // Translation proxy (avoids CORS in content script)
 async function translate(text, tl) {
   const u = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&dt=t&tl=' + encodeURIComponent(tl) + '&q=' + encodeURIComponent(text);
-  const r = await fetch(u);
-  const j = await r.json();
-  return (j[0] || []).map(x => x[0]).join('');
+  try { const j = await (await fetch(u)).json(); const t = (j[0] || []).map(x => x[0]).join(''); if (t) return t; } catch (e) { }
+  try { const j = await (await fetch('https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl=' + encodeURIComponent(tl) + '&q=' + encodeURIComponent(text))).json(); const x = j[0]; const t = Array.isArray(x) ? x[0] : x; if (t) return t; } catch (e) { }
+  const j = await (await fetch('https://api.mymemory.translated.net/get?langpair=en|' + encodeURIComponent(tl) + '&q=' + encodeURIComponent(text.slice(0, 480)))).json();
+  return j.responseData ? j.responseData.translatedText : '';
 }
 chrome.runtime.onMessage.addListener((msg, _s, send) => {
   if (msg.type === 'translate') {
