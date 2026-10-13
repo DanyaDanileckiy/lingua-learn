@@ -1,38 +1,68 @@
-# Lingua — изучение языков по видео (MVP-клон Trancy)
+<div align="center">
 
-## Состав
-- `extension/` — расширение Chrome (Manifest V3) для YouTube: двойные субтитры (оригинал + перевод), клик по слову → перевод и сохранение (слово, перевод, предложение, ссылка на видео с таймкодом). Popup со списком слов и экспортом в JSON. Настройки — язык перевода (по умолчанию русский).
-- `docs/` — веб-приложение в стиле Trancy (тёмная тема, без бэкенда, localStorage, hash-роутинг): Главная (видео, подкасты по RSS, календарь, карточки, активность), Библиотека (YouTube/Подкасты/Наборы/Фильмы, избранное, история, каналы), плеер с двуязычным кликабельным транскриптом, AI Talk (62 ролевых сценария, TTS и распознавание речи), Мои книги (.txt/.epub, таймер чтения), Словарь (свои слова + наборы CEFR A1–C2, ИТ, BEC; SM-2), Предложения (избранное, диктант, шэдоуинг).
-- `shots/` — скриншоты разделов, `reference/` — референсные скриншоты Trancy.
-- Веб-приложение: https://danyadanileckiy.github.io/lingua-learn/
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:8b5cf6,100:3b82f6&height=140&section=header&text=Lingua&fontSize=48&fontColor=fff&fontAlignY=35" width="100%"/>
+
+**Изучение языков по видео · MVP-клон Trancy**
+
+[Русский](README.md) · [English](README.en.md)
+
+[![Open Site](https://img.shields.io/badge/Открыть_сайт-8b5cf6?style=for-the-badge&logo=googlechrome&logoColor=white)](https://danyadanileckiy.github.io/lingua-learn/)
+[![Download Extension](https://img.shields.io/badge/Скачать_расширение-3b82f6?style=for-the-badge&logo=googlechrome&logoColor=white)](https://github.com/DanyaDanileckiy/lingua-learn/raw/main/extension.zip)
+
+</div>
+
+---
+
+## Прямые ссылки
+
+| Что | Ссылка |
+|-----|--------|
+| **Веб-приложение** | [https://danyadanileckiy.github.io/lingua-learn/](https://danyadanileckiy.github.io/lingua-learn/) |
+| **Chrome-расширение** | [Скачать extension.zip](https://github.com/DanyaDanileckiy/lingua-learn/raw/main/extension.zip) |
+| **Cloudflare Worker** | [https://lingua.lingua-learn.workers.dev](https://lingua.lingua-learn.workers.dev) |
+
+## Что это
+
+**Lingua** — инструмент для изучения языков по видео (YouTube и др.). Включает:
+
+- **Chrome-расширение** — двойные субтитры на YouTube, клик по слову → перевод и сохранение в словарь
+- **Веб-приложение** — библиотека, плеер с транскриптом, словарь (SM-2), книги, AI Talk, подкасты
+
+Все данные хранятся **локально** (без сервера и аккаунта).
 
 ## Установка расширения
-1. Скачайте `extension.zip` (или клонируйте репозиторий) и распакуйте.
-2. Откройте `chrome://extensions`, включите «Режим разработчика».
-3. Нажмите «Загрузить распакованное» и выберите папку `extension`.
-4. Откройте видео на YouTube с субтитрами — внизу появятся двойные субтитры. Кликните по слову, чтобы увидеть перевод и сохранить его.
-5. Если открыт сайт Lingua, слова синхронизируются автоматически (content script `sync.js`). Либо в popup расширения нажмите «Экспорт JSON», затем импортируйте файл в веб-приложении (вкладка «Импорт»).
 
-## Локальный запуск веб-приложения
-`cd docs && python3 -m http.server 8000` → http://localhost:8000
+1. Скачайте [extension.zip](https://github.com/DanyaDanileckiy/lingua-learn/raw/main/extension.zip) и распакуйте
+2. Откройте `chrome://extensions` → включите «Режим разработчика»
+3. «Загрузить распакованное» → выберите папку `extension`
+4. Откройте видео на YouTube с субтитрами — появятся двойные субтитры
+
+## Возможности веб-приложения
+
+- Библиотека видео, подкастов, книг (.txt / .epub)
+- Плеер с двуязычным кликабельным транскриптом
+- Словарь с интервальным повторением SM-2 + готовые наборы (CEFR, IT, BEC)
+- AI Talk (62 ролевых сценария), диктант, шэдоуинг
+- Экспорт/импорт словаря
 
 ## Ограничения
-- Перевод через неофициальный бесплатный endpoint Google (`translate_a/single?client=gtx`) — может ограничиваться.
-- Используется первая не автоматическая дорожка субтитров (иначе автосубтитры); без субтитров оверлей не показывается.
-- Веб-приложение часто не может получить транскрипт из-за CORS/ограничений YouTube — есть ручная вставка SRT/VTT.
-- Данные хранятся локально (chrome.storage / localStorage), без синхронизации.
-- AI Talk — сценарные диалоги (без нейросети); распознавание речи работает только в Chrome/Edge.
-- Подкасты и каналы загружаются через публичные CORS-прокси (allorigins/corsproxy) — могут быть недоступны.
-- PDF не поддерживается в «Мои книги»; большие книги могут не поместиться в localStorage (~5 МБ).
 
-## Транскрипты
-Сайт ищет субтитры по цепочке: готовый файл `docs/transcripts/<id>.json` → расширение Lingua → innertube `/player` (ANDROID/IOS) напрямую и через CORS-прокси → `get_transcript` → `timedtext`. Для курируемых видео транскрипты генерируются `scripts/fetch_transcripts.py` (yt-dlp) и workflow `ci/transcripts.yml` (скопируйте в `.github/workflows/` для активации — для push нужен токен со scope `workflow`) (можно запустить вручную с дополнительными ID).
+- Перевод через неофициальный endpoint Google (gtx) — может ограничиваться
+- Данные только локально (localStorage / chrome.storage)
+- Без расширения транскрипты с YouTube могут не загружаться из-за CORS
+- AI Talk — сценарные диалоги (без нейросети)
 
-## Тесты
-`tests/qa.js` — Playwright-проверка всех разделов живого сайта; `tests/ext.js` — E2E расширения (YouTube-субтитры, сохранение слова, popup, синхронизация, транскрипты произвольных видео). Нужен `playwright-core` и Chromium.
+## Локальный запуск сайта
 
-## Произвольные видео
-Надёжный путь — расширение Lingua (v0.6+): сайт запрашивает транскрипт у расширения, оно получает субтитры через innertube без CORS. Без расширения сайт пробует Piped (работает только для видео, которые есть в кэше инстанса) и CORS-прокси (сейчас бесплатные прокси не работают).
+```bash
+cd docs && python3 -m http.server 8000
+# → http://localhost:8000
+```
 
-## Cloudflare Worker
-`worker/worker.js` развёрнут как https://lingua.lingua-learn.workers.dev (`/transcript?id=`, `/translate`, `/fetch`). CORS разрешён только для danyadanileckiy.github.io и localhost. Деплой: `CLOUDFLARE_API_TOKEN=... npx wrangler deploy` в папке `worker/` (токен в репозиторий не коммитится).
+<div align="center">
+
+**Сделано с ❤️ для любителей изучать языки по видео**
+
+[![Site](https://img.shields.io/badge/Открыть_сайт-8b5cf6?style=for-the-badge)](https://danyadanileckiy.github.io/lingua-learn/)
+
+</div>
